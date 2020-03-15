@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+  <head>
+    <title>inboxy | Google Inbox-style bundles for Gmail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta property="og:title" content="inboxy: Chrome extension for email bundles on Gmail">
+    <meta property="og:image" content="assets/inboxy.png">
+    <meta property="og:url" content="https://teresa-ou.github.io/inboxy">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link 
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Overlock:700&display=swap" 
+      rel="stylesheet"
+    >
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img src="assets/inboxy.svg">
+        inboxy
+      </nav>
+      <section class="top-section">
+        <div class="top-section-content">
+          <h1>Bringing Inbox-style bundles to Gmail</h1>
+          <div class="description">
+            inboxy is an open-source Chrome extension that bundles together emails and 
+            makes it easier to manage your inbox.
+          </div>
+          <div class="button-links-container">
+            <a href="" target="_blank">
+              <button class="light get-inboxy">Get inboxy for Chrome</button>
+            </a>
+            <div class="view-source small-caps">
+              <a href="https://github.com/teresa-ou/inboxy" target="_blank">
+                <img src="assets/github.svg">
+                View source code
+              </a>
+            </div>
+          </div>
+        </div>
+        <img 
+          src="assets/inboxy-mock@2x.png" 
+          srcset="assets/inboxy-mock.png, assets/inboxy-mock@2x.png 2x"
+          class="inboxy-mock"
+        >
+      </section>
+    </header>
+
+    <section>
+      <h2>What are bundles?</h2>
+      <div class="intro-section">
+        <img src="assets/organization-illustration.svg">
+        <div>
+          <p>
+            <span class="semibold">Google Inbox</span> introduced bundles, which group together 
+            related emails in your inbox.
+          </p> 
+          <p>
+            Email bundles are collapsed by default and can be expanded to show the individual emails
+            in the bundles. 
+          </p>
+          <p>
+            In early 2019, Google sunsetted Inbox, and bundles departed along with it.
+          </p>
+        </div>
+      </div>
+      <div class="intro-section">
+        <img src="assets/labels-illustration.svg">
+        <div>
+          <p>
+            <span class="semibold">inboxy</span> is a Chrome extension that brings bundles to 
+            Gmail, by bundling together emails that share the same labels.
+          </p>
+          <p>
+            To get started with automatic bundling, simply 
+            <a target="_blank" href="https://support.google.com/mail/answer/6579?hl=en">create filters</a>
+            to apply labels to incoming messages. 
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Highlights</h2>
+      <ul class="highlights-list">
+        <li>
+          <img src="assets/label.svg">
+          <div>
+            Messages with the same label are bundled together in your inbox
+          </div>
+        </li>
+        <li>
+          <img src="assets/check.svg">
+          <div>
+            Archive all bundled messages on the current page quickly
+          </div>
+        </li>
+        <li>
+          <img src="assets/filter.svg">
+          <div>
+            Use email filters to bundle messages automatically
+          </div>
+        </li>
+        <li>
+          <img src="assets/star.svg">
+          <div>
+            Star a message to pin it outside of its bundle
+          </div>
+        </li>
+        <li>
+          <img src="assets/calendar.svg">
+          <div>
+            Intuitive date headings
+          </div>
+        </li>
+        <li>
+          <img src="assets/night.svg">
+          <div>
+            Supports light and dark themes
+          </div>
+        </li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2>Privacy & Security</h2>
+      <p>
+        inboxy uses Javascript and CSS to draw bundles in Gmail. The browser extension does not send 
+        any data or include any sort of tracking. 
+      </p>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="screenshot-container">
+        <picture>
+          <source 
+            media="(max-width: 554px)" 
+            srcset="assets/screenshot-overview-mobile.png, assets/screenshot-overview-mobile@2x.png 2x"
+          >
+          <img 
+            class="screenshot" 
+            src="assets/screenshot-overview@2x.png" 
+            srcset="assets/screenshot-overview.png, assets/screenshot-overview@2x.png 2x"
+          >
+        </picture>
+
+        <div class="overlay-container">
+          <img class="overlay" src="assets/overlay-overview.svg">
+          <div class="tooltip arrow-down" id="tooltip-star">
+            Star a message to pin it
+          </div>
+          <div class="tooltip arrow-down" id="tooltip-date">
+            Intuitive date headings
+          </div>
+          <div class="tooltip arrow-up" id="tooltip-bundle">
+            Organize your inbox with bundles
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-container">
+        <picture>
+          <source 
+            media="(max-width: 554px)" 
+            srcset="assets/screenshot-bundle-mobile.png, assets/screenshot-bundle-mobile@2x.png 2x"
+          >
+          <img 
+            class="screenshot" 
+            src="assets/screenshot-bundle@2x.png" 
+            srcset="assets/screenshot-bundle.png, assets/screenshot-bundle@2x.png 2x"
+          >
+        </picture>
+
+        <div class="overlay-container">
+          <img class="overlay" src="assets/overlay-bundle.svg">
+          <div class="tooltip arrow-down" id="tooltip-open-bundle">
+            Messages with the same label are bundled together 
+          </div>
+          <div class="tooltip arrow-up" id="tooltip-bulk-archive">
+            Archive all bundled messages on the current page quickly
+          </div>
+          <div class="tooltip arrow-down" id="tooltip-view-all">
+            Easily view all messages with the same label
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-container">
+        <picture>
+          <source 
+            media="(max-width: 554px)" 
+            srcset="assets/screenshot-overview-dark-mobile.png, assets/screenshot-overview-dark-mobile@2x.png 2x"
+          >
+          <img 
+            class="screenshot" 
+            src="assets/screenshot-overview-dark@2x.png" 
+            srcset="assets/screenshot-overview-dark.png, assets/screenshot-overview-dark@2x.png 2x"
+          >
+        </picture>
+      </div>
+
+      <div class="screenshot-container">
+        <picture>
+          <source
+            media="(max-width: 554px)" 
+            srcset="assets/screenshot-bundle-dark-mobile.png, assets/screenshot-bundle-dark-mobile@2x.png 2x"
+          >
+          <img 
+            class="screenshot" 
+            src="assets/screenshot-bundle-dark@2x.png" 
+            srcset="assets/screenshot-bundle-dark.png, assets/screenshot-bundle-dark@2x.png 2x"
+          >
+        </picture>
+      </div>
+    </section>
+
+    <section class="final-section">
+      <a href="" target="_blank" class="get-inboxy">
+        <button>Get inboxy for Chrome</button>
+      </a>
+      <p class="post-feedback">
+        Have feedback? <a href="https://github.com/teresa-ou/inboxy/issues" target="_blank">Post issues</a> to the Github repo.
+      </p>
+    </section>
+  </body>
+</html>
