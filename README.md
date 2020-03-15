@@ -37,4 +37,4 @@ Feel free to [send feedback](https://github.com/teresa-ou/inboxy/issues) by fili
 
 ## License
 
-[GPL](https://github.com/teresa-ou/inboxy/blob/dev/COPYING), Copyright (C) 2020  [Teresa Ou](https://github.com/teresa-ou)
+[GPL](https://github.com/teresa-ou/inboxy/blob/master/COPYING), Copyright (C) 2020  [Teresa Ou](https://github.com/teresa-ou)
