@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="650" src="https://github.com/teresa-ou/inboxy/blob/dev/images/inboxy-illustration.png" alt="Illustration of inboxy">
+  <img width="650" src="https://github.com/teresa-ou/inboxy/blob/master/images/inboxy-illustration.png" alt="Illustration of inboxy">
 </p>
 
 # inboxy: Google Inbox-style bundles for Gmail
