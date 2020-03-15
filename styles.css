@@ -109,6 +109,7 @@ nav:after {
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     bottom: 0;
     content: "";
+    left: 0;
     margin-left: 50%;
     position: absolute;    
     transform: translateX(-50%);
