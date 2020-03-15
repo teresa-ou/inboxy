@@ -1,0 +1,20 @@
+{
+  "name": "inboxy",
+  "version": "1.0.0",
+  "description": "GPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [],
+  "author": "Teresa Ou",
+  "license": "GPL",
+  "devDependencies": {
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  }
+}

@@ -1,0 +1,242 @@
+/**
+ * inboxy: Chrome extension for Google Inbox-style bundles in Gmail.
+ * Copyright (C) 2020  Teresa Ou
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+ 
+.inboxy .flex-table-body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 0;
+}
+
+/**
+ * Bundle row
+ */
+ 
+.inboxy .bundle-row.zE {
+    font-weight: bold;
+}
+
+.inboxy .bundle-row.visible {
+    box-shadow: none;
+    font-weight: bold;
+    background-color: #e8eaed;
+    padding-top: 32px;
+    padding-bottom: 18px;
+    margin-top: 24px;
+}
+
+.inboxy.dark-theme .bundle-row.visible {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+.inboxy .bundle-row.visible .xY.yX {
+    font-size: 1.025rem;
+    margin-left: 56px;
+}
+
+.inboxy .bundle-row.visible td:nth-child(1),
+.inboxy .bundle-row.visible td:nth-child(2),
+.inboxy .bundle-row.visible td:nth-child(3),
+.inboxy .bundle-row.visible td:nth-child(4) {
+    width: 0;
+    padding: 0;
+}
+
+.inboxy .bundle-row.has-unread {
+    font-weight: bold;
+}
+
+/** 
+ * Message count, in bundle row 
+ */
+
+.inboxy .bundle-count {
+    font-weight: normal;
+}
+
+.inboxy .bundle-row.visible .bundle-count {
+    display: none;
+}
+
+/** 
+ * Archive-all button, in bundle row
+ */
+
+.inboxy .bundle-row .flex-grow {
+    display: flex;
+    flex-grow: 1;
+}
+
+.inboxy .bundle-row .archive-bundle {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/check-all.png');
+    background-size: 24px;
+    display: none;
+    height: 24px;
+    margin-right: 8px;
+    width: 24px;
+}
+
+.inboxy.dark-theme .bundle-row .archive-bundle {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all.png');
+    opacity: 0.7;
+}
+
+@media (min-resolution: 2dppx) {
+    .inboxy .bundle-row .archive-bundle {
+        background-image: url('chrome-extension://__MSG_@@extension_id__/check-all@2x.png');
+    }
+
+    .inboxy.dark-theme .bundle-row .archive-bundle {
+        background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all@2x.png');
+    }
+}
+
+.inboxy .bundle-row.visible .archive-bundle {
+    display: block;
+}
+
+.inboxy .bundle-row .archive-bundle.disabled {
+    cursor: default;
+    opacity: .15;
+}
+
+.inboxy .bundle-row .archive-bundle.disabled::before {
+    display: none;
+}
+
+/**
+ * Bundled messages
+ */
+
+.inboxy .bundled-message {
+    display: none;
+}
+
+.inboxy .bundled-message.visible {
+    display: flex;
+    margin-left: 40px;
+    margin-right: 40px;
+    width: auto;
+    z-index: auto;
+}
+
+/** 
+ * Sides and bottom of open bundle area 
+ */
+
+.inboxy .bundle-area {
+    background-color: #e8eaed;
+    cursor: pointer;
+    display: none;
+    padding-bottom: 48px;
+    position: absolute;
+    width: 100%;
+    z-index: -2;
+}
+
+.inboxy.dark-theme .bundle-area {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/** 
+ * Bottom of open bundle area
+ */
+.inboxy .bundled-message.visible.last {
+    margin-bottom: 72px;
+}
+
+/** 
+ * Date divider
+ */
+
+.inboxy .date-row {
+    padding: 24px 0 16px 28px;
+    font-size: 0.94rem;
+    color: #202124;
+}
+
+.inboxy.dark-theme .date-row {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+/** 
+ * Archive button 
+ */
+.inboxy .brq,
+.inboxy .ar8 {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/check.png');
+}
+
+.inboxy.messages-dark-theme .brq,
+.inboxy.dark-theme .ar8 {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/light-check.png');
+}
+
+@media (min-resolution: 2dppx) {
+    .inboxy .brq,
+    .inboxy .ar8 {
+        background-image: url('chrome-extension://__MSG_@@extension_id__/check@2x.png');
+    }
+
+    .inboxy.messages-dark-theme .brq,
+    .inboxy.dark-theme .ar8 {
+        background-image: url('chrome-extension://__MSG_@@extension_id__/light-check@2x.png');
+    }
+}
+
+/**
+ * View all link 
+ */
+
+.inboxy .view-all-link {
+    border-radius: 4px;
+    color: inherit;
+    display: none;
+    margin-right: 40px;
+    padding: 8px 14px;
+    text-decoration: none;
+}
+
+.inboxy .bundle-row.visible .view-all-link {
+    display: block;
+}
+
+.inboxy .view-all-link:hover {
+    background-color: rgba(32, 33, 36, 0.059);
+}
+
+.inboxy .view-all-link:hover .view-all {
+    opacity: 1;
+}
+
+.inboxy .view-all {
+    font-weight: 500;
+    opacity: 0.54;
+}
+
+.inboxy.dark-theme .view-all {
+    opacity: 0.7;
+    text-shadow: none;
+}
+
+.inboxy.dark-theme .view-all-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

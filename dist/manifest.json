@@ -1,0 +1,39 @@
+{
+    "name": "inboxy: Bundles for Gmail",
+    "version": "1.0.0",
+    "description": "Google Inbox-style bundles for Gmail",
+    "homepage_url": "https://teresa-ou.github.io/inboxy",
+    "content_scripts": [{
+        "matches": ["*://mail.google.com/mail/*"],
+        "js": ["content.js"],
+        "css": ["style.css"],
+        "run_at": "document_start",
+        "all_frames": false
+    }],
+
+    "page_action": {
+        "default_icon": {
+            "16": "icons/inboxy.png",
+            "24": "icons/inboxy@1.5x.png",
+            "32": "icons/inboxy@2x.png"
+        }
+    },
+    "icons": {
+        "16": "icons/inboxy.png",
+        "32": "icons/inboxy@2x.png",
+        "48": "icons/inboxy@3x.png",
+        "128": "icons/inboxy@8x.png"
+    },
+    "web_accessible_resources": [
+        "check.png",
+        "check@2x.png",
+        "check-all.png",
+        "check-all@2x.png",
+        "light-check.png",
+        "light-check@2x.png",
+        "light-check-all.png",
+        "light-check-all@2x.png"
+    ],
+
+    "manifest_version": 2
+}
