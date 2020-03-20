@@ -27,6 +27,11 @@
  * Bundle row
  */
  
+.inboxy:not(.messages-dark-theme) tr:not(.bundle-row).zE,
+.inboxy:not(.messages-dark-theme) .bundle-row.zE:not(.visible) {
+    background-color: rgba(242, 245, 245, 0.8);
+}
+
 .inboxy .bundle-row.zE {
     font-weight: bold;
 }
@@ -41,7 +46,7 @@
 }
 
 .inboxy.dark-theme .bundle-row.visible {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(241, 243, 244, 0.24);
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
@@ -57,10 +62,6 @@
 .inboxy .bundle-row.visible td:nth-child(4) {
     width: 0;
     padding: 0;
-}
-
-.inboxy .bundle-row.has-unread {
-    font-weight: bold;
 }
 
 /** 
@@ -152,7 +153,7 @@
 }
 
 .inboxy.dark-theme .bundle-area {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(241, 243, 244, 0.24);
 }
 
 /** 

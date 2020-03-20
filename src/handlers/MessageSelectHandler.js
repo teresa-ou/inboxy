@@ -84,10 +84,6 @@ class MessageSelectHandler {
                 }
             }
             
-            if (message.classList.contains(GmailClasses.UNREAD)) {
-                InboxyStyler.removeGmailUnreadStyling(message);
-            }
-            
             if (mutation.oldValue.includes(GmailClasses.SELECTED) !== 
                 message.classList.contains(GmailClasses.SELECTED)) 
             {

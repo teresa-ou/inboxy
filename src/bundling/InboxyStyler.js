@@ -28,14 +28,6 @@ class InboxyStyler {
     }
 
     /**
-     * Remove Gmail's unread-message styling, ex. white background for light themes.
-     */
-    static removeGmailUnreadStyling(message) {
-        message.classList.remove(GmailClasses.UNREAD);
-        message.classList.add(GmailClasses.READ);
-    }
-
-    /**
      * Apply "selected" styling (i.e. checked) to all bundles that have any messages that
      * are selected.
      */

@@ -64,7 +64,7 @@ function _getHash(url) {
 }
 
 function _matchesPage1(hash) {
-    return hash.match(/inbox$/);
+    return hash === 'inbox';
 }
 
 function _matchesPageX(hash) {

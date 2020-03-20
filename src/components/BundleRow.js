@@ -33,7 +33,7 @@ function create(label, order, messageCount, hasUnread, toggleBundle) {
     const displayedMessageCount = messageCount >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
         : messageCount;
-    const unreadClass = hasUnread ? 'has-unread' : '';
+    const unreadClass = hasUnread ? GmailClasses.UNREAD : '';
 
     const personalLevelClass = !!document.querySelector(Selectors.PERSONAL_LEVEL_INDICATOR)
         ? GmailClasses.PERSONAL_LEVEL_INDICATOR

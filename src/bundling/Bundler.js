@@ -309,10 +309,6 @@ class Bundler {
     }
 
     _applyStyles(messageNodes) {
-        messageNodes
-            .filter(this._isUnreadMessage)
-            .forEach(InboxyStyler.removeGmailUnreadStyling);
-
         this.inboxyStyler.markSelectedBundles();
         this.inboxyStyler.disableBulkArchiveIfNecessary();
     }
