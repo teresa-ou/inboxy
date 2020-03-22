@@ -27,8 +27,8 @@
  * Bundle row
  */
  
-.inboxy:not(.messages-dark-theme) tr:not(.bundle-row).zE,
-.inboxy:not(.messages-dark-theme) .bundle-row.zE:not(.visible) {
+.inboxy:not(.messages-dark-theme) tr:not(.bundle-row).zE:not(.x7),
+.inboxy:not(.messages-dark-theme) .bundle-row.zE:not(.visible):not(.x7) {
     background-color: rgba(242, 245, 245, 0.8);
 }
 
