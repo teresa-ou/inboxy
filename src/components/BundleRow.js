@@ -35,16 +35,12 @@ function create(label, order, messageCount, hasUnread, toggleBundle) {
         : messageCount;
     const unreadClass = hasUnread ? GmailClasses.UNREAD : '';
 
-    const personalLevelClass = !!document.querySelector(Selectors.PERSONAL_LEVEL_INDICATOR)
-        ? GmailClasses.PERSONAL_LEVEL_INDICATOR
-        : '';
-
     const html = `
         <tr class="${GmailClasses.ROW} ${GmailClasses.READ} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
             <td class="${GmailClasses.CELL} oZ-x3"></td>
             <td class="${GmailClasses.CELL} apU"></td>
-            <td class="${GmailClasses.CELL} ${personalLevelClass}"></td>
+            <td class="${GmailClasses.CELL}"></td>
             <td class="${GmailClasses.CELL} yX">
                 <span>${label}</span>
                 <span class="bundle-count">&nbsp;(${displayedMessageCount})</span>

@@ -29,7 +29,6 @@ const NO_TAB = '__NO_TAB';
 const GmailClasses = {
     ARCHIVE_BUTTON: 'brq bqX',
     CELL: 'xY',
-    PERSONAL_LEVEL_INDICATOR: 'bnk',
     READ: 'yO',
     ROW: 'zA',
     SELECTED: 'x7',
@@ -67,8 +66,6 @@ const Selectors = {
     POSSIBLE_MESSAGE_LISTS: POSSIBLE_MESSAGE_LISTS,
     PAGE: PAGE,
     PAGECHANGING_BUTTONS: '.ar5 .Di *',
-    PERSONAL_LEVEL_INDICATOR: 
-        `.${GmailClasses.ROW} > .${GmailClasses.PERSONAL_LEVEL_INDICATOR}:not(.byv)`,
     READ_MESSAGE: `tr.${GmailClasses.ROW}.${GmailClasses.READ}`,
     REFRESH: '.T-I.J-J5-Ji[act="20"]',
     SELECTED: `${CURRENT_TABPANEL} tr.${GmailClasses.SELECTED}:not(.${InboxyClasses.BUNDLE_ROW})`,
