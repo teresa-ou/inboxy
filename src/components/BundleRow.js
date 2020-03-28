@@ -29,7 +29,7 @@ const MAX_MESSAGE_COUNT = 25;
 /**
  * Create a table row for a bundle, to be shown in the list of messages. 
  */
-function create(label, order, messageCount, hasUnread, toggleBundle) {
+function create(label, order, messageCount, hasUnread, toggleBundle, baseUrl) {
     const displayedMessageCount = messageCount >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
         : messageCount;
@@ -54,10 +54,11 @@ function create(label, order, messageCount, hasUnread, toggleBundle) {
     bulkArchiveTd.appendChild(bulkArchiveButton);
 
     const labelUrl = label.replace(' ', '+').replace('/', '%2F');
+    const url = `${baseUrl}#search/label%3AInbox+and+label%3A${labelUrl}`;
     const viewAllButtonHtml = `
         <td class="${GmailClasses.CELL}">
             <a 
-                href="https://mail.google.com/mail/u/0/#label/${labelUrl}" 
+                href="${url}" 
                 class="view-all-link"
             >
                 <div class="view-all">

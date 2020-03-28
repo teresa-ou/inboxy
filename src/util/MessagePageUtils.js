@@ -55,6 +55,15 @@ function supportsBundling(url) {
         _matchesPageX(_getHash(url));
 }
 
+/**
+ * Returns the part of the current url that precedes '#'.
+ */
+function getCurrentBaseUrl() {
+    const url = window.location.href;
+    const parts = url.split('#');
+    return parts[0];
+}
+
 function _getHash(url) {
     const hash = url.split('#')[1];
     // # might be followed by ?
@@ -76,4 +85,5 @@ export {
     getPageNumber,
     getCurrentTab,
     supportsBundling,
+    getCurrentBaseUrl,
 };

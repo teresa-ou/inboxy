@@ -24,7 +24,10 @@ import MessageSelectHandler from '../handlers/MessageSelectHandler';
 
 import InboxyStyler from './InboxyStyler';
 
-import { getCurrentPageNumber } from '../util/MessagePageUtils';
+import { 
+    getCurrentPageNumber, 
+    getCurrentBaseUrl,
+} from '../util/MessagePageUtils';
 import { 
     GmailClasses,
     InboxyClasses,
@@ -241,6 +244,7 @@ class Bundler {
      * Returns a map of newly created bundle rows by label.
      */
     _drawTableRows(tableRows, tableBody) {
+        const baseUrl = getCurrentBaseUrl();
         const bundleRowsByLabel = {};
         tableRows.forEach((e, i) => {
             const order = (i + 1) * ORDER_INCREMENT;
@@ -250,7 +254,7 @@ class Bundler {
                     break;
                 case Element.BUNDLE:
                     const bundle = e.element;
-                    const bundleRow = this._drawBundleRow(bundle, order, tableBody);
+                    const bundleRow = this._drawBundleRow(bundle, order, tableBody, baseUrl);
                     bundleRowsByLabel[bundle.getLabel()] = bundleRow;
                     break;
                 case Element.UNBUNDLED_MESSAGE:
@@ -283,7 +287,7 @@ class Bundler {
     /**
      * Create a bundle row element and append it to the tableBody.
      */
-    _drawBundleRow(bundle, order, tableBody) {
+    _drawBundleRow(bundle, order, tableBody, baseUrl) {
         const messages = bundle.getMessages();
         const hasUnreadMessages = messages.some(this._isUnreadMessage);
 
@@ -292,7 +296,8 @@ class Bundler {
             order, 
             messages.length,
             hasUnreadMessages, 
-            this.bundleToggler.toggleBundle);
+            this.bundleToggler.toggleBundle,
+            baseUrl);
         tableBody.appendChild(bundleRow);
 
         messages.forEach(m => m.classList.add(InboxyClasses.BUNDLED_MESSAGE));

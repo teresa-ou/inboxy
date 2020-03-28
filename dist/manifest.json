@@ -1,6 +1,6 @@
 {
     "name": "inboxy: Inbox Bundles for Gmail",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://teresa-ou.github.io/inboxy",
     "content_scripts": [{
