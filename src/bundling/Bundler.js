@@ -294,7 +294,7 @@ class Bundler {
         const bundleRow = BundleRow.create(
             bundle.getLabel(), 
             order, 
-            messages.length,
+            messages,
             hasUnreadMessages, 
             this.bundleToggler.toggleBundle,
             baseUrl);

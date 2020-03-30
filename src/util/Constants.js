@@ -29,11 +29,16 @@ const NO_TAB = '__NO_TAB';
 const GmailClasses = {
     ARCHIVE_BUTTON: 'brq bqX',
     CELL: 'xY',
+    DATE_CELL: 'xW',
+    IMPORTANCE_MARKER: 'WA',
+    PERSONAL_LEVEL_INDICATOR: 'bnk',
     READ: 'yO',
     ROW: 'zA',
     SELECTED: 'x7',
     STARRED: 'T-KT-Jp',
+    SUBJECT_CELL: 'a4W',
     UNREAD: 'zE',
+    UNREAD_SENDER: 'zF',
 };
 
 const InboxyClasses = {
@@ -60,15 +65,20 @@ const Selectors = {
     INBOXY: `.${InboxyClasses.INBOXY}`,
     LABEL_CONTAINERS: '.ar.as',
     LABELS: LABELS,
+    IMPORTANCE_MARKER: `.${GmailClasses.ROW} .${GmailClasses.IMPORTANCE_MARKER}`,
     INBOX_TAB: '.TO[data-tooltip="Inbox"]',
     MAIN: MAIN,
     MESSAGE_DATE: '.xW span',
+    MESSAGE_DATE_SPAN: `.xW span span`,
     POSSIBLE_MESSAGE_LISTS: POSSIBLE_MESSAGE_LISTS,
     PAGE: PAGE,
     PAGECHANGING_BUTTONS: '.ar5 .Di *',
+    PERSONAL_LEVEL_INDICATOR:   
+        `.${GmailClasses.ROW} > .${GmailClasses.PERSONAL_LEVEL_INDICATOR}:not(.byv)`,
     READ_MESSAGE: `tr.${GmailClasses.ROW}.${GmailClasses.READ}`,
     REFRESH: '.T-I.J-J5-Ji[act="20"]',
     SELECTED: `${CURRENT_TABPANEL} tr.${GmailClasses.SELECTED}:not(.${InboxyClasses.BUNDLE_ROW})`,
+    SENDERS: '.yX.xY .yW .bA4 span[email]',
     SCROLLABLE_CONTAINER: '.Tm.aeJ',
     SIDEPANE_TEXT: '.TO .nU',
     STARRED: `.T-KT.${GmailClasses.STARRED}`,

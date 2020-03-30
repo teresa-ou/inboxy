@@ -29,23 +29,44 @@ const MAX_MESSAGE_COUNT = 25;
 /**
  * Create a table row for a bundle, to be shown in the list of messages. 
  */
-function create(label, order, messageCount, hasUnread, toggleBundle, baseUrl) {
-    const displayedMessageCount = messageCount >= MAX_MESSAGE_COUNT 
+function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
+    const displayedMessageCount = messages.length >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
-        : messageCount;
+        : messages.length;
     const unreadClass = hasUnread ? GmailClasses.UNREAD : '';
 
+    let spacerClass = '';
+    if (document.querySelector(Selectors.IMPORTANCE_MARKER)) {
+        spacerClass = GmailClasses.IMPORTANCE_MARKER;
+    }
+    else if (document.querySelector(Selectors.PERSONAL_LEVEL_INDICATOR)) {
+        spacerClass = GmailClasses.PERSONAL_LEVEL_INDICATOR;
+    }
+
+    const sendersText = _generateSendersText(messages).join(', ');
+
+    const latestDate = messages[0].querySelector(Selectors.MESSAGE_DATE_SPAN).innerText;
+    const latestIsUnreadClass = messages[0].classList.contains(GmailClasses.UNREAD) ? 'unread' : '';
+    
     const html = `
         <tr class="${GmailClasses.ROW} ${GmailClasses.READ} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
             <td class="${GmailClasses.CELL} oZ-x3"></td>
             <td class="${GmailClasses.CELL} apU"></td>
-            <td class="${GmailClasses.CELL}"></td>
+            <td class="spacer ${GmailClasses.CELL} ${spacerClass}"></td>
             <td class="${GmailClasses.CELL} yX">
                 <span>${label}</span>
                 <span class="bundle-count">&nbsp;(${displayedMessageCount})</span>
             </td>
-            <td class="${GmailClasses.CELL} flex-grow" colspan="3"></td>
+            <td class="${GmailClasses.CELL} ${GmailClasses.SUBJECT_CELL}">
+                <span class="bundle-senders">
+                    ${sendersText}
+                </span>
+            </td>
+            <td class="${GmailClasses.CELL} flex-grow"></td>
+            <td class="${GmailClasses.DATE_CELL} ${GmailClasses.CELL}">
+                <span class="bundle-date ${latestIsUnreadClass}">${latestDate}</span>
+            </td>
         </tr>
     `;
 
@@ -85,6 +106,28 @@ function create(label, order, messageCount, hasUnread, toggleBundle, baseUrl) {
     el.style.order = order;
 
     return el;
+}
+
+function _generateSendersText(messages) {
+    const dedupedSenders = [];
+    const unreadStatusBySenders = {};
+
+    for (let i = 0; i < messages.length; i++) {
+        const message = messages[i];
+        const sendersElements = [...message.querySelectorAll(Selectors.SENDERS)];;
+        
+        for (let j = sendersElements.length - 1; j >= 0; j--) {
+            const sender = sendersElements[j].innerText;
+            if (!unreadStatusBySenders.hasOwnProperty(sender)) {
+                dedupedSenders.push(sender);
+            }
+            const isUnread = sendersElements[j].classList.contains(GmailClasses.UNREAD_SENDER);
+            unreadStatusBySenders[sender] = !!unreadStatusBySenders[sender] || isUnread;
+        }
+    }
+
+    return dedupedSenders.map(s => 
+        unreadStatusBySenders[s] ? `<span class="unread-sender">${s}</span>` : s)
 }
 
 export default { create };

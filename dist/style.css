@@ -32,7 +32,12 @@
     background-color: rgba(242, 245, 245, 0.8);
 }
 
-.inboxy .bundle-row.zE {
+.inboxy .bundle-row.zE .xY.yX,
+.inboxy .bundle-row .bundle-date.unread {
+    font-weight: bold;
+}
+
+.inboxy .bundle-row .unread-sender {
     font-weight: bold;
 }
 
@@ -54,6 +59,16 @@
 .inboxy .bundle-row.visible .xY.yX {
     font-size: 1.025rem;
     margin-left: 56px;
+}
+
+.inboxy .bundle-row.visible .bundle-date,
+.inboxy .bundle-row.visible .bundle-senders {
+    display: none;
+}
+
+.inboxy .bundle-senders {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .inboxy .bundle-row.visible td:nth-child(1),
