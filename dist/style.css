@@ -61,6 +61,15 @@
     margin-left: 56px;
 }
 
+/* Handle long label names */
+.inboxy .bundle-row:not(.visible) .bundle-and-count {
+    white-space: normal;
+}
+.inboxy .bundle-row:not(.visible) .xY {
+    align-items: flex-start;
+    height: unset;
+}
+
 .inboxy .bundle-row.visible .bundle-date,
 .inboxy .bundle-row.visible .bundle-senders {
     display: none;

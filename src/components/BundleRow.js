@@ -55,8 +55,10 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
             <td class="${GmailClasses.CELL} apU"></td>
             <td class="spacer ${GmailClasses.CELL} ${spacerClass}"></td>
             <td class="${GmailClasses.CELL} yX">
-                <span>${label}</span>
-                <span class="bundle-count">&nbsp;(${displayedMessageCount})</span>
+                <div class="bundle-and-count">
+                    <span>${label}</span>
+                    <span class="bundle-count">(${displayedMessageCount})</span>
+                </div>
             </td>
             <td class="${GmailClasses.CELL} ${GmailClasses.SUBJECT_CELL}">
                 <span class="bundle-senders">
