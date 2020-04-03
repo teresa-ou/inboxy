@@ -95,14 +95,75 @@ button.light {
 }
 
 /**
+ * CTAs
+ */
+.firefox-cta {
+    display: none;
+}
+
+@-moz-document url-prefix() {
+    .firefox-cta {
+        display: block;
+    }
+
+    .chrome-cta {
+        display: none;
+    }
+}
+
+/**
  * Nav and top section.
  */
 
 nav {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.nav-left {
     display: flex;
     font: 1.5rem/3rem bold;
     font-family: 'Overlock', sans-serif;
-    position: relative;
+}
+
+.nav-right {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+}
+
+.available-for {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: normal;
+    letter-spacing: 0.03em;
+    margin-right: 1.5em;
+    opacity: 0.9;
+}
+
+.chrome-icon {
+    background: center/contain no-repeat url("assets/chrome.svg");
+    display: inline-block;
+    height: 28px;
+    margin-right: 1em;
+    width: 28px;
+}
+
+.firefox-icon {
+    background: center/contain no-repeat url("assets/firefox.svg");
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+
+.nav-right a {
+    opacity: 0.9;
+}
+
+.nav-right a:hover {
+    opacity: 1;
 }
 
 nav:after {
@@ -121,7 +182,7 @@ nav img {
 }
 
 header {
-    background:  center no-repeat url("assets/background.svg"), linear-gradient(176.9deg, #2FD0E4 -24.81%, #007F8F 145.19%);
+    background: center no-repeat url("assets/background.svg"), linear-gradient(176.9deg, #2FD0E4 -24.81%, #007F8F 145.19%);
     color: #ffffff;
 }
 
@@ -180,6 +241,7 @@ section {
     margin-bottom: -5%;
     margin-left: 1rem;
     max-width: 40%;
+    width: 100%;
 }
 
 /**
@@ -492,6 +554,10 @@ section {
     section {
         margin-left: 1rem;
         margin-right: 1rem;
+    }
+
+    .available-for {
+        display: none;
     }
 
     h1 {

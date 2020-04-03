@@ -14,8 +14,8 @@
     <title>inboxy | Google Inbox-style bundles for Gmail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta property="og:title" content="inboxy: Chrome extension for email bundles on Gmail">
-    <meta property="og:description" content="inboxy is an open-source Chrome extension that bundles together emails and makes it easier to manage your inbox.">
+    <meta property="og:title" content="inboxy: Browser extension for email bundles on Gmail">
+    <meta property="og:description" content="inboxy is an open-source browser extension that bundles together emails and makes it easier to manage your inbox.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://github.com/teresa-ou/inboxy/blob/gh-pages/assets/inboxy.png?raw=true">
     <meta property="og:url" content="https://teresa-ou.github.io/inboxy">
@@ -34,19 +34,29 @@
   <body>
     <header>
       <nav>
-        <img src="assets/inboxy.svg">
-        inboxy
+        <div class="nav-left">
+          <img src="assets/inboxy.svg">
+          inboxy
+        </div>
+        <div class="nav-right">
+          <span class="available-for small-caps">Available for</span>
+          <a class="chrome-icon" href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank"></a>
+          <a class="firefox-icon" href="https://addons.mozilla.org/addon/inboxy-inbox-bundles-for-gmail/" target="_blank"></a>
+        </div>
       </nav>
       <section class="top-section">
         <div class="top-section-content">
           <h1>Bringing Google Inbox bundles to Gmail</h1>
           <div class="description">
-            inboxy is an open-source Chrome extension that bundles together emails and 
+            inboxy is an open-source browser extension that bundles together emails and 
             makes it easier to manage your inbox.
           </div>
           <div class="button-links-container">
-            <a href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank">
+            <a class="chrome-cta" href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank">
               <button class="light get-inboxy">Get inboxy for Chrome</button>
+            </a>
+            <a class="firefox-cta" href="https://addons.mozilla.org/addon/inboxy-inbox-bundles-for-gmail/" target="_blank">
+              <button class="light get-inboxy">Get inboxy for Firefox</button>
             </a>
             <div class="view-source small-caps">
               <a href="https://github.com/teresa-ou/inboxy" target="_blank">
@@ -86,7 +96,7 @@
         <img src="assets/labels-illustration.svg">
         <div>
           <p>
-            <span class="semibold">inboxy</span> is a Chrome extension that brings bundles to 
+            <span class="semibold">inboxy</span> is a browser extension that brings bundles to 
             Gmail, by bundling together emails that share the same labels.
           </p>
           <p>
@@ -234,8 +244,11 @@
     </section>
 
     <section class="final-section">
-      <a href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank" class="get-inboxy">
+      <a class="chrome-cta" href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank" class="get-inboxy">
         <button>Get inboxy for Chrome</button>
+      </a>
+      <a class="firefox-cta" href="https://addons.mozilla.org/addon/inboxy-inbox-bundles-for-gmail/" target="_blank" class="get-inboxy">
+        <button>Get inboxy for Firefox</button>
       </a>
       <p class="post-feedback">
         Have feedback? <a href="https://github.com/teresa-ou/inboxy/issues" target="_blank">Post issues</a> to the Github repo.
