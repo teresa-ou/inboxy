@@ -4,8 +4,11 @@
 
 # inboxy: Google Inbox-style bundles for Gmail
 
-inboxy is a [Chrome extension](https://chrome.google.com/webstore/detail/inboxy-inbox-bundles-for/clahkkinbdcdnogkkgmacmiknnamahha) that bundles together your email messages and makes it easier to manage
-your inbox.
+inboxy is a browser extension that bundles together your email messages and makes it easier to manage
+your inbox. 
+
+Available for [Chrome](https://chrome.google.com/webstore/detail/inboxy-inbox-bundles-for/clahkkinbdcdnogkkgmacmiknnamahha) 
+and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/inboxy-inbox-bundles-for-gmail/).
 
 ## Features
 

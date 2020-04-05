@@ -111,7 +111,7 @@ function handleContentLoaded() {
 }
 
 function tryBundling(i, bundleCurrentPage) {
-    if (i > 30) {
+    if (i > 60) {
         throw new Error('inboxy was unable to bundle messages. To try again, refresh the page.')
     }
 

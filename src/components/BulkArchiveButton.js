@@ -19,33 +19,36 @@ import {
     GmailClasses,
     InboxyClasses,
     Selectors,
-    ORDER_INCREMENT
 } from '../util/Constants';
 
 /**
- * Create bulk archive button, for archiving all messages in a bundle.
+ * Create bulk archive button for archiving the given messages, which should be in the same bundle.
  */
-function create(bundleOrder) {
-        const html = `
-            <span class="archive-bundle ${GmailClasses.ARCHIVE_BUTTON}">
-            </span>
-        `;
+function create(messages) {
+    return _create(() => _selectMessages(messages));
+}
 
-        const archiveSpan = DomUtils.htmlToElement(html);
-        archiveSpan.addEventListener('click', e =>  {
-            if (archiveSpan.classList.contains('disabled')) {
-                e.stopPropagation();
-                return;
-            }
+function _create(selectMessagesFunction) {
+    const html = `
+        <span class="archive-bundle ${GmailClasses.ARCHIVE_BUTTON}">
+        </span>
+    `;
 
-            _archiveAllMessages(bundleOrder);
+    const archiveSpan = DomUtils.htmlToElement(html);
+    archiveSpan.addEventListener('click', e =>  {
+        if (archiveSpan.classList.contains('disabled')) {
             e.stopPropagation();
-        });
+            return;
+        }
 
-        return archiveSpan;
-    }
+        _archiveMessages(selectMessagesFunction);
+        e.stopPropagation();
+    });
 
-function _archiveAllMessages(bundleOrder) {
+    return archiveSpan;
+}
+
+function _archiveMessages(selectMessagesFunction) {
     const toolbarArchiveButton = document.querySelector(Selectors.TOOLBAR_ARCHIVE_BUTTON);
 
     const buttonIsVisible = new Promise((resolve, reject) => {
@@ -61,7 +64,7 @@ function _archiveAllMessages(bundleOrder) {
     });
 
     const selectMessages = new Promise((resolve, reject) => {
-        _selectMessages(bundleOrder);
+        selectMessagesFunction();
         resolve();
     });
 
@@ -69,19 +72,12 @@ function _archiveAllMessages(bundleOrder) {
 }
 
 /**
- * Select all messages in the bundle with the given bundle order number.
+ * Select all given messages.
  */
-function _selectMessages(bundleOrder) {
-    const checkboxes = document.querySelectorAll(Selectors.CHECKBOXES);
-
-    const minOrder = bundleOrder;
-    const maxOrder = minOrder + ORDER_INCREMENT;
-
-    for (let i = checkboxes.length - 1; i >= 0; i--) {
-        const checkboxNode = checkboxes.item(i);
-        const message = DomUtils.findMessageRow(checkboxNode);
-        const order = message.style.order;
-        if (minOrder <= order && order < maxOrder && !DomUtils.isChecked(checkboxNode)) {
+function _selectMessages(messages) {
+    for (let i = messages.length - 1; i >= 0; i--) {
+        const checkboxNode = messages[i].querySelector(Selectors.MESSAGE_CHECKBOX);
+        if (!DomUtils.isChecked(checkboxNode)) {
             checkboxNode.click();
         }
     }

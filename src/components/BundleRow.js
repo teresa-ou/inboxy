@@ -66,18 +66,15 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
                 </span>
             </td>
             <td class="${GmailClasses.CELL} flex-grow"></td>
-            <td class="${GmailClasses.DATE_CELL} ${GmailClasses.CELL}">
-                <span class="bundle-date ${latestIsUnreadClass}">${latestDate}</span>
-            </td>
         </tr>
     `;
 
-    const bulkArchiveButton = BulkArchiveButton.create(order);
+    const bulkArchiveButton = BulkArchiveButton.create(messages);
     const bulkArchiveTd = DomUtils.htmlToElement(`<td class="${GmailClasses.CELL}"></td>`);
     bulkArchiveTd.appendChild(bulkArchiveButton);
 
-    const labelUrl = label.replace(' ', '+').replace('/', '%2F');
-    const url = `${baseUrl}#search/label%3AInbox+and+label%3A${labelUrl}`;
+    const labelUrl = label.split(' ').join('+').split('/').join('%2F');
+    const url = `${baseUrl}#search/label%3AInbox+label%3A${labelUrl}`;
     const viewAllButtonHtml = `
         <td class="${GmailClasses.CELL}">
             <a 
@@ -91,8 +88,15 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
         </td>
     `;
 
+    const bundleDateHtml = `
+        <td class="${GmailClasses.DATE_CELL} ${GmailClasses.CELL}">
+            <span class="bundle-date ${latestIsUnreadClass}">${latestDate}</span>
+        </td>
+    `;
+
     const el = DomUtils.htmlToElement(html);
     el.appendChild(bulkArchiveTd);
+    el.appendChild(DomUtils.htmlToElement(bundleDateHtml));
     el.appendChild(DomUtils.htmlToElement(viewAllButtonHtml));
 
     el.addEventListener('click', e => {

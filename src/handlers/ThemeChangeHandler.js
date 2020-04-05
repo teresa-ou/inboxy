@@ -62,7 +62,7 @@ class ThemeChangeHandler {
             body.classList.remove(InboxyClasses.DARK_THEME);
         }
 
-        const message = document.querySelector(Selectors.READ_MESSAGE);
+        const message = document.querySelector(Selectors.SAMPLE_MESSAGE);
         if (!message) {
             return;
         }
@@ -71,6 +71,13 @@ class ThemeChangeHandler {
         }
         else {
             body.classList.remove(InboxyClasses.MESSAGES_DARK_THEME);
+        }
+
+        if (message.clientHeight <= 28) {
+            body.classList.add('compact');
+        }
+        else {
+            body.classList.remove('compact');
         }
     }
 

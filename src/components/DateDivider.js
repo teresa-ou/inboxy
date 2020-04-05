@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import BulkArchiveButton from '../components/BulkArchiveButton';
+
 import DomUtils from '../util/DomUtils';
 import {
     Selectors
@@ -130,11 +132,16 @@ function _extractMessageDate(message) {
 /**
  * Create a date divider row.
  */
-function create(divider, order) {
-    const el = document.createElement('div');
-    el.classList.add('date-row');
-    el.innerHTML += divider.text;
+function create(divider, order, messages) {
+    const html = `
+        <div class="date-row">
+            ${divider.text}
+        </div>
+    `;
+    const el = DomUtils.htmlToElement(html);
     el.style.order = order;
+
+    el.appendChild(BulkArchiveButton.create(messages));
 
     return el;
 }

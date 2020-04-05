@@ -250,7 +250,8 @@ class Bundler {
             const order = (i + 1) * ORDER_INCREMENT;
             switch (e.type) {
                 case Element.DATE_DIVIDER:
-                    this._drawDateDivider(e.element, order, tableBody);
+                    const messages = this._findMessagesForDivider(tableRows, i);
+                    this._drawDateDivider(e.element, order, messages, tableBody);
                     break;
                 case Element.BUNDLE:
                     const bundle = e.element;
@@ -276,11 +277,29 @@ class Bundler {
         tableBody.appendChild(bundleBox);
     }
 
+    _findMessagesForDivider(tableRows, dividerIndex) {
+        const messages = [];
+        for (let i = dividerIndex + 1; i < tableRows.length; i++) {
+            const row = tableRows[i];
+            if (row.type === Element.DATE_DIVIDER) {
+                break;
+            }
+            else if (row.type === Element.UNBUNDLED_MESSAGE) {
+                messages.push(row.element);
+            }
+            else if (row.type === Element.BUNDLE) {
+                messages.push(...row.element.getMessages());
+            }
+        }
+
+        return messages;
+    }
+
     /**
      * Create a date divider element and append it to the tableBody.
      */
-    _drawDateDivider(divider, order, tableBody) {
-        const dividerNode = DateDivider.create(divider, order);
+    _drawDateDivider(divider, order, messages, tableBody) {
+        const dividerNode = DateDivider.create(divider, order, messages);
         tableBody.append(dividerNode);
     }
 
