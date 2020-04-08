@@ -18,7 +18,7 @@ and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/inboxy-inbox-bundle
 * Intuitive date headings
 * Supports light and dark themes
 
-For more info, visit https://teresa-ou.github.io/inboxy.
+For more info, visit https://www.inboxymail.com.
 
 ## Setup
 
