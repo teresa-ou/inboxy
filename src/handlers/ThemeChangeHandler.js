@@ -53,13 +53,13 @@ class ThemeChangeHandler {
      * Apply the appropriate light/dark theme styling, so that inboxy theming matches Gmail.
      */
     _applyTheme() {
-        const body = document.querySelector('body');
+        const node = document.querySelector('html');
         const sidepaneText = document.querySelector(Selectors.SIDEPANE_TEXT);
         if (this._isLight(getComputedStyle(sidepaneText).color)) {
-            body.classList.add(InboxyClasses.DARK_THEME);
+            node.classList.add(InboxyClasses.DARK_THEME);
         }
         else {
-            body.classList.remove(InboxyClasses.DARK_THEME);
+            node.classList.remove(InboxyClasses.DARK_THEME);
         }
 
         const message = document.querySelector(Selectors.SAMPLE_MESSAGE);
@@ -67,17 +67,17 @@ class ThemeChangeHandler {
             return;
         }
         if (!this._isLight(getComputedStyle(message).backgroundColor)) {
-            body.classList.add(InboxyClasses.MESSAGES_DARK_THEME);
+            node.classList.add(InboxyClasses.MESSAGES_DARK_THEME);
         }
         else {
-            body.classList.remove(InboxyClasses.MESSAGES_DARK_THEME);
+            node.classList.remove(InboxyClasses.MESSAGES_DARK_THEME);
         }
 
         if (message.clientHeight <= 28) {
-            body.classList.add('compact');
+            node.classList.add('compact');
         }
         else {
-            body.classList.remove('compact');
+            node.classList.remove('compact');
         }
     }
 

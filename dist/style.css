@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
  
-.inboxy .flex-table-body {
+html.inboxy .flex-table-body {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -26,80 +26,84 @@
 /**
  * Bundle row
  */
- 
-.inboxy:not(.messages-dark-theme) tr:not(.bundle-row).zE:not(.x7),
-.inboxy:not(.messages-dark-theme) .bundle-row.zE:not(.visible):not(.x7) {
+
+/* Make unread messages grey for light theme, when Simplify is not used */
+html.inboxy:not(.messages-dark-theme):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
+html.inboxy:not(.messages-dark-theme):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
     background-color: rgba(242, 245, 245, 0.8);
 }
 
-.inboxy .bundle-row.zE .xY.yX,
-.inboxy .bundle-row .bundle-date.unread {
+html.inboxy .bundle-row.zE .xY.yX,
+html.inboxy .bundle-row .bundle-date.unread {
     font-weight: bold;
 }
 
 /* Allow column to shrink so that archive-bundle is next to the bundle-date */
-.inboxy .bundle-row .xW.xY {
+html.inboxy .bundle-row .xW.xY {
     flex-basis: auto;
 }
 
-.inboxy .bundle-row .unread-sender {
+html.inboxy .bundle-row .unread-sender {
     font-weight: bold;
 }
 
-.inboxy .bundle-row.visible {
-    box-shadow: none;
+/* Include zA/yO/zE/!important so that styles are compatible with Simplify */
+html.inboxy .bundle-row.zA.yO.visible,
+html.inboxy .bundle-row.zA.zE.visible {
+    box-shadow: none !important;
     font-weight: bold;
     background-color: #e8eaed;
-    padding-top: 32px;
-    padding-bottom: 18px;
+    padding-top: 32px !important;
+    padding-bottom: 18px !important;
     margin-top: 24px;
 }
 
-.inboxy.dark-theme .bundle-row.visible {
+html.inboxy.dark-theme .bundle-row.yO.visible,
+html.inboxy.dark-theme .bundle-row.zE.visible {
     background-color: rgba(241, 243, 244, 0.24);
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
-.inboxy .bundle-row.visible .xY.yX {
+html.inboxy .bundle-row.visible .xY.yX {
     font-size: 1.025rem;
     margin-left: 56px;
 }
 
 /* Handle long label names */
-.inboxy .bundle-row:not(.visible) .bundle-and-count {
+html.inboxy .bundle-row:not(.visible) .bundle-and-count {
     white-space: normal;
 }
-.inboxy .bundle-row:not(.visible) .xY {
+html.inboxy .bundle-row:not(.visible) .xY {
     align-items: flex-start;
     height: unset;
 }
 /* Allow more width before wrapping */
-.inboxy .bundle-row:not(.visible) .xY.yX {
+html.inboxy .bundle-row:not(.visible) .xY.yX {
     padding-right: 12px;
     flex-basis: 188px;
     max-width: 188px;
 }
 
-.inboxy .bundle-row.visible .xW.xY,
-.inboxy .bundle-row.visible .bundle-senders {
+html.inboxy .bundle-row.visible .xW.xY,
+html.inboxy .bundle-row.visible .bundle-senders {
     display: none;
 }
 
-.inboxy .bundle-senders {
+html.inboxy .bundle-senders {
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.inboxy .bundle-row.visible td:nth-child(1),
-.inboxy .bundle-row.visible td:nth-child(2),
-.inboxy .bundle-row.visible td:nth-child(3),
-.inboxy .bundle-row.visible td:nth-child(4) {
+html.inboxy .bundle-row.visible td:nth-child(1),
+html.inboxy .bundle-row.visible td:nth-child(2),
+html.inboxy .bundle-row.visible td:nth-child(3),
+html.inboxy .bundle-row.visible td:nth-child(4) {
     width: 0;
     padding: 0;
 }
 
-.inboxy .bundle-row td.apU {
+html.inboxy .bundle-row td.apU {
     background-image: url('chrome-extension://__MSG_@@extension_id__/bundle.png');
     background-size: 20px;
     background-repeat: no-repeat;
@@ -108,44 +112,44 @@
     width: 20px;
 }
 
-.inboxy .bundle-row:hover td.apU {
+html.inboxy .bundle-row:hover td.apU {
     opacity: 0.54;
 }
 
-.inboxy.messages-dark-theme .bundle-row td.apU {
+html.inboxy.messages-dark-theme .bundle-row td.apU {
     background-image: url('chrome-extension://__MSG_@@extension_id__/light-bundle.png');
     opacity: 0.55;
 }
 
-.inboxy.messages-dark-theme .bundle-row:hover td.apU {
+html.inboxy.messages-dark-theme .bundle-row:hover td.apU {
     opacity: 0.7;
 }
 
 @-moz-document url-prefix() {
-    .inboxy .bundle-row td.apU {
+    html.inboxy .bundle-row td.apU {
         background-image: url('moz-extension://__MSG_@@extension_id__/bundle.png');
     }
 
-    .inboxy.messages-dark-theme .bundle-row td.apU {
+    html.inboxy.messages-dark-theme .bundle-row td.apU {
         background-image: url('moz-extension://__MSG_@@extension_id__/light-bundle.png');
     }
 }
 
 @media (min-resolution: 2dppx) {
-    .inboxy .bundle-row td.apU {
+    html.inboxy .bundle-row td.apU {
         background-image: url('chrome-extension://__MSG_@@extension_id__/bundle@2x.png');
     }
 
-    .inboxy.messages-dark-theme .bundle-row td.apU {
+    html.inboxy.messages-dark-theme .bundle-row td.apU {
         background-image: url('chrome-extension://__MSG_@@extension_id__/light-bundle@2x.png');
     }
 
     @-moz-document url-prefix() {
-        .inboxy .bundle-row td.apU {
+        html.inboxy .bundle-row td.apU {
             background-image: url('moz-extension://__MSG_@@extension_id__/bundle@2x.png');
         }
 
-        .inboxy.messages-dark-theme .bundle-row td.apU {
+        html.inboxy.messages-dark-theme .bundle-row td.apU {
             background-image: url('moz-extension://__MSG_@@extension_id__/light-bundle@2x.png');
         }
     }
@@ -155,11 +159,11 @@
  * Message count, in bundle row 
  */
 
-.inboxy .bundle-count {
+html.inboxy .bundle-count {
     font-weight: normal;
 }
 
-.inboxy .bundle-row.visible .bundle-count {
+html.inboxy .bundle-row.visible .bundle-count {
     display: none;
 }
 
@@ -167,12 +171,12 @@
  * Archive-all button, in bundle row
  */
 
-.inboxy .bundle-row .flex-grow {
+html.inboxy .bundle-row .flex-grow {
     display: flex;
     flex-grow: 1;
 }
 
-.inboxy .bundle-row .archive-bundle {
+html.inboxy .bundle-row .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/check-all.png');
     background-size: 24px;
     display: none;
@@ -180,78 +184,78 @@
     width: 24px;
 }
 
-.inboxy .bundle-row:not(.visible) .archive-bundle {
+html.inboxy .bundle-row:not(.visible) .archive-bundle {
     margin-right: 16px;
 }
 
 /** Adjust size of circle on hover */
-.inboxy .bundle-row .archive-bundle:before {
+html.inboxy .bundle-row .archive-bundle:before {
     left: -8px;
     right: -8px;
 }
-.inboxy.compact .bundle-row .archive-bundle:before {
+html.inboxy.compact .bundle-row .archive-bundle:before {
     left: -2px;
     right: -2px;
 }
 
 /** Show on hover */
-.inboxy .bundle-row:hover .archive-bundle {
+html.inboxy .bundle-row:hover .archive-bundle {
     display: block;
 }
 
-.inboxy.dark-theme .bundle-row.visible .archive-bundle,
-.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
+html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
+html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all.png');
     opacity: 0.7;
 }
 
-.inboxy.dark-theme .bundle-row.visible .archive-bundle:before {
+html.inboxy.dark-theme .bundle-row.visible .archive-bundle:before {
     background-color: rgb(255, 255, 255, 0.2);
 }
 
 @-moz-document url-prefix() {
-    .inboxy .bundle-row .archive-bundle {
+    html.inboxy .bundle-row .archive-bundle {
         background-image: url('moz-extension://__MSG_@@extension_id__/check-all.png');
     }
 
-    .inboxy.dark-theme .bundle-row.visible .archive-bundle,
-    .inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
+    html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
+    html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
         background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all.png');
     }
 }
 
 @media (min-resolution: 2dppx) {
-    .inboxy .bundle-row .archive-bundle {
+    html.inboxy .bundle-row .archive-bundle {
         background-image: url('chrome-extension://__MSG_@@extension_id__/check-all@2x.png');
     }
 
-    .inboxy.dark-theme .bundle-row.visible .archive-bundle,
-    .inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
+    html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
+    html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
         background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all@2x.png');
     }
 
     @-moz-document url-prefix() {
-        .inboxy .bundle-row .archive-bundle {
+        html.inboxy .bundle-row .archive-bundle {
             background-image: url('moz-extension://__MSG_@@extension_id__/check-all@2x.png');
         }
 
-        .inboxy.dark-theme .bundle-row.visible .archive-bundle,
-        .inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
+        html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
+        html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
             background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all@2x.png');
         }
     }
 }
 
-.inboxy .bundle-row.visible .archive-bundle {
+html.inboxy .bundle-row.visible .archive-bundle {
     display: block;
 }
 
-.inboxy .bundle-row .archive-bundle.disabled {
+html.inboxy .bundle-row .archive-bundle.disabled {
     cursor: default;
     opacity: .15;
 }
 
-.inboxy .bundle-row .archive-bundle.disabled::before {
+html.inboxy .bundle-row .archive-bundle.disabled::before {
     display: none;
 }
 
@@ -259,11 +263,11 @@
  * Bundled messages
  */
 
-.inboxy .bundled-message {
+html.inboxy .bundled-message {
     display: none;
 }
 
-.inboxy .bundled-message.visible {
+html.inboxy .bundled-message.visible {
     display: flex;
     margin-left: 40px;
     margin-right: 40px;
@@ -275,7 +279,7 @@
  * Sides and bottom of open bundle area 
  */
 
-.inboxy .bundle-area {
+html.inboxy .bundle-area {
     background-color: #e8eaed;
     cursor: pointer;
     display: none;
@@ -285,14 +289,14 @@
     z-index: -2;
 }
 
-.inboxy.dark-theme .bundle-area {
+html.inboxy.dark-theme .bundle-area {
     background-color: rgba(241, 243, 244, 0.24);
 }
 
 /** 
  * Bottom of open bundle area
  */
-.inboxy .bundled-message.visible.last {
+html.inboxy .bundled-message.visible.last {
     margin-bottom: 72px;
 }
 
@@ -300,7 +304,7 @@
  * Date divider
  */
 
-.inboxy .date-row {
+html.inboxy .date-row {
     display: flex;
     justify-content: space-between;
     padding: 24px 0 16px 28px;
@@ -308,51 +312,51 @@
     color: #202124;
 }
 
-.inboxy.dark-theme .date-row {
+html.inboxy.dark-theme .date-row {
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
-.inboxy .date-row .archive-bundle {
+html.inboxy .date-row .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/check-all.png');
     background-size: 20px;
     margin-right: 24px;
 }
 
-.inboxy.dark-theme .date-row .archive-bundle {
+html.inboxy.dark-theme .date-row .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all.png');
     opacity: 0.7;
 }
 
-.inboxy.dark-theme .date-row .archive-bundle:before {
+html.inboxy.dark-theme .date-row .archive-bundle:before {
     background-color: rgb(255, 255, 255, 0.2);
 }
 
 @-moz-document url-prefix() {
-    .inboxy .date-row .archive-bundle {
+    html.inboxy .date-row .archive-bundle {
         background-image: url('moz-extension://__MSG_@@extension_id__/check-all.png');
     }
 
-    .inboxy.dark-theme .date-row .archive-bundle {
+    html.inboxy.dark-theme .date-row .archive-bundle {
         background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all.png');
     }
 }
 
 @media (min-resolution: 2dppx) {
-    .inboxy .date-row .archive-bundle {
+    html.inboxy .date-row .archive-bundle {
         background-image: url('chrome-extension://__MSG_@@extension_id__/check-all@2x.png');
     }
 
-    .inboxy.dark-theme .date-row .archive-bundle {
+    html.inboxy.dark-theme .date-row .archive-bundle {
         background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all@2x.png');
     }
 
     @-moz-document url-prefix() {
-        .inboxy .date-row .archive-bundle {
+        html.inboxy .date-row .archive-bundle {
             background-image: url('moz-extension://__MSG_@@extension_id__/check-all@2x.png');
         }
 
-        .inboxy.dark-theme .date-row .archive-bundle {
+        html.inboxy.dark-theme .date-row .archive-bundle {
             background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all@2x.png');
         }
     }
@@ -361,47 +365,47 @@
 /** 
  * Archive button 
  */
-.inboxy .brq,
-.inboxy .ar8 {
+html.inboxy .brq,
+html.inboxy .ar8 {
     background-image: url('chrome-extension://__MSG_@@extension_id__/check.png');
 }
 
-.inboxy.messages-dark-theme .brq,
-.inboxy.dark-theme .ar8 {
+html.inboxy.messages-dark-theme .brq,
+html.inboxy.dark-theme .ar8 {
     background-image: url('chrome-extension://__MSG_@@extension_id__/light-check.png');
 }
 
 @-moz-document url-prefix() {
-    .inboxy .brq,
-    .inboxy .ar8 {
+    html.inboxy .brq,
+    html.inboxy .ar8 {
         background-image: url('moz-extension://__MSG_@@extension_id__/check.png');
     }
 
-    .inboxy.messages-dark-theme .brq,
-    .inboxy.dark-theme .ar8 {
+    html.inboxy.messages-dark-theme .brq,
+    html.inboxy.dark-theme .ar8 {
         background-image: url('moz-extension://__MSG_@@extension_id__/light-check.png');
     }
 }
 
 @media (min-resolution: 2dppx) {
-    .inboxy .brq,
-    .inboxy .ar8 {
+    html.inboxy .brq,
+    html.inboxy .ar8 {
         background-image: url('chrome-extension://__MSG_@@extension_id__/check@2x.png');
     }
 
-    .inboxy.messages-dark-theme .brq,
-    .inboxy.dark-theme .ar8 {
+    html.inboxy.messages-dark-theme .brq,
+    html.inboxy.dark-theme .ar8 {
         background-image: url('chrome-extension://__MSG_@@extension_id__/light-check@2x.png');
     }
 
     @-moz-document url-prefix() {
-        .inboxy .brq,
-        .inboxy .ar8 {
+        html.inboxy .brq,
+        html.inboxy .ar8 {
             background-image: url('moz-extension://__MSG_@@extension_id__/check@2x.png');
         }
 
-        .inboxy.messages-dark-theme .brq,
-        .inboxy.dark-theme .ar8 {
+        html.inboxy.messages-dark-theme .brq,
+        html.inboxy.dark-theme .ar8 {
             background-image: url('moz-extension://__MSG_@@extension_id__/light-check@2x.png');
         }
     }
@@ -411,7 +415,7 @@
  * View all link 
  */
 
-.inboxy .view-all-link {
+html.inboxy .view-all-link {
     border-radius: 4px;
     color: inherit;
     display: none;
@@ -420,28 +424,161 @@
     text-decoration: none;
 }
 
-.inboxy .bundle-row.visible .view-all-link {
+html.inboxy .bundle-row.visible .view-all-link {
     display: block;
 }
 
-.inboxy .view-all-link:hover {
+html.inboxy .view-all-link:hover {
     background-color: rgba(32, 33, 36, 0.059);
 }
 
-.inboxy .view-all-link:hover .view-all {
+html.inboxy .view-all-link:hover .view-all {
     opacity: 1;
 }
 
-.inboxy .view-all {
+html.inboxy .view-all {
     font-weight: 500;
     opacity: 0.54;
 }
 
-.inboxy.dark-theme .view-all {
+html.inboxy.dark-theme .view-all {
     opacity: 0.7;
     text-shadow: none;
 }
 
-.inboxy.dark-theme .view-all-link:hover {
+html.inboxy.dark-theme .view-all-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+/**
+ * Pinned toggle.
+ */
+ 
+html.inboxy .pinned-toggle {
+    position: relative;
+    width: 44px;
+    height: 20px;
+    margin: 0 9px;
+    flex: 0 0 auto;
+}
+
+html.inboxy .pinned-toggle .slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    
+    background-color: #f1f3f4;
+}
+
+html.inboxy.dark-theme .pinned-toggle .slider {
+    background-color: rgba(241,243,244,0.24);
+}
+
+html.inboxy .pinned-toggle .slider-button {
+    position: absolute;
+    content: "";
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    left: -4px;
+    bottom: -4px;
+    transition: all 0.3s ease;
+
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 0px 3px 1px rgba(60,64,67,0.149);
+    background: #ffffff center no-repeat;
+    background-image: url('chrome-extension://__MSG_@@extension_id__/star-outline.svg');
+}
+
+@-moz-document url-prefix() {
+    html.inboxy .pinned-toggle .slider-button {
+        background-image: url('moz-extension://__MSG_@@extension_id__/star-outline.svg');
+    }
+}
+
+html.inboxy .pinned-toggle:not(.show-pinned) .slider-button {
+    opacity: 0.87;
+}
+
+html.inboxy .pinned-toggle:not(.show-pinned) .slider-button:hover {
+    opacity: 1;
+}
+
+html.inboxy .pinned-toggle .slider-button:hover {
+    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 1px 3px 2px rgba(60,64,67,0.149);
+}
+
+html.inboxy .pinned-toggle.show-pinned .slider {
+    background-color: #ffd037;
+}
+
+html.inboxy .pinned-toggle.show-pinned .slider-button {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/star-filled.svg');
+    transform: translateX(24px);
+}
+
+@-moz-document url-prefix() {
+    html.inboxy .pinned-toggle.show-pinned .slider-button {
+        background-image: url('moz-extension://__MSG_@@extension_id__/star-filled.svg');
+    }
+}
+
+/** 
+ * Layout 
+ */
+ 
+ html.inboxy .gb_Ze,
+ html.inboxy .pinned-toggle {
+    display: inline-block;
+ }
+
+ html.inboxy .pinned-toggle {
+    float: right;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 0;
+}
+
+html.inboxy:not(.simpl) .gb_Ze {
+    width: 100%;
+}
+@media(max-width: 1250px) {
+    html.inboxy:not(.simpl) .gb_Ze {
+        width: calc(100% - 100px);
+    }
+}
+
+/**
+ * pinned-toggle <--> Simplify compatibility.
+ * Only apply these styles on pages that show the toggle.
+ */
+
+html.inboxy.show-pinned-toggle.simpl:not(.hideSearch) .pinned-toggle {
+    margin-right: 14px;
+}
+
+/** 
+ * Show pinned-toggle when search is shown but not focused.
+ * Adjust width of the search form.
+ */
+html.inboxy.show-pinned-toggle.simpl:not(.hideSearch):not(.searchFocused) #gb form {
+    width: calc(20% - 62px);
+}
+html.inboxy.show-pinned-toggle.simpl:not(.hideSearch):not(.searchFocused).appSwitcher #gb form {
+    width: calc(20% - 112px);
+}
+html.inboxy.show-pinned-toggle.simpl.searchFocused .pinned-toggle {
+    display: none;
+}
+
+/** Hidden search */
+html.inboxy.show-pinned-toggle.simpl.hideSearch .aeH {
+    width: calc(100vw - 234px);
+}
+html.inboxy.show-pinned-toggle.simpl.hideSearch.appSwitcher #gb form {
+    display: block;
+    visibility: hidden;
 }

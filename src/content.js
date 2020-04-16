@@ -16,8 +16,11 @@
 
 import BundleToggler from './bundling/BundleToggler';
 import Bundler from './bundling/Bundler';
+import DateGrouper from './bundling/DateGrouper';
 
 import BundledMail from './containers/BundledMail';
+
+import PinnedToggle from './components/PinnedToggle';
 
 import TabPanelsObserver from './handlers/TabPanelsObserver';
 import MainParentObserver from './handlers/MainParentObserver';
@@ -29,7 +32,10 @@ import {
     InboxyClasses,
     Selectors,
 } from './util/Constants';
-import { supportsBundling } from './util/MessagePageUtils';
+import { 
+    supportsBundling,
+    isStarredPage,
+} from './util/MessagePageUtils';
 
 const RETRY_TIMEOUT_MS = 50;
 
@@ -53,6 +59,7 @@ const bundledMail = new BundledMail();
 const bundleToggler = new BundleToggler(bundledMail);
 const bundler = new Bundler(bundleToggler, bundledMail, messageListWatcher);
 const starHandler = new StarHandler(bundledMail);
+const dateGrouper = new DateGrouper();
 
 // 
 // Observers for handling navigation
@@ -70,6 +77,9 @@ const tabPanelsObserver = new TabPanelsObserver(mutations => rebundle());
 const mainParentObserver = new MainParentObserver(mutations => {
     if (supportsBundling(window.location.href)) {
         rebundle();
+    }
+    else if (isStarredPage(window.location.href)) {
+        dateGrouper.refreshDateDividers();
     }
 });
 
@@ -123,7 +133,12 @@ function tryBundling(i, bundleCurrentPage) {
             setTimeout(() => tryBundling(i + 1, bundleCurrentPage), RETRY_TIMEOUT_MS);
         }
         else {
+            addPinnedToggle(); 
             startObservers();
+
+            if (isStarredPage(window.location.href)) {
+                dateGrouper.refreshDateDividers();
+            }
         }
     }
     else {
@@ -138,6 +153,7 @@ function tryBundling(i, bundleCurrentPage) {
         }
         else {
             bundler.bundleMessages(false);
+            addPinnedToggle();
             startObservers();
         }
     }
@@ -148,4 +164,9 @@ function startObservers() {
     themeChangeHandler.observe();
     mainParentObserver.observe();
     tabPanelsObserver.observe();
+}
+
+function addPinnedToggle() {
+    const searchForm = document.querySelector(Selectors.SEARCH_FORM).parentNode;
+    searchForm.appendChild((new PinnedToggle()).create());
 }

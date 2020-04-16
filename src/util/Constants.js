@@ -48,6 +48,7 @@ const InboxyClasses = {
     MESSAGES_DARK_THEME: 'messages-dark-theme',
     INBOXY: 'inboxy',
     LAST: 'last',
+    SHOW_PINNED_TOGGLE: 'show-pinned-toggle',
     VIEW_ALL_LINK: 'view-all-link',
     VISIBLE: 'visible',
 };
@@ -79,6 +80,7 @@ const Selectors = {
     READ_MESSAGE: `tr.${GmailClasses.ROW}.${GmailClasses.READ}`,
     REFRESH: '.T-I.J-J5-Ji[act="20"]',
     SAMPLE_MESSAGE: `${POSSIBLE_MESSAGE_LISTS} tr.${GmailClasses.ROW}.${GmailClasses.READ}:not(.bundled-message)`,
+    SEARCH_FORM: '.gb_Ze',
     SELECTED: `${CURRENT_TABPANEL} tr.${GmailClasses.SELECTED}:not(.${InboxyClasses.BUNDLE_ROW})`,
     SENDERS: '.yX.xY .yW .bA4 span[email]',
     SCROLLABLE_CONTAINER: '.Tm.aeJ',
@@ -94,7 +96,17 @@ const Selectors = {
 // Selectors for elements assuming we are selecting within TABLE_BODY
 const TableBodySelectors = {
     MESSAGE_NODES: `tr.${GmailClasses.ROW}`,
-}
+};
+
+const Urls = {
+    STARRED_PAGE_HASH: 'search/is%3Astarred+label%3Ainbox',
+};
+
+const Element = {
+    DATE_DIVIDER: 1,
+    BUNDLE: 2,
+    UNBUNDLED_MESSAGE: 3,
+};
 
 export { 
     ORDER_INCREMENT, 
@@ -103,4 +115,6 @@ export {
     InboxyClasses,
     Selectors, 
     TableBodySelectors,
+    Urls,
+    Element,
 };

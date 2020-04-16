@@ -33,7 +33,7 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const displayedMessageCount = messages.length >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
         : messages.length;
-    const unreadClass = hasUnread ? GmailClasses.UNREAD : '';
+    const unreadClass = hasUnread ? GmailClasses.UNREAD : GmailClasses.READ;
 
     let spacerClass = '';
     if (document.querySelector(Selectors.IMPORTANCE_MARKER)) {
@@ -49,7 +49,7 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const latestIsUnreadClass = messages[0].classList.contains(GmailClasses.UNREAD) ? 'unread' : '';
     
     const html = `
-        <tr class="${GmailClasses.ROW} ${GmailClasses.READ} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
+        <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
             <td class="${GmailClasses.CELL} oZ-x3"></td>
             <td class="${GmailClasses.CELL} apU"></td>

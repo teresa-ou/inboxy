@@ -18,7 +18,8 @@ import BulkArchiveButton from '../components/BulkArchiveButton';
 
 import DomUtils from '../util/DomUtils';
 import {
-    Selectors
+    Selectors,
+    Element,
 } from '../util/Constants';
 
 /**
@@ -35,6 +36,75 @@ const DividerDate = {
 };
 
 /**
+ * Inserts date divider objects between the given rows, and returns the 
+ * modified list of rows with date divider rows.
+ */
+function withDateDividers(
+    messagesAndBundleRows, 
+    sampleDate, 
+    getLatestMessageForRow = x => x ? x.element : null) 
+{
+    const rows = [];
+    
+    let dateDividers = _getDateDividers(sampleDate, new Date());
+    let prevRow = null;
+    for (let i = 0; i < messagesAndBundleRows.length; i++) {
+        const currRow = messagesAndBundleRows[i];
+        const divider = _shouldInsertDateDivider(
+            getLatestMessageForRow(prevRow), getLatestMessageForRow(currRow), dateDividers);
+        if (divider) {
+            rows.push({
+                element: divider,
+                type: Element.DATE_DIVIDER,
+            });                   
+        }
+
+        rows.push(currRow);
+        prevRow = currRow;
+    }
+
+    return rows;
+}
+
+/**
+ * Find messages that are between the given dividerIndex and the next date divider.
+ */
+function findMessagesForDivider(tableRows, dividerIndex) {
+    const messages = [];
+    for (let i = dividerIndex + 1; i < tableRows.length; i++) {
+        const row = tableRows[i];
+        if (row.type === Element.DATE_DIVIDER) {
+            break;
+        }
+        else if (row.type === Element.UNBUNDLED_MESSAGE) {
+            messages.push(row.element);
+        }
+        else if (row.type === Element.BUNDLE) {
+            messages.push(...row.element.getMessages());
+        }
+    }
+
+    return messages;
+}
+
+/**
+ * Create a date divider row.
+ */
+function create(divider, order, messages) {
+    const html = `
+        <div class="date-row">
+            ${divider.text}
+        </div>
+    `;
+    const el = DomUtils.htmlToElement(html);
+    el.style.order = order;
+
+    el.appendChild(BulkArchiveButton.create(messages));
+
+    return el;
+}
+
+/**
  * Return a list of date dividers, based on the provided current date. 
  * 
  * Date dividers are objects with the fields 'value' (enum value), 'text' (displayed to user), and 
@@ -43,7 +113,7 @@ const DividerDate = {
  * If date dividers aren't supported for dates in a format of the sampleDateString, returns 
  * an empty list.
  */
-function getDateDividers(sampleDateString, now) {
+function _getDateDividers(sampleDateString, now) {
     if (!_isDateDividerSupported(sampleDateString)) {
         return [];
     }
@@ -109,7 +179,7 @@ function _parseDate(dateString) {
  * Returns the date divider object that should be used to divide prev and curr message node,
  * if any, or null otherwise. 
  */
-function shouldInsertDateDivider(prevMessageNode, currMessageNode, dateDividers) {
+function _shouldInsertDateDivider(prevMessageNode, currMessageNode, dateDividers) {
     for (let i = dateDividers.length - 1; i >= 0; i--) {
         const dividerDate = dateDividers[i].endDate;
         const prevDate = prevMessageNode 
@@ -129,25 +199,8 @@ function _extractMessageDate(message) {
     return _parseDate(DomUtils.extractDate(message));
 }
 
-/**
- * Create a date divider row.
- */
-function create(divider, order, messages) {
-    const html = `
-        <div class="date-row">
-            ${divider.text}
-        </div>
-    `;
-    const el = DomUtils.htmlToElement(html);
-    el.style.order = order;
-
-    el.appendChild(BulkArchiveButton.create(messages));
-
-    return el;
-}
-
 export default {
-    getDateDividers,
-    shouldInsertDateDivider,
     create,
+    withDateDividers,
+    findMessagesForDivider,
 };

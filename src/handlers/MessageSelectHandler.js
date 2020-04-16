@@ -19,6 +19,7 @@ import {
     InboxyClasses,
 } from '../util/Constants';
 import DomUtils from '../util/DomUtils';
+import { supportsBundling } from '../util/MessagePageUtils';
 import InboxyStyler from '../bundling/InboxyStyler';
 
 const MESSAGE_LIST_CONFIG = { 
@@ -63,6 +64,10 @@ class MessageSelectHandler {
     }
 
     _handleMessageChange(mutations) {
+        if (!supportsBundling(window.location.href)) {
+            return;
+        }
+
         mutations.forEach(mutation => {
             if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') {
                 return;

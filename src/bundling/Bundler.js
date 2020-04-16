@@ -34,14 +34,9 @@ import {
     Selectors, 
     TableBodySelectors,
     ORDER_INCREMENT, 
+    Element,
 } from '../util/Constants';
 import DomUtils from '../util/DomUtils';
-
-const Element = {
-    DATE_DIVIDER: 1,
-    BUNDLE: 2,
-    UNBUNDLED_MESSAGE: 3,
-};
 
 /**
  * Groups messages into bundles, and renders those bundles.
@@ -97,7 +92,7 @@ class Bundler {
     _bundleMessages(messageList) {
         const tableBody = messageList.querySelector(Selectors.TABLE_BODY);
 
-        document.querySelector('body').classList.add(InboxyClasses.INBOXY);
+        document.querySelector('html').classList.add(InboxyClasses.INBOXY);
         tableBody.classList.add('flex-table-body');
 
         const messageNodes = [...tableBody.querySelectorAll(TableBodySelectors.MESSAGE_NODES)];
@@ -159,7 +154,7 @@ class Bundler {
             ? DomUtils.extractDate(messageNodes[0])
             : '';
 
-        return this._insertDateDividers(rows, sampleDate);
+        return DateDivider.withDateDividers(rows, sampleDate, this._getLatestMessage);
     }
 
     _calculateMessageAndBundleRows(messageNodes, bundlesByLabel) {
@@ -187,33 +182,6 @@ class Bundler {
                     labels.add(l);
                 }
             });
-        }
-
-        return rows;
-    }
-
-    /**
-     * Inserts date dividers between the given rows, and returns the 
-     * modified list of rows with date divider rows.
-     */
-    _insertDateDividers(messagesAndBundleRows, sampleDate) {
-        const rows = [];
-        
-        let dateDividers = DateDivider.getDateDividers(sampleDate, new Date());
-        let prevRow = null;
-        for (let i = 0; i < messagesAndBundleRows.length; i++) {
-            const currRow = messagesAndBundleRows[i];
-            const divider = DateDivider.shouldInsertDateDivider(
-                this._getLatestMessage(prevRow), this._getLatestMessage(currRow), dateDividers);
-            if (divider) {
-                rows.push({
-                    element: divider,
-                    type: Element.DATE_DIVIDER,
-                });                   
-            }
-
-            rows.push(currRow);
-            prevRow = currRow;
         }
 
         return rows;
@@ -250,7 +218,7 @@ class Bundler {
             const order = (i + 1) * ORDER_INCREMENT;
             switch (e.type) {
                 case Element.DATE_DIVIDER:
-                    const messages = this._findMessagesForDivider(tableRows, i);
+                    const messages = DateDivider.findMessagesForDivider(tableRows, i);
                     this._drawDateDivider(e.element, order, messages, tableBody);
                     break;
                 case Element.BUNDLE:
@@ -275,24 +243,6 @@ class Bundler {
             'click', 
             () => this.bundleToggler.closeAllBundles());
         tableBody.appendChild(bundleBox);
-    }
-
-    _findMessagesForDivider(tableRows, dividerIndex) {
-        const messages = [];
-        for (let i = dividerIndex + 1; i < tableRows.length; i++) {
-            const row = tableRows[i];
-            if (row.type === Element.DATE_DIVIDER) {
-                break;
-            }
-            else if (row.type === Element.UNBUNDLED_MESSAGE) {
-                messages.push(row.element);
-            }
-            else if (row.type === Element.BUNDLE) {
-                messages.push(...row.element.getMessages());
-            }
-        }
-
-        return messages;
     }
 
     /**

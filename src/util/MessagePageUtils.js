@@ -17,6 +17,7 @@
 import { 
     Selectors,
     NO_TAB,
+    Urls,
 } from './Constants';
 
 /**
@@ -28,7 +29,10 @@ function getPageNumber(url) {
         return 1;
     }
 
-    return parseInt(_matchesPageX(hash)[1]);
+    const matchesPageX = _matchesPageX(hash);
+    if (matchesPageX) {
+        return parseInt(matchesPageX[1]);
+    }
 };
 
 /**
@@ -50,9 +54,21 @@ function getCurrentTab() {
  * Whether messages should be bundled on the page.
  */
 function supportsBundling(url) {
-    return !url.includes('#') ||
-        _matchesPage1(_getHash(url)) || 
-        _matchesPageX(_getHash(url));
+    if (!url.includes('#')) {
+        return true;
+    }
+
+    const hash = _getHash(url);
+    return _matchesPage1(hash) || !!_matchesPageX(hash);
+}
+
+/**
+ * Whether the given url is for showing all starred (pinned) messages that are
+ * in the inbox.
+ */
+function isStarredPage(url) {
+    return url.includes('#') &&
+        (_matchesStarredPage1(_getHash(url)) || !!_matchesStarredPageX(_getHash(url)));
 }
 
 /**
@@ -77,7 +93,15 @@ function _matchesPage1(hash) {
 }
 
 function _matchesPageX(hash) {
-    return hash.match(/inbox\/p(\d+)$/);
+    return hash.match(/^inbox\/p(\d+)$/);
+}
+
+function _matchesStarredPage1(hash) {
+    return hash === Urls.STARRED_PAGE_HASH;
+}
+
+function _matchesStarredPageX(hash) {
+    return hash.match(/^search\/is%3Astarred\+label%3Ainbox\/p(\d+)$/)
 }
 
 export {
@@ -85,5 +109,6 @@ export {
     getPageNumber,
     getCurrentTab,
     supportsBundling,
+    isStarredPage,
     getCurrentBaseUrl,
 };
