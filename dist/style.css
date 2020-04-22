@@ -530,7 +530,7 @@ html.inboxy .pinned-toggle.show-pinned .slider-button {
  * Layout 
  */
  
- html.inboxy .gb_Ze,
+ html.inboxy #gb form,
  html.inboxy .pinned-toggle {
     display: inline-block;
  }
@@ -542,11 +542,11 @@ html.inboxy .pinned-toggle.show-pinned .slider-button {
     margin-right: 0;
 }
 
-html.inboxy:not(.simpl) .gb_Ze {
+html.inboxy:not(.simpl) #gb form {
     width: 100%;
 }
 @media(max-width: 1250px) {
-    html.inboxy:not(.simpl) .gb_Ze {
+    html.inboxy:not(.simpl) #gb form {
         width: calc(100% - 100px);
     }
 }
