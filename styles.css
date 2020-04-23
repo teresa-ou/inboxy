@@ -350,7 +350,7 @@ section {
 /* screenshot-overview tooltips */
 
 #tooltip-date {
-    bottom: calc(51.5% + 15px);
+    bottom: calc(45% + 15px);
     right: calc(71% - 15px - 8px);
 }
 
@@ -368,14 +368,14 @@ section {
 }
 
 #tooltip-bundle {
-    top: calc(73.5% + 8px);
-    left: calc(48% - 15px - 4px);
+    top: calc(80.5% + 8px);
+    left: calc(39% - 15px - 4px);
 }
 
 /* screenshot-bundle tooltips */
 
 #tooltip-open-bundle {
-    bottom: calc(32% + 15px);
+    bottom: calc(58.5% + 15px);
     max-width: 160px;
     right: calc(69% - 15px - 8px);
 }
@@ -386,7 +386,7 @@ section {
 
 #tooltip-bulk-archive {
     max-width: 177px;
-    top: calc(73.5% + 15px);
+    top: calc(46.5% + 15px);
     right: calc(15% - 15px - 8px);
     text-align: right;
 }
@@ -396,7 +396,7 @@ section {
 }
 
 #tooltip-view-all {
-    bottom: calc(33% + 8px);
+    bottom: calc(59.5% + 8px);
     max-width: 143px;
     right: calc(8% - 15px - 8px);
     text-align: right;
