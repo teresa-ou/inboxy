@@ -38,8 +38,13 @@ html.inboxy .bundle-row .bundle-date.unread {
     font-weight: bold;
 }
 
+html.inboxy .bundle-row .bundle-date.cL {
+    margin-left: 0;
+    margin-right: 16px;
+}
+
 /* Allow column to shrink so that archive-bundle is next to the bundle-date */
-html.inboxy .bundle-row .xW.xY {
+html.inboxy .bundle-row .bundle-date-cell {
     flex-basis: auto;
 }
 
@@ -85,7 +90,7 @@ html.inboxy .bundle-row:not(.visible) .xY.yX {
     max-width: 188px;
 }
 
-html.inboxy .bundle-row.visible .xW.xY,
+html.inboxy .bundle-row.visible .bundle-date-cell,
 html.inboxy .bundle-row.visible .bundle-senders {
     display: none;
 }
@@ -104,7 +109,7 @@ html.inboxy .bundle-row.visible td:nth-child(4) {
 }
 
 html.inboxy .bundle-row td.apU {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/bundle.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/bundle.svg');
     background-size: 20px;
     background-repeat: no-repeat;
     height: 20px;
@@ -117,7 +122,7 @@ html.inboxy .bundle-row:hover td.apU {
 }
 
 html.inboxy.messages-dark-theme .bundle-row td.apU {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/light-bundle.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-bundle.svg');
     opacity: 0.55;
 }
 
@@ -127,31 +132,11 @@ html.inboxy.messages-dark-theme .bundle-row:hover td.apU {
 
 @-moz-document url-prefix() {
     html.inboxy .bundle-row td.apU {
-        background-image: url('moz-extension://__MSG_@@extension_id__/bundle.png');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/bundle.svg');
     }
 
     html.inboxy.messages-dark-theme .bundle-row td.apU {
-        background-image: url('moz-extension://__MSG_@@extension_id__/light-bundle.png');
-    }
-}
-
-@media (min-resolution: 2dppx) {
-    html.inboxy .bundle-row td.apU {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/bundle@2x.png');
-    }
-
-    html.inboxy.messages-dark-theme .bundle-row td.apU {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/light-bundle@2x.png');
-    }
-
-    @-moz-document url-prefix() {
-        html.inboxy .bundle-row td.apU {
-            background-image: url('moz-extension://__MSG_@@extension_id__/bundle@2x.png');
-        }
-
-        html.inboxy.messages-dark-theme .bundle-row td.apU {
-            background-image: url('moz-extension://__MSG_@@extension_id__/light-bundle@2x.png');
-        }
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-bundle.svg');
     }
 }
 
@@ -177,7 +162,7 @@ html.inboxy .bundle-row .flex-grow {
 }
 
 html.inboxy .bundle-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/check-all.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check-all.svg');
     background-size: 24px;
     display: none;
     height: 20px;
@@ -205,7 +190,7 @@ html.inboxy .bundle-row:hover .archive-bundle {
 
 html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
 html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     opacity: 0.7;
 }
 
@@ -215,34 +200,12 @@ html.inboxy.dark-theme .bundle-row.visible .archive-bundle:before {
 
 @-moz-document url-prefix() {
     html.inboxy .bundle-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/check-all.png');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
     }
 
     html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
     html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all.png');
-    }
-}
-
-@media (min-resolution: 2dppx) {
-    html.inboxy .bundle-row .archive-bundle {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/check-all@2x.png');
-    }
-
-    html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
-    html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all@2x.png');
-    }
-
-    @-moz-document url-prefix() {
-        html.inboxy .bundle-row .archive-bundle {
-            background-image: url('moz-extension://__MSG_@@extension_id__/check-all@2x.png');
-        }
-
-        html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
-        html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-            background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all@2x.png');
-        }
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     }
 }
 
@@ -318,13 +281,13 @@ html.inboxy.dark-theme .date-row {
 }
 
 html.inboxy .date-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/check-all.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check-all.svg');
     background-size: 20px;
     margin-right: 24px;
 }
 
 html.inboxy.dark-theme .date-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     opacity: 0.7;
 }
 
@@ -334,31 +297,11 @@ html.inboxy.dark-theme .date-row .archive-bundle:before {
 
 @-moz-document url-prefix() {
     html.inboxy .date-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/check-all.png');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
     }
 
     html.inboxy.dark-theme .date-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all.png');
-    }
-}
-
-@media (min-resolution: 2dppx) {
-    html.inboxy .date-row .archive-bundle {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/check-all@2x.png');
-    }
-
-    html.inboxy.dark-theme .date-row .archive-bundle {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/light-check-all@2x.png');
-    }
-
-    @-moz-document url-prefix() {
-        html.inboxy .date-row .archive-bundle {
-            background-image: url('moz-extension://__MSG_@@extension_id__/check-all@2x.png');
-        }
-
-        html.inboxy.dark-theme .date-row .archive-bundle {
-            background-image: url('moz-extension://__MSG_@@extension_id__/light-check-all@2x.png');
-        }
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     }
 }
 
@@ -367,47 +310,23 @@ html.inboxy.dark-theme .date-row .archive-bundle:before {
  */
 html.inboxy .brq,
 html.inboxy .ar8 {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/check.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check.svg');
 }
 
 html.inboxy.messages-dark-theme .brq,
 html.inboxy.dark-theme .ar8 {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/light-check.png');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check.svg');
 }
 
 @-moz-document url-prefix() {
     html.inboxy .brq,
     html.inboxy .ar8 {
-        background-image: url('moz-extension://__MSG_@@extension_id__/check.png');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check.svg');
     }
 
     html.inboxy.messages-dark-theme .brq,
     html.inboxy.dark-theme .ar8 {
-        background-image: url('moz-extension://__MSG_@@extension_id__/light-check.png');
-    }
-}
-
-@media (min-resolution: 2dppx) {
-    html.inboxy .brq,
-    html.inboxy .ar8 {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/check@2x.png');
-    }
-
-    html.inboxy.messages-dark-theme .brq,
-    html.inboxy.dark-theme .ar8 {
-        background-image: url('chrome-extension://__MSG_@@extension_id__/light-check@2x.png');
-    }
-
-    @-moz-document url-prefix() {
-        html.inboxy .brq,
-        html.inboxy .ar8 {
-            background-image: url('moz-extension://__MSG_@@extension_id__/check@2x.png');
-        }
-
-        html.inboxy.messages-dark-theme .brq,
-        html.inboxy.dark-theme .ar8 {
-            background-image: url('moz-extension://__MSG_@@extension_id__/light-check@2x.png');
-        }
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check.svg');
     }
 }
 
@@ -490,12 +409,12 @@ html.inboxy .pinned-toggle .slider-button {
 
     box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 0px 3px 1px rgba(60,64,67,0.149);
     background: #ffffff center no-repeat;
-    background-image: url('chrome-extension://__MSG_@@extension_id__/star-outline.svg');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/star-outline.svg');
 }
 
 @-moz-document url-prefix() {
     html.inboxy .pinned-toggle .slider-button {
-        background-image: url('moz-extension://__MSG_@@extension_id__/star-outline.svg');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/star-outline.svg');
     }
 }
 
@@ -516,13 +435,13 @@ html.inboxy .pinned-toggle.show-pinned .slider {
 }
 
 html.inboxy .pinned-toggle.show-pinned .slider-button {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/star-filled.svg');
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/star-filled.svg');
     transform: translateX(24px);
 }
 
 @-moz-document url-prefix() {
     html.inboxy .pinned-toggle.show-pinned .slider-button {
-        background-image: url('moz-extension://__MSG_@@extension_id__/star-filled.svg');
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/star-filled.svg');
     }
 }
 

@@ -1,6 +1,6 @@
 {
     "name": "inboxy: Inbox Bundles for Gmail",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://www.inboxymail.com",
     "content_scripts": [{
@@ -25,20 +25,14 @@
         "128": "icons/inboxy@8x.png"
     },
     "web_accessible_resources": [
-        "bundle.png",
-        "bundle@2x.png",
-        "check.png",
-        "check@2x.png",
-        "check-all.png",
-        "check-all@2x.png",
-        "light-bundle.png",
-        "light-bundle@2x.png",
-        "light-check.png",
-        "light-check@2x.png",
-        "light-check-all.png",
-        "light-check-all@2x.png",
-        "star-outline.svg",
-        "star-filled.svg"
+        "assets/bundle.svg",
+        "assets/check.svg",
+        "assets/check-all.svg",
+        "assets/light-bundle.svg",
+        "assets/light-check.svg",
+        "assets/light-check-all.svg",
+        "assets/star-outline.svg",
+        "assets/star-filled.svg"
     ],
 
     "manifest_version": 2

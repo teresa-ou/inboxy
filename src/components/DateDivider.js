@@ -42,17 +42,39 @@ const DividerDate = {
 function withDateDividers(
     messagesAndBundleRows, 
     sampleDate, 
-    getLatestMessageForRow = x => x ? x.element : null) 
+    getLatestMessageForRow = x => x ? x.element : null,
+    getNow = () => new Date()) 
 {
     const rows = [];
     
-    let dateDividers = _getDateDividers(sampleDate, new Date());
+    let dateDividers = _getDateDividers(sampleDate, getNow());
     let prevRow = null;
+    let addedTodayForSnoozedMessage = false;
     for (let i = 0; i < messagesAndBundleRows.length; i++) {
         const currRow = messagesAndBundleRows[i];
+        if (getLatestMessageForRow(currRow).querySelector(Selectors.MESSAGE_SNOOZED_TEXT)) { 
+            // Use "Today" if the first message is snoozed
+            if (i === 0 && dateDividers.length) {
+                rows.push({
+                    element: dateDividers[0],
+                    type: Element.DATE_DIVIDER,
+                });
+                addedTodayForSnoozedMessage = true;
+            }
+
+            rows.push(currRow);
+
+            // Don't push dividers in front of snoozed rows; they'll belong to
+            // the same section as the previous row
+            continue;
+        }
+
         const divider = _shouldInsertDateDivider(
             getLatestMessageForRow(prevRow), getLatestMessageForRow(currRow), dateDividers);
-        if (divider) {
+        if (divider && 
+            // If "Today" was already added for a snoozed message, then don't add it again
+            !(addedTodayForSnoozedMessage && divider.value === DividerDate.TODAY.value)) 
+        {
             rows.push({
                 element: divider,
                 type: Element.DATE_DIVIDER,
@@ -168,7 +190,7 @@ function _isDateDividerSupported(sampleDateString) {
 
 function _parseDate(dateString) {
     const date = Date.parse(dateString);
-    if (date === NaN) {
+    if (isNaN(date)) {
         return null;
     }
 
@@ -203,4 +225,6 @@ export default {
     create,
     withDateDividers,
     findMessagesForDivider,
+    // Exposed for testing
+    _getDateDividers,
 };

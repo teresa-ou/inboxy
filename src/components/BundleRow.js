@@ -45,9 +45,14 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
 
     const sendersText = _generateSendersText(messages).join(', ');
 
-    const latestDate = messages[0].querySelector(Selectors.MESSAGE_DATE_SPAN).innerText;
+    const snoozedText = messages[0].querySelector(Selectors.MESSAGE_SNOOZED_TEXT);
+    const latestDate = snoozedText
+        ? snoozedText.innerText
+        : messages[0].querySelector(Selectors.MESSAGE_DATE_SPAN).innerText;
+
     const latestIsUnreadClass = messages[0].classList.contains(GmailClasses.UNREAD) ? 'unread' : '';
-    
+    const latestIsSnoozedClass = snoozedText ? GmailClasses.SNOOZED : '';
+
     const html = `
         <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
@@ -89,8 +94,10 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     `;
 
     const bundleDateHtml = `
-        <td class="${GmailClasses.DATE_CELL} ${GmailClasses.CELL}">
-            <span class="bundle-date ${latestIsUnreadClass}">${latestDate}</span>
+        <td class="bundle-date-cell ${snoozedText ? '' : GmailClasses.DATE_CELL} ${GmailClasses.CELL}">
+            <span class="bundle-date ${latestIsUnreadClass} ${latestIsSnoozedClass}">
+                ${latestDate}
+            </span>
         </td>
     `;
 
