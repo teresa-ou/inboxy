@@ -1,0 +1,61 @@
+/**
+ * inboxy: Chrome extension for Google Inbox-style bundles in Gmail.
+ * Copyright (C) 2020  Teresa Ou
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+ 
+body {
+    color: #345255;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    margin: 0;
+    width: 250px;
+}
+
+.logo-container {
+    border-bottom: 1px solid #e0e0e0;
+    padding-left: 1.25rem;
+    padding-top: 11px;
+    padding-bottom: 7px;
+}
+
+.link {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+.link:hover {
+    background-color: #f4f4f4;
+}
+
+.link img {
+    margin-right: 6px;
+}
+
+.links-container a:first-child .link{
+    padding-top: 0.75rem;
+}
+
+.links-container a:last-child .link {
+    padding-bottom: 0.75rem;
+}
+
+a {
+    color: #345255;
+    text-decoration: none;
+}

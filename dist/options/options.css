@@ -1,0 +1,364 @@
+/**
+ * inboxy: Chrome extension for Google Inbox-style bundles in Gmail.
+ * Copyright (C) 2020  Teresa Ou
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+html {
+    font-size: 17px;
+}
+
+body {
+    color: #345255;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+}
+
+a {
+    color: #00acc1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #007C8E;
+}
+
+::selection {
+    background-color: #cceef3;
+}
+
+nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fafafa;
+    padding-left: 2.5rem;
+    box-sizing: border-box;
+    width: 16rem;
+}
+
+main {
+    margin-left: 16rem;
+    margin-top: 6rem;
+}
+
+.tab {
+    display: none;
+    max-width: 596px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+.tab.help section {
+    margin-bottom: 2rem;
+}
+
+p, ul {
+    line-height: 1.602;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
+
+.bulleted-list li {
+    margin-bottom: 0.5em;
+}
+
+.inboxy-logo {
+    display: block;
+    margin: 5rem 0 3rem 0;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.067rem;
+}
+
+.nav-links li {
+    display: block;
+    margin: 0.802rem 0;
+}
+
+.nav-links li a,
+.nav-links li a:hover {
+    color: #345255;
+}
+
+h1 {
+    font-size: 1.802rem;
+    font-weight: 700;
+    margin: 1.5rem 0 0.75rem 0;
+}
+
+h2 {
+    font-size: 1.424rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem 0;
+}
+
+/**
+ * Get started tab.
+ */
+
+.table-of-contents {
+    border: 1px solid #F1F1F1;
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 50%;
+}
+
+.table-of-contents-header {
+    color: #757575;
+    font-size: 0.79rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.step-links-list {
+    line-height: 1.602;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.create-filters .step {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 1rem 2rem 0;
+}
+.create-filters .step:first-child {
+    margin-top: 0;
+}
+.create-filters .step:last-child {
+    margin-bottom: 0;
+}
+
+.create-filters .step-text {
+    flex: 0 0 calc(58% - 1rem);
+}
+
+.create-filters .index {
+    border-radius: 50%;
+    color: #ffffff;
+    display: inline-block;
+    font-family: 'Roboto Slab', sans-serif;
+    font-weight: bold;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 8px;
+    text-align: center;
+    width: 24px;
+}
+
+.create-filters .step:nth-child(1) .index {
+    background-color: #00C1B7;
+}
+.create-filters .step:nth-child(2) .index {
+    background-color: #00ACC1;
+}
+.create-filters .step:nth-child(3) .index {
+    background-color: #008AC1;
+}
+
+.create-filters .step-header {
+    display: inline-block;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.create-filters .step-description {
+    font-size: 0.889rem;
+    line-height: 1.424;
+    margin-left: 32px;
+}
+
+.create-filters .step-img {
+    flex: 0 0 42%;
+}
+
+.create-filters .step-img img {
+    width: 100%;
+}
+
+/** Image shadows */
+.step img {
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/**
+ * Options tab
+ */ 
+
+.help-container {
+    display: inline-block;
+    position: relative;
+}
+
+.help-icon {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.tooltip {
+    background-color: #ffffff;
+    bottom: calc(100% - 8px);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15);
+    display: none;
+    font: 0.8rem 'Open Sans', sans-serif;
+    color: #345255;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1.4;
+    padding: 1rem;
+    position: absolute;
+    text-transform: none;
+    width: 400px;
+}
+
+.help-icon:hover + .tooltip {
+    display: block;
+}
+
+.list-type-options {
+    margin: 1.5rem 0;
+}
+
+.list-type {
+    margin: 0.75rem 0;
+}
+
+input[type="radio"] {
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+}
+
+input[type="radio"] + label {
+    cursor: pointer;
+    padding-left: 26px;
+    position: relative;
+}
+
+input[type="radio"] + label::before {
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    top: 0;
+    content: '';
+    height: 16px;
+    left: 0;
+    position: absolute;
+    width: 16px;
+}
+
+input[type="radio"] + label::after {
+    background-color: #00acc1;
+    border-radius: 50%;
+    top: 4px;
+    content: '';
+    height: 10px;
+    left: 4px;
+    position: absolute;
+    width: 10px;
+    transition: transform 0.2s ease;
+}
+
+input[type="radio"]:not(:checked) + label::after {
+    transform: scale(0);
+}
+
+input[type="radio"](:checked) + label::after {
+    transform: scale(1);
+}
+
+textarea {
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    color: #345255;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    padding: 8px;
+    resize: none;
+    width: 100%;
+}
+
+textarea::placeholder {
+    color: #989898;
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.save-button {
+    background-color: #00acc1;
+    border: 2px solid #00acc1;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    outline: none;
+    position: relative;
+    text-transform: uppercase;
+    height: 36px;
+    width: 94px;
+}
+
+.save-button .saved-text {
+    width: 100%;
+}
+.save-button .saved-text img {
+    vertical-align: bottom;
+}
+
+.save-button .save-text,
+.save-button .saved-text {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transition: transform 1s ease;
+}
+
+/** Save */
+.save-button .save-text {
+    transform: translate(-50%, -50%) translateY(0);
+}
+.save-button .saved-text {
+    transform: translate(-50%, -50%) translateY(35px);
+}
+
+/** Saved */
+.save-button.saved .save-text {
+    transform: translate(-50%, -50%) translateY(-35px);
+}
+.save-button.saved .saved-text {
+    transform: translate(-50%, -50%) translateY(0);
+}

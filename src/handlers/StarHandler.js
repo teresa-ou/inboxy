@@ -26,8 +26,9 @@ const _getTop = function(element) {
  * Handler for when messages are starred or unstarred.
  */
 class StarHandler {
-    constructor(bundledMail) {
+    constructor(bundledMail, selectiveBundling) {
         this.bundledMail = bundledMail;
+        this.selectiveBundling = selectiveBundling;
         this.prevTop = null;
 
         this.handleStarring = this.handleStarring.bind(this);
@@ -50,7 +51,7 @@ class StarHandler {
 
         // Only applies to bundled messages
         const messageRow = DomUtils.findMessageRow(e.target);
-        const labels = DomUtils.getLabelStrings(messageRow);
+        const labels = this.selectiveBundling.findRelevantLabels(messageRow);
         if (!labels.length) {
             return;
         }

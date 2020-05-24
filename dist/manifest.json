@@ -1,8 +1,12 @@
 {
     "name": "inboxy: Inbox Bundles for Gmail",
-    "version": "1.4.2",
+    "version": "1.5.0",
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://www.inboxymail.com",
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
     "content_scripts": [{
         "matches": ["*://mail.google.com/mail/*"],
         "js": ["content.js"],
@@ -10,13 +14,23 @@
         "run_at": "document_start",
         "all_frames": false
     }],
-
+    "options_ui": {
+        "page": "options/options.html",
+        "chrome_style": false,
+        "open_in_tab": true
+    },
+    "permissions": [
+        "storage",
+        "declarativeContent"
+    ],
     "page_action": {
         "default_icon": {
             "16": "icons/inboxy.png",
             "24": "icons/inboxy@1.5x.png",
             "32": "icons/inboxy@2x.png"
-        }
+        },
+        "default_popup": "popup/popup.html",
+        "show_matches": ["*://mail.google.com/mail/*"]
     },
     "icons": {
         "16": "icons/inboxy.png",
@@ -25,15 +39,7 @@
         "128": "icons/inboxy@8x.png"
     },
     "web_accessible_resources": [
-        "assets/bundle.svg",
-        "assets/check.svg",
-        "assets/check-all.svg",
-        "assets/light-bundle.svg",
-        "assets/light-check.svg",
-        "assets/light-check-all.svg",
-        "assets/star-outline.svg",
-        "assets/star-filled.svg"
+        "assets/*.svg"
     ],
-
     "manifest_version": 2
 }

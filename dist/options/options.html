@@ -1,0 +1,269 @@
+<!-- 
+inboxy: Chrome extension for Google Inbox-style bundles in Gmail.
+Copyright (C) 2020  Teresa Ou
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>inboxy</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,400b,600,700|Roboto+Slab:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <nav>
+        <a class="inboxy-logo" href="https://www.inboxymail.com" target="_blank">
+            <img src="assets/inboxy-logo.svg" width="140" height="47" alt="inboxy">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#get-started">Get started</a></li>
+            <li><a href="#">Options</a></li>
+            <li><a href="#help">Help</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="tab">
+            <section>
+                <h1>Get started</h1>
+                <p>
+                    inboxy bundles together emails that share the same labels. Bundles make it 
+                    easier to manage and view related emails.
+                </p>
+                <p>
+                    <b>To get the most out of inboxy, you can <a href="#create-filters">set up bundles</a> 
+                    by creating Gmail filters.</b> Read on to learn about setting up bundles, 
+                    key features, and preferred Gmail settings.
+                </p>
+                <div class="table-of-contents">
+                    <div class="table-of-contents-header">Contents</div>
+                    <ul class="step-links-list">
+                        <li>
+                            <a href="#create-filters">
+                                Set up bundles by creating filters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pinning-messages">
+                                Pinning messages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#archiving-messages">
+                                Archiving messages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#preferred-settings">
+                                Preferred Gmail settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2 id="create-filters">Set up bundles by creating filters</h2>
+                <p>
+                    inboxy uses labels to bundle messages. You can set up Gmail filters to 
+                    automatically label emails that match criteria that you specify. When you 
+                    receive these emails, inboxy will display them in a bundle corresponding to 
+                    their label.
+                </p>
+                <p>
+                    There are 
+                    <a href="https://support.google.com/mail/answer/6579?hl=en" target="_blank">a few ways</a>
+                    to create and manage filters. The search box offers an easy way to create a new filter.
+                </p>
+                <div class="create-filters">
+                    <div class="step">
+                        <div class="step-text">
+                            <div>
+                                <div class="index">1</div><div class="step-header">Open the search form</div>
+                            </div>
+                            <div class="step-description">
+                                Click the down arrow to open the form on the search bar.
+                            </div>
+                        </div>
+                        <div class="step-img">
+                            <img 
+                              src="assets/filter-step-1@2x.png" 
+                              srcset="assets/filter-step-1.png, assets/filter-step-1@2x.png 2x"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-text">
+                            <div>
+                                <div class="index">2</div><div class="step-header">Enter filter criteria</div>
+                            </div>
+                            <div class="step-description">
+                                Fill out the form with criteria to match messages of interest, ex. 
+                                enter &ldquo;*@acme.com&rdquo; in the &ldquo;From&rdquo; field to 
+                                filter email from the acme.com domain.
+                            </div>
+                        </div>
+                        <div class="step-img">
+                            <img 
+                              src="assets/filter-step-2@2x.png" 
+                              srcset="assets/filter-step-2.png, assets/filter-step-2@2x.png 2x"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-text">
+                            <div>
+                                <div class="index">3</div><div class="step-header">Choose a label</div>
+                            </div>
+                            <div class="step-description">
+                                Check &ldquo;Apply the label&rdquo; and select a label. 
+                                Then click &ldquo;Create filter&rdquo; to save the filter.
+                            </div>
+                        </div>
+                        <div class="step-img">
+                            <img 
+                              src="assets/filter-step-3@2x.png" 
+                              srcset="assets/filter-step-3.png, assets/filter-step-3@2x.png 2x"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 id="pinning-messages">Pinning messages</h2>
+                <p>
+                    You can pin important bundled messages by starring them. Pinned messages will appear 
+                    in their own row outside of their bundle.
+                </p>
+                <div>
+                    <img 
+                      src="assets/pinning@2x.png" 
+                      srcset="assets/pinning.png, assets/pinning@2x.png 2x"
+                    >
+                </div>
+            </section>
+
+            <section>
+                <h2 id="archiving-messages">Archiving messages</h2>
+                <p>
+                    Messages in a bundle can be archived easily, with a single click. You can archive
+                    all messages in a bundle, that are on the current page. Messages in each date section
+                    can also be archived in the same way.
+                </p>
+                <div>
+                    <img 
+                      src="assets/archiving@2x.png" 
+                      srcset="assets/archiving.png, assets/archiving@2x.png 2x"
+                    >
+                </div>
+            </section>
+            
+            <section>
+                <h2 id="preferred-settings">Preferred Gmail settings</h2>
+                <p>
+                    inboxy primarily supports the default Gmail settings. Here are the recommended 
+                    settings that work best with inboxy:
+                </p>
+                <ul class="bulleted-list">
+                    <li>
+                        <b>Default inbox</b> type. inboxy supports this layout regardless of whether the 
+                        category tabs are shown (Primary, Social, Promotions, etc.).
+                    </li> 
+                    <li>
+                        Show <b>100 conversations</b> per page (the maximum number).
+                    </li>
+                    <li>
+                        <b>English</b> language. When Gmail is not using English, bundling may work, 
+                        but the date sections will not appear.
+                    </li>
+                    <li>
+                        Labels should be <b>shown</b> in the message list, which is the default behavior.
+                    </li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="tab">
+            <h1>
+                Options
+                <div class="help-container">
+                    <img src="assets/help.svg" class="help-icon">
+                    <div class="tooltip">
+                        Add the name of each bundle on a new line. For nested labels, use forward-slashes between the nesting hierarchy levels.
+                    </div>
+                </div>
+            </h1>
+            
+            <div class="list-type-options">
+                <div class="list-type">
+                    <input type="radio" name="listType" value="exclude" id="exclude-radio">
+                    <label for="exclude-radio">Bundle all labels except those in the following list:</label>
+                </div>
+                <div class="list-type">
+                    <input type="radio" name="listType" value="include" id="include-radio">
+                    <label for="include-radio">Only bundle labels in the following list:</label>
+                </div>
+            </div>
+
+            <textarea id="label-list" rows="16"></textarea>
+
+            <button id="save-button" class="save-button">
+                <span class="save-text">Save</span>
+                <span class="saved-text">Saved <img src="assets/small-check.svg"></span>
+            </button>
+        </div>
+
+        <div class="tab help">
+            <h1>Help</h1>
+
+            <section>
+                <h2>Got feedback?</h2>
+                <p>
+                    You can send feedback through the support tab in the Chrome store 
+                    <a href="https://chrome.google.com/webstore/detail/inboxy-inbox-bundles-for/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank">listing</a>, 
+                    or by submitting an 
+                    <a href="https://github.com/teresa-ou/inboxy/issues" target="_blank">issue</a> 
+                    on Github. You can report bugs, ask questions, or share 
+                    suggestions.
+                </p>
+            </section>
+
+            <section>
+                <h2>Release notes</h2>
+                <p>
+                    To see what's new in recent releases, 
+                    <a href="https://github.com/teresa-ou/inboxy/releases" target="_blank">see the release notes</a> 
+                    on Github.
+                </p>
+            </section>
+            
+            <section>
+                <h2>About inboxy</h2>
+                <p>
+                    inboxy is an open-source browser extension that brings bundles to Gmail. 
+                    To learn more, visit 
+                    <a href="https://www.inboxymail.com/" target="_blank">inboxymail.com</a>.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <script src="options.js"></script>
+</body>
+</html>

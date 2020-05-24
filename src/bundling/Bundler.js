@@ -42,11 +42,12 @@ import DomUtils from '../util/DomUtils';
  * Groups messages into bundles, and renders those bundles.
  */
 class Bundler {
-    constructor(bundleToggler, bundledMail, messageListWatcher) {
+    constructor(bundleToggler, bundledMail, messageListWatcher, selectiveBundling) {
         this.bundleToggler = bundleToggler;
         this.bundledMail = bundledMail;
         this.messageListWatcher = messageListWatcher;
-        this.messageSelectHandler = new MessageSelectHandler(bundledMail);
+        this.selectiveBundling = selectiveBundling;
+        this.messageSelectHandler = new MessageSelectHandler(bundledMail, selectiveBundling);
         this.inboxyStyler = new InboxyStyler(bundledMail);
         this.quickSelectHandler = new QuickSelectHandler();
     }
@@ -123,7 +124,7 @@ class Bundler {
         const bundlesByLabel = {};
 
         messageNodes.forEach(message => {
-            const messageLabels = DomUtils.getLabelStrings(message);
+            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
 
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
@@ -163,7 +164,7 @@ class Bundler {
 
         for (let i = 0; i < messageNodes.length; i++) {
             const message = messageNodes[i];
-            const messageLabels = DomUtils.getLabelStrings(message);
+            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
 
             if (messageLabels.length === 0 || this._isStarred(message)) {
                 rows.push({

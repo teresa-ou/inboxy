@@ -17,6 +17,7 @@
 import BundleToggler from './bundling/BundleToggler';
 import Bundler from './bundling/Bundler';
 import DateGrouper from './bundling/DateGrouper';
+import SelectiveBundling from './bundling/SelectiveBundling';
 
 import BundledMail from './containers/BundledMail';
 
@@ -57,8 +58,9 @@ const messageListWatcher = new MessageListWatcher(mutations => {
 
 const bundledMail = new BundledMail();
 const bundleToggler = new BundleToggler(bundledMail);
-const bundler = new Bundler(bundleToggler, bundledMail, messageListWatcher);
-const starHandler = new StarHandler(bundledMail);
+const selectiveBundling = new SelectiveBundling();
+const bundler = new Bundler(bundleToggler, bundledMail, messageListWatcher, selectiveBundling);
+const starHandler = new StarHandler(bundledMail, selectiveBundling);
 const dateGrouper = new DateGrouper();
 
 // 

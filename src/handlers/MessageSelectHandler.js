@@ -36,8 +36,9 @@ const MESSAGE_LIST_CONFIG = {
  */
 class MessageSelectHandler {
 
-    constructor(bundledMail) {
+    constructor(bundledMail, selectiveBundling) {
         this.bundledMail = bundledMail;
+        this.selectiveBundling = selectiveBundling;
         this.messageObservers = [];
         this.inboxyStyler = new InboxyStyler(bundledMail);
 
@@ -92,7 +93,8 @@ class MessageSelectHandler {
             if (mutation.oldValue.includes(GmailClasses.SELECTED) !== 
                 message.classList.contains(GmailClasses.SELECTED)) 
             {
-                this.inboxyStyler.markSelectedBundlesFor(DomUtils.getLabelStrings(message));
+                this.inboxyStyler.markSelectedBundlesFor(
+                    this.selectiveBundling.findRelevantLabels(message));
                 this.inboxyStyler.disableBulkArchiveIfNecessary();
             }
         });    
