@@ -78,7 +78,10 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const bulkArchiveTd = DomUtils.htmlToElement(`<td class="${GmailClasses.CELL}"></td>`);
     bulkArchiveTd.appendChild(bulkArchiveButton);
 
-    const labelUrl = label.split(' ').join('+').split('/').join('%2F');
+    const labelUrl = label
+        .split(' ').join('-')
+        .split('/').join('%2F')
+        .split('&').join('-');
     const url = `${baseUrl}#search/label%3AInbox+label%3A${labelUrl}`;
     const viewAllButtonHtml = `
         <td class="${GmailClasses.CELL}">

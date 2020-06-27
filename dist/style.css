@@ -70,9 +70,20 @@ html.inboxy.dark-theme .bundle-row.zE.visible {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
+html.inboxy .bundle-row.visible {
+    flex-wrap: nowrap;
+}
+
 html.inboxy .bundle-row.visible .xY.yX {
     font-size: 1.025rem;
     margin-left: 56px;
+    /* Truncate for reading pane view. See #36. */
+    max-width: calc(100% - 220px);
+}
+
+html.inboxy .bundle-row.visible .bundle-and-count {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Handle long label names */
@@ -83,15 +94,16 @@ html.inboxy .bundle-row:not(.visible) .xY {
     align-items: flex-start;
     height: unset;
 }
-/* Allow more width before wrapping */
+/* Allow more width before wrapping (#11), but not too much so that #36 happens */
 html.inboxy .bundle-row:not(.visible) .xY.yX {
     padding-right: 12px;
-    flex-basis: 188px;
-    max-width: 188px;
+    flex-basis: 180px;
+    max-width: 180px;
 }
 
 html.inboxy .bundle-row.visible .bundle-date-cell,
-html.inboxy .bundle-row.visible .bundle-senders {
+/* .bundle-senders parent */
+html.inboxy .bundle-row.visible .a4W { 
     display: none;
 }
 

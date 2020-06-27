@@ -59,7 +59,9 @@ class Bundler {
     bundleMessages(reopenRecentBundle) {
         const bundledMail = this.bundledMail;
         const possibleMessageLists = document.querySelectorAll(Selectors.POSSIBLE_MESSAGE_LISTS);
-        const messageList = possibleMessageLists.length ? possibleMessageLists.item(1) : null;
+        const messageList = possibleMessageLists.length 
+            ? possibleMessageLists.item(possibleMessageLists.length - 1) 
+            : null;
 
         if (!messageList) {
             return;
