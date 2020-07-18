@@ -38,6 +38,11 @@ import {
     isStarredPage,
 } from './util/MessagePageUtils';
 
+const html = document.querySelector('html');
+if (html) {
+    html.classList.add(InboxyClasses.INBOXY);
+}
+
 const RETRY_TIMEOUT_MS = 50;
 
 let isFreshPage = false;
@@ -88,9 +93,13 @@ const mainParentObserver = new MainParentObserver(mutations => {
 //
 // Attach event listeners
 //
-
 // Call the bundler when the page has loaded.
-window.addEventListener('DOMContentLoaded', handleContentLoaded);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleContentLoaded);
+}
+else {
+    handleContentLoaded();
+}
 
 document.addEventListener('mousedown', starHandler.handleStarring);
 
