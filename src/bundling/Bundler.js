@@ -126,7 +126,7 @@ class Bundler {
         const bundlesByLabel = {};
 
         messageNodes.forEach(message => {
-            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message).map(l => l.title));
 
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
@@ -166,7 +166,7 @@ class Bundler {
 
         for (let i = 0; i < messageNodes.length; i++) {
             const message = messageNodes[i];
-            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message).map(l => l.title));
 
             if (messageLabels.length === 0 || this._isStarred(message)) {
                 rows.push({

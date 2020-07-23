@@ -32,8 +32,8 @@ const DomUtils = {
         return checkboxNode.getAttribute('aria-checked') === 'true';
     },
 
-    getLabelStrings: function(message) {
-        return [...message.querySelectorAll(Selectors.LABELS)].map(l => l.title);
+    getLabels: function(message) {
+        return [...message.querySelectorAll(Selectors.LABELS)];
     },
 
     htmlToElement: function(html) {
