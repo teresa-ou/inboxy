@@ -29,7 +29,7 @@ const MAX_MESSAGE_COUNT = 25;
 /**
  * Create a table row for a bundle, to be shown in the list of messages. 
  */
-function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
+function create(label, style, order, messages, hasUnread, toggleBundle, baseUrl) {
     const displayedMessageCount = messages.length >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
         : messages.length;
@@ -54,7 +54,7 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const latestIsSnoozedClass = snoozedText ? GmailClasses.SNOOZED : '';
 
     const html = `
-        <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
+        <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}" ${style}>
             <td class="${GmailClasses.CELL} PF"></td>
             <td class="${GmailClasses.CELL} oZ-x3"></td>
             <td class="${GmailClasses.CELL} apU"></td>

@@ -126,16 +126,18 @@ class Bundler {
         const bundlesByLabel = {};
 
         messageNodes.forEach(message => {
-            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message).map(l => l.title));
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message));
 
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
-                    if (!bundlesByLabel[l]) {
-                        const bundle = new Bundle(l);
-                        bundlesByLabel[l] = bundle;
+                    const t = l.title;
+                    if (!bundlesByLabel[t]) {
+                        const styleAttrs = ["background", "color", "font-family"];
+                        const styleHTMLAttr = DomUtils.copyStyle(l, ...styleAttrs);
+                        bundlesByLabel[t] = new Bundle(t, styleHTMLAttr);
                     }
 
-                    bundlesByLabel[l].addMessage(message);
+                    bundlesByLabel[t].addMessage(message);
                 });
             }
         })
@@ -166,7 +168,7 @@ class Bundler {
 
         for (let i = 0; i < messageNodes.length; i++) {
             const message = messageNodes[i];
-            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message).map(l => l.title));
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message));
 
             if (messageLabels.length === 0 || this._isStarred(message)) {
                 rows.push({
@@ -177,6 +179,7 @@ class Bundler {
             }
 
             messageLabels.forEach(l => {
+                l = l.title;
                 if (!labels.has(l) && bundlesByLabel[l]) {
                     rows.push({
                         element: bundlesByLabel[l],
@@ -265,6 +268,7 @@ class Bundler {
 
         const bundleRow = BundleRow.create(
             bundle.getLabel(), 
+            bundle.getStyle(),
             order, 
             messages,
             hasUnreadMessages, 

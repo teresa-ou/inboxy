@@ -29,10 +29,10 @@ class SelectiveBundling {
 
     filter(messageLabels) {
         if (this.exclude) {
-            return messageLabels.filter(l => !this.labels.has(l.toLowerCase()));
+            return messageLabels.filter(l => !this.labels.has(l.title.toLowerCase()));
         }
         else {
-            return messageLabels.filter(l => this.labels.has(l.toLowerCase()));
+            return messageLabels.filter(l => this.labels.has(l.title.toLowerCase()));
         }
     }
 }

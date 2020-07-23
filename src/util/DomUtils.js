@@ -36,6 +36,31 @@ const DomUtils = {
         return [...message.querySelectorAll(Selectors.LABELS)];
     },
 
+    copyStyle: function(element, ...cssAttributes) {
+        return DomUtils.styleFor(DomUtils.getCSS(element, ...cssAttributes));
+    },
+
+    getCSS: function(element, ...cssAttributes) {
+        let cssObj = {}
+        let csm = element.computedStyleMap();
+        for (let sty of cssAttributes) {
+            cssObj[sty] = csm.get(sty).toString();
+        }
+        return cssObj;
+    },
+
+    styleFor: function(cssObj) {
+        const css = Object.entries(cssObj).map(([k, v]) => `${k}: ${v};`).join("\n\t");
+        const [hasSingleQuote, hasDoubleQuote] = ["'", '"'].map(q => css.indexOf(q) > -1);
+        if (hasSingleQuote && hasDoubleQuote) {
+            return "";  // Safely-punt on safely-quoting the css.
+        } else if (hasSingleQuote) {
+            return `style="${css}"`;
+        } else {
+            return `style='${css}'`;
+        }
+    },
+
     htmlToElement: function(html) {
         var template = document.createElement('template');
         html = html.trim();
