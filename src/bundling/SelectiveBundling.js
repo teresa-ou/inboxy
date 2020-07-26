@@ -35,6 +35,10 @@ class SelectiveBundling {
             return messageLabels.filter(l => this.labels.has(l.title.toLowerCase()));
         }
     }
+
+    filterStrings(messageLabels) {
+        return this.filter(messageLabels).map(l => l.title);
+    }
 }
 
 export default SelectiveBundling;
