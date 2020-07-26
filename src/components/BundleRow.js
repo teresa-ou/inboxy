@@ -24,6 +24,8 @@ import {
     Selectors,
 } from '../util/Constants';
 
+import RGBColor from '../containers/Color';
+
 const MAX_MESSAGE_COUNT = 25;
 
 /**
@@ -53,15 +55,19 @@ function create(label, style, order, messages, hasUnread, toggleBundle, baseUrl)
     const latestIsUnreadClass = messages[0].classList.contains(GmailClasses.UNREAD) ? 'unread' : '';
     const latestIsSnoozedClass = snoozedText ? GmailClasses.SNOOZED : '';
 
+    const iconStyle = _composeIconStyle(style);
+    const labelStyle = _composeLabelStyle(style);
+    const backgroundStyle = _composeBackgroundStyle(style);
+
     const html = `
-        <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}" ${style}>
+        <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}" ${backgroundStyle}>
             <td class="${GmailClasses.CELL} PF"></td>
             <td class="${GmailClasses.CELL} oZ-x3"></td>
-            <td class="${GmailClasses.CELL} apU"></td>
+            <td class="${GmailClasses.CELL} apU" ${iconStyle}></td>
             <td class="spacer ${GmailClasses.CELL} ${spacerClass}"></td>
             <td class="${GmailClasses.CELL} yX">
                 <div class="bundle-and-count">
-                    <span>${label}</span>
+                    <span ${labelStyle}>${label}</span>
                     <span class="bundle-count">(${displayedMessageCount})</span>
                 </div>
             </td>
@@ -122,6 +128,27 @@ function create(label, style, order, messages, hasUnread, toggleBundle, baseUrl)
     el.style.order = order;
 
     return el;
+}
+
+function _composeIconStyle(gmailLabelStyle) {
+    const c0 = new RGBColor(gmailLabelStyle["background-color"]);
+    const iconStyle = DomUtils.slice(
+        gmailLabelStyle, "background-color", "border-radius"
+    );
+    iconStyle["background-color"] = Object.assign({}, c0, {_a: 0.33});
+    return DomUtils.styleFor(iconStyle);
+}
+
+function _composeLabelStyle(gmailLabelStyle) {
+    return DomUtils.styleFor(gmailLabelStyle);
+}
+
+function _composeBackgroundStyle(gmailLabelStyle) {
+    const c0 = new RGBColor(gmailLabelStyle["background-color"]);
+    const g1 = Object.assign({}, c0, {_a: .33});
+    const g2 = Object.assign({}, c0, {_a: .11});
+    const g3 = new RGBColor(0,0,0,0);
+    return `style="background: linear-gradient(.5turn, ${g1}, ${g2}, ${g3}, ${g3});"`;
 }
 
 function _generateSendersText(messages) {

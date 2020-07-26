@@ -36,13 +36,18 @@ const DomUtils = {
         return [...message.querySelectorAll(Selectors.LABELS)];
     },
 
-    copyStyle: function(element, ...cssAttributes) {
-        return DomUtils.styleFor(DomUtils.getCSS(element, ...cssAttributes));
+    /** Slice entries out of an object. */
+    slice: function(src, ...keys) {
+        const dst = {};
+        for (const k of keys) {
+            dst[k] = src[k];
+        }
+        return dst;
     },
 
     getCSS: function(element, ...cssAttributes) {
-        let cssObj = {}
-        let csm = element.computedStyleMap();
+        const cssObj = {};
+        const csm = element.computedStyleMap();
         for (let sty of cssAttributes) {
             cssObj[sty] = csm.get(sty).toString();
         }

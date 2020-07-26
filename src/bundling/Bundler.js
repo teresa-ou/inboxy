@@ -131,10 +131,14 @@ class Bundler {
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
                     const t = l.title;
+                    const leaf = l.querySelector(Selectors.LABEL_LEAF);
+                    const labelStyle = Object.assign(
+                        DomUtils.getCSS(l, "background", "background-color", "font-family", "border"),
+                        DomUtils.getCSS(leaf, "border-radius", "color", "padding")
+                    );
+
                     if (!bundlesByLabel[t]) {
-                        const styleAttrs = ["background", "color", "font-family"];
-                        const styleHTMLAttr = DomUtils.copyStyle(l, ...styleAttrs);
-                        bundlesByLabel[t] = new Bundle(t, styleHTMLAttr);
+                        bundlesByLabel[t] = new Bundle(t, labelStyle);
                     }
 
                     bundlesByLabel[t].addMessage(message);
