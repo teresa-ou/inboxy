@@ -96,9 +96,15 @@ html.inboxy .bundle-row:not(.visible) .xY {
 }
 /* Allow more width before wrapping (#11), but not too much so that #36 happens */
 html.inboxy .bundle-row:not(.visible) .xY.yX {
-    padding-right: 12px;
+    padding-right: 20px;
     flex-basis: 180px;
     max-width: 180px;
+}
+html.inboxy .Zs .bundle-row:not(.visible) .xY.yX {
+    padding-right: 0;
+}
+html.inboxy .Zs .bundle-row:not(.visible) .xY.yX {
+    flex-basis: unset;
 }
 
 html.inboxy .bundle-row.visible .bundle-date-cell,

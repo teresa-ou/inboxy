@@ -298,7 +298,8 @@ class Bundler {
 
         // Close bundles when clicking outside of any open bundle
         messageList.addEventListener('click', e => {
-            if (!e.target.closest('tr')) {
+            // #63 - e.target may have been removed before event propagates to messageList
+            if (document.body.contains(e.target) && !e.target.closest('tr')) {
                 this.bundleToggler.closeAllBundles();
             }
         });
