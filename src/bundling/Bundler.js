@@ -55,6 +55,8 @@ class Bundler {
     /**
      * Bundle together the messages on the current page of messages, if they aren't already bundled,
      * optionally reopening the most recently open bundle.
+     *
+     * Returns an object with info for debug printing.
      */
     bundleMessages(reopenRecentBundle) {
         const bundledMail = this.bundledMail;
@@ -64,14 +66,18 @@ class Bundler {
             : null;
 
         if (!messageList) {
-            return;
+            return {
+                foundMessageList: false,
+            };
         }
         
+        let debugInfo = { foundMessageList: true };
+
         this.messageListWatcher.disconnect();
 
         // Only redraw if message list isn't still bundled
         if (!messageList.children[0].classList.contains('is-bundled')) {
-            this._bundleMessages(messageList);
+            debugInfo = this._bundleMessages(messageList);
             messageList.children[0].classList.add('is-bundled');
         }
 
@@ -84,6 +90,8 @@ class Bundler {
         }
 
         this.messageListWatcher.observe();
+
+        return debugInfo;
     }
 
     /**
@@ -91,6 +99,8 @@ class Bundler {
      *
      * Table rows are reordered by using flexbox and the order property, since Gmail's js seems 
      * to require the DOM nodes to remain in their original order. 
+     *
+     * Returns an object with info for debug printing.
      */
     _bundleMessages(messageList) {
         const tableBody = messageList.querySelector(Selectors.TABLE_BODY);
@@ -116,6 +126,11 @@ class Bundler {
 
         this._applyStyles(messageNodes);
         this._attachHandlers(messageNodes, messageList);
+
+        return {
+            numMessages: messageNodes.length,
+            numBundles: Object.keys(bundlesByLabel).length,
+        };
     }
 
     /**
