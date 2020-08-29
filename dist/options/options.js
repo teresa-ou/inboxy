@@ -20,10 +20,12 @@ function saveOptions() {
     const exclude = document.getElementById('exclude-radio').checked;
     const labelList = document.getElementById('label-list');
     const labels = labelList.value.split(/[\n]+/).map(s => s.trim()).filter(s => !!s);
+    const bundleDates = document.getElementById('enable-radio').checked;
 
     chrome.storage.sync.set({
         exclude: !!exclude,
         labels: labels,
+        bundleDates: !!bundleDates,
     }, function() {
         labelList.value = labels.join('\n');
 
@@ -39,8 +41,9 @@ function restoreOptions() {
     chrome.storage.sync.get({
         exclude: true,
         labels: [],
+        bundleDates: true,
     }, function(items) {
-        const id = items.exclude ? 'exclude-radio' : 'include-radio';
+        let id = items.exclude ? 'exclude-radio' : 'include-radio';
         document.getElementById(id).checked = true;
 
         const labelList = document.getElementById('label-list');
@@ -48,6 +51,10 @@ function restoreOptions() {
         if (!items.labels.length) {
           labelList.placeholder = PLACEHOLDER;
         }
+
+        id = items.bundleDates ? 'enable-radio' : 'disable-radio';
+        document.getElementById(id).checked = true;
+
     });
 }
 document.getElementById('save-button').addEventListener('click', saveOptions);

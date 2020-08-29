@@ -166,7 +166,16 @@ class Bundler {
      * a message row, date divider, or bundle row.
      */
     _calculateSortedTableRows(messageNodes, bundlesByLabel) {
+
+        chrome.storage.sync.get(['bundleDates'], ({ bundleDates = true }) => {
+            this.bundleDates = bundleDates;
+        });
+        
         const rows = this._calculateMessageAndBundleRows(messageNodes, bundlesByLabel);
+
+        if (!this.bundleDates) {
+            return rows;
+        }
 
         const sampleDate = messageNodes.length 
             ? DomUtils.extractDate(messageNodes[0])

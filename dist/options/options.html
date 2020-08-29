@@ -202,13 +202,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         <div class="tab">
             <h1>
                 Options
+            </h1>
+            <h2>
+                Label Filtering
                 <div class="help-container">
                     <img src="assets/help.svg" class="help-icon">
                     <div class="tooltip">
                         Add the name of each bundle on a new line. For nested labels, use forward-slashes between the nesting hierarchy levels.
                     </div>
                 </div>
-            </h1>
+            </h2>
             
             <div class="list-type-options">
                 <div class="list-type">
@@ -222,6 +225,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             </div>
 
             <textarea id="label-list" rows="16"></textarea>
+
+            <h2>
+                Date Grouping
+            </h2>
+
+            <div class="list-type-options">
+                <div class="list-type">
+                    <input type="radio" name="bundleDates" value="enable" id="enable-radio">
+                    <label for="enable-radio">Group messages based on labels and when they arrived</label>
+                </div>
+                <div class="list-type">
+                    <input type="radio" name="bundleDates" value="disable" id="disable-radio">
+                    <label for="disable-radio">Group messages based on labels only</label>
+                </div>
+            </div>            
 
             <button id="save-button" class="save-button">
                 <span class="save-text">Save</span>
