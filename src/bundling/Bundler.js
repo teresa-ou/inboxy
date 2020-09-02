@@ -50,6 +50,9 @@ class Bundler {
         this.messageSelectHandler = new MessageSelectHandler(bundledMail, selectiveBundling);
         this.inboxyStyler = new InboxyStyler(bundledMail);
         this.quickSelectHandler = new QuickSelectHandler();
+        chrome.storage.sync.get(['groupMessagesByDate'], ({ groupMessagesByDate = true }) => {
+            this.groupMessagesByDate = groupMessagesByDate;
+        });
     }
 
     /**
@@ -166,14 +169,10 @@ class Bundler {
      * a message row, date divider, or bundle row.
      */
     _calculateSortedTableRows(messageNodes, bundlesByLabel) {
-
-        chrome.storage.sync.get(['bundleDates'], ({ bundleDates = true }) => {
-            this.bundleDates = bundleDates;
-        });
         
         const rows = this._calculateMessageAndBundleRows(messageNodes, bundlesByLabel);
 
-        if (!this.bundleDates) {
+        if (!this.groupMessagesByDate) {
             return rows;
         }
 

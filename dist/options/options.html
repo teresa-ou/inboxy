@@ -204,7 +204,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 Options
             </h1>
             <h2>
-                Label Filtering
+                Labels
                 <div class="help-container">
                     <img src="assets/help.svg" class="help-icon">
                     <div class="tooltip">
@@ -227,18 +227,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <textarea id="label-list" rows="16"></textarea>
 
             <h2>
-                Date Grouping
+                Group by date
             </h2>
 
-            <div class="list-type-options">
-                <div class="list-type">
-                    <input type="radio" name="bundleDates" value="enable" id="enable-radio">
-                    <label for="enable-radio">Group messages based on labels and when they arrived</label>
-                </div>
-                <div class="list-type">
-                    <input type="radio" name="bundleDates" value="disable" id="disable-radio">
-                    <label for="disable-radio">Group messages based on labels only</label>
-                </div>
+            <div>
+                <label class="switch">
+                    <input type="checkbox" id="group-by-date-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-label">Group messages by date</span>
             </div>            
 
             <button id="save-button" class="save-button">
