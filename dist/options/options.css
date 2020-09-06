@@ -329,6 +329,7 @@ textarea::placeholder {
     text-transform: uppercase;
     height: 36px;
     width: 94px;
+    margin: 20px 0px;
 }
 
 .save-button .saved-text {
