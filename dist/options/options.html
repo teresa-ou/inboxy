@@ -202,13 +202,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         <div class="tab">
             <h1>
                 Options
+            </h1>
+            <h2>
+                Labels
                 <div class="help-container">
                     <img src="assets/help.svg" class="help-icon">
                     <div class="tooltip">
                         Add the name of each bundle on a new line. For nested labels, use forward-slashes between the nesting hierarchy levels.
                     </div>
                 </div>
-            </h1>
+            </h2>
             
             <div class="list-type-options">
                 <div class="list-type">
@@ -222,6 +225,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             </div>
 
             <textarea id="label-list" rows="16"></textarea>
+
+            <h2>
+                Group by date
+            </h2>
+
+            <div>
+                <label class="switch">
+                    <input type="checkbox" id="group-by-date-checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="switch-label">Group messages by date</span>
+            </div>            
 
             <button id="save-button" class="save-button">
                 <span class="save-text">Save</span>
