@@ -200,9 +200,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </div>
 
         <div class="tab">
-            <h1>
-                Options
-            </h1>
+            <h1>Options</h1>
+
             <h2>
                 Labels
                 <div class="help-container">
@@ -213,18 +212,37 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                 </div>
             </h2>
             
-            <div class="list-type-options">
-                <div class="list-type">
-                    <input type="radio" name="listType" value="exclude" id="exclude-radio">
+            <div class="options-list">
+                <div class="option-item">
+                    <input type="radio" value="exclude" id="exclude-radio">
                     <label for="exclude-radio">Bundle all labels except those in the following list:</label>
                 </div>
-                <div class="list-type">
-                    <input type="radio" name="listType" value="include" id="include-radio">
+                <div class="option-item">
+                    <input type="radio" value="include" id="include-radio">
                     <label for="include-radio">Only bundle labels in the following list:</label>
                 </div>
             </div>
 
             <textarea id="label-list" rows="16"></textarea>
+
+            <h2>
+                Actions
+            </h2>
+
+            <div class="options-list">
+                <div class="option-item">
+                    <input type="checkbox" class="action" value="archive" id="archive-checkbox">
+                    <label for="archive-checkbox">Show an "Archive all" button</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" class="action" value="delete" id="delete-checkbox">
+                    <label for="delete-checkbox">Show a "Delete all" button</label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" class="action" value="select" id="select-checkbox">
+                    <label for="select-checkbox">Show a "Select all" button</label>
+                </div>
+            </div>
 
             <h2>
                 Group by date

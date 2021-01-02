@@ -95,7 +95,7 @@ class MessageSelectHandler {
             {
                 this.inboxyStyler.markSelectedBundlesFor(
                     this.selectiveBundling.findRelevantLabels(message));
-                this.inboxyStyler.disableBulkArchiveIfNecessary();
+                this.inboxyStyler.disableBulkActionsIfNecessary();
             }
         });    
     }
