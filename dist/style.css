@@ -179,64 +179,66 @@ html.inboxy .bundle-row .flex-grow {
     flex-grow: 1;
 }
 
-html.inboxy .bundle-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check-all.svg');
-    background-size: 24px;
-    display: none;
-    height: 20px;
-    width: 24px;
+html.inboxy .bundle-row > .select {
+    margin-left: 4px;
+    opacity: .54;
+}
+html.inboxy .bundle-row:hover > .select {
+    opacity: .7;
 }
 
-html.inboxy .bundle-row:not(.visible) .archive-bundle {
-    margin-right: 16px;
+html.inboxy .bundle-row .bulk-action {
+    background-size: 20px;
+    display: none;
+    height: 20px;
+    width: 20px;
+}
+
+html.inboxy .bundle-row .bulk-action.select {
+    display: block;
+}
+
+html.inboxy .bundle-row:not(.visible) .bulk-action:last-of-type {
+    margin-right: 12px;
+}
+html.inboxy .bundle-row:not(.visible) .bulk-action {
+    margin-right: 8px;
 }
 
 /** Adjust size of circle on hover */
-html.inboxy .bundle-row .archive-bundle:before {
+html.inboxy .bundle-row .bulk-action:before {
     left: -8px;
     right: -8px;
 }
-html.inboxy.compact .bundle-row .archive-bundle:before {
+html.inboxy.compact .bundle-row .bulk-action:before {
     left: -2px;
     right: -2px;
 }
 
 /** Show on hover */
-html.inboxy .bundle-row:hover .archive-bundle {
+html.inboxy .bundle-row:hover .bulk-action {
     display: block;
 }
 
-html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
-html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
+html.inboxy.dark-theme .bundle-row.visible .bulk-action,
+html.inboxy.messages-dark-theme .bundle-row:not(.visible) .bulk-action {
     opacity: 0.7;
 }
 
-html.inboxy.dark-theme .bundle-row.visible .archive-bundle:before {
+html.inboxy.dark-theme .bundle-row.visible .bulk-action:before {
     background-color: rgb(255, 255, 255, 0.2);
 }
 
-@-moz-document url-prefix() {
-    html.inboxy .bundle-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
-    }
-
-    html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
-    html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
-    }
-}
-
-html.inboxy .bundle-row.visible .archive-bundle {
+html.inboxy .bundle-row.visible .bulk-action {
     display: block;
 }
 
-html.inboxy .bundle-row .archive-bundle.disabled {
+html.inboxy .bundle-row .bulk-action.disabled {
     cursor: default;
     opacity: .15;
 }
 
-html.inboxy .bundle-row .archive-bundle.disabled::before {
+html.inboxy .bundle-row .bulk-action::before {
     display: none;
 }
 
@@ -287,8 +289,8 @@ html.inboxy .bundled-message.visible.last {
 
 html.inboxy .date-row {
     display: flex;
-    justify-content: space-between;
-    padding: 24px 0 16px 28px;
+    justify-content: stretch;
+    padding: 24px 0 16px 6px;
     font-size: 0.94rem;
     color: #202124;
 }
@@ -298,55 +300,98 @@ html.inboxy.dark-theme .date-row {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
-html.inboxy .date-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check-all.svg');
-    background-size: 20px;
-    margin-right: 24px;
+html.inboxy .date-row .bulk-action.archive {
+    margin-left: auto;
 }
 
-html.inboxy.dark-theme .date-row .archive-bundle {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
+html.inboxy .date-row .bulk-action {
+    background-size: 20px;
+    margin-right: 10px;
+}
+
+html.inboxy.dark-theme .date-row .bulk-action {
     opacity: 0.7;
 }
 
-html.inboxy.dark-theme .date-row .archive-bundle:before {
+html.inboxy.dark-theme .date-row .bulk-action:before {
     background-color: rgb(255, 255, 255, 0.2);
-}
-
-@-moz-document url-prefix() {
-    html.inboxy .date-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
-    }
-
-    html.inboxy.dark-theme .date-row .archive-bundle {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
-    }
 }
 
 /** 
  * Archive button 
  */
-html.inboxy .brq,
-html.inboxy .ar8 {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check.svg');
+html.inboxy .bulk-action.archive {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/check-all.svg');
 }
 
-html.inboxy.messages-dark-theme .brq,
-html.inboxy.dark-theme .ar8 {
-    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check.svg');
+html.inboxy.dark-theme .bulk-action.archive {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
 }
 
 @-moz-document url-prefix() {
-    html.inboxy .brq,
-    html.inboxy .ar8 {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check.svg');
+    html.inboxy .bulk-action.archive {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
     }
 
-    html.inboxy.messages-dark-theme .brq,
-    html.inboxy.dark-theme .ar8 {
-        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check.svg');
+    html.inboxy.dark-theme .bulk-action.archive {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     }
 }
+
+html.inboxy.hide-archive-action .bulk-action.archive {
+    display: none;
+}
+
+/**
+ * Delete button
+ */
+html.inboxy .bulk-action.delete {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/delete-sweep.svg');
+}
+
+html.inboxy.dark-theme .bulk-action.delete {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-delete-sweep.svg');
+}
+
+@-moz-document url-prefix() {
+    html.inboxy .bulk-action.delete {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/delete-sweep.svg');
+    }
+
+    html.inboxy.dark-theme .bulk-action.delete {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-delete-sweep.svg');
+    }
+}
+
+html.inboxy.hide-delete-action .bulk-action.delete {
+    display: none;
+}
+
+/**
+ * Select button
+ */
+html.inboxy .bulk-action.select {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/checkbox.svg');
+}
+
+html.inboxy.dark-theme .bulk-action.select {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-checkbox.svg');
+}
+
+@-moz-document url-prefix() {
+    html.inboxy .bulk-action.select {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/checkbox.svg');
+    }
+
+    html.inboxy.dark-theme .bulk-action.select {
+        background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-checkbox.svg');
+    }
+}
+
+html.inboxy.hide-select-action .bulk-action.select {
+    display: none;
+}
+
 
 /**
  * View all link 

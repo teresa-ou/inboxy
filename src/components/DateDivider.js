@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import BulkArchiveButton from '../components/BulkArchiveButton';
+import BulkActionButton from '../components/BulkActionButton';
 
 import DomUtils from '../util/DomUtils';
 import {
@@ -115,13 +115,15 @@ function findMessagesForDivider(tableRows, dividerIndex) {
 function create(divider, order, messages) {
     const html = `
         <div class="date-row">
-            ${divider.text}
+            <span>${divider.text}</span>
         </div>
     `;
     const el = DomUtils.htmlToElement(html);
     el.style.order = order;
 
-    el.appendChild(BulkArchiveButton.create(messages));
+    el.insertBefore(BulkActionButton.createSelect(messages), el.firstChild);
+    el.appendChild(BulkActionButton.createArchive(messages));
+    el.appendChild(BulkActionButton.createDelete(messages));
 
     return el;
 }

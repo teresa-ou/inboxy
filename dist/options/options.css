@@ -243,30 +243,32 @@ h2 {
     display: block;
 }
 
-.list-type-options {
+.options-list {
     margin: 1.5rem 0;
 }
 
-.list-type {
+.option-item {
     margin: 0.75rem 0;
 }
 
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
     height: 0;
     opacity: 0;
     position: absolute;
     width: 0;
 }
 
-input[type="radio"] + label {
+input[type="radio"] + label,
+input[type="checkbox"] + label {
     cursor: pointer;
     padding-left: 26px;
     position: relative;
 }
 
-input[type="radio"] + label::before {
+input[type="radio"] + label::before,
+input[type="checkbox"] + label::before {
     border: 1px solid #c4c4c4;
-    border-radius: 50%;
     top: 0;
     content: '';
     height: 16px;
@@ -275,9 +277,9 @@ input[type="radio"] + label::before {
     width: 16px;
 }
 
-input[type="radio"] + label::after {
+input[type="radio"] + label::after,
+input[type="checkbox"] + label::after {
     background-color: #00acc1;
-    border-radius: 50%;
     top: 4px;
     content: '';
     height: 10px;
@@ -287,12 +289,24 @@ input[type="radio"] + label::after {
     transition: transform 0.2s ease;
 }
 
-input[type="radio"]:not(:checked) + label::after {
+input[type="radio"]:not(:checked) + label::after,
+input[type="checkbox"]:not(:checked) + label::after {
     transform: scale(0);
 }
 
-input[type="radio"](:checked) + label::after {
+input[type="radio"]:checked + label::after,
+input[type="checkbox"]:checked + label::after {
     transform: scale(1);
+}
+
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+    border-radius: 50%;
+}
+
+input[type="checkbox"] + label::before,
+input[type="checkbox"] + label::after {
+    border-radius: 10%;
 }
 
 textarea {
