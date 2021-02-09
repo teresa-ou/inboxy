@@ -81,7 +81,7 @@ const Selectors = {
         `.${GmailClasses.ROW} > .${GmailClasses.PERSONAL_LEVEL_INDICATOR}:not(.byv)`,
     READ_MESSAGE: `tr.${GmailClasses.ROW}.${GmailClasses.READ}`,
     REFRESH: '.T-I.J-J5-Ji[act="20"]',
-    SAMPLE_MESSAGE: `${POSSIBLE_MESSAGE_LISTS} tr.${GmailClasses.ROW}.${GmailClasses.READ}:not(.bundled-message)`,
+    SAMPLE_MESSAGE: `${POSSIBLE_MESSAGE_LISTS} tr.${GmailClasses.ROW}.${GmailClasses.READ}:not(.bundled-message):not(.btb)`,
     SEARCH_FORM: '#gb form',
     SELECTED: `${CURRENT_TABPANEL} tr.${GmailClasses.SELECTED}:not(.${InboxyClasses.BUNDLE_ROW})`,
     SENDERS: '.yX.xY .yW .bA4 span[email]',
