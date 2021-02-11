@@ -94,6 +94,12 @@ button.light {
     color: #00ACC1;
 }
 
+button.ghost {
+    border: 2px solid #00ACC1;
+    background-color: #ffffff;
+    color: #00ACC1;
+}
+
 /**
  * CTAs
  */

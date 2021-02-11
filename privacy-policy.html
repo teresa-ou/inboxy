@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161410304-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-161410304-1');
+    </script>
+
+    <title>inboxy | Google Inbox-style bundles for Gmail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta property="og:title" content="inboxy: Browser extension for email bundles on Gmail">
+    <meta property="og:description" content="inboxy is an open-source browser extension that bundles together emails and makes it easier to manage your inbox.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://github.com/teresa-ou/inboxy/blob/gh-pages/assets/inboxy.png?raw=true">
+    <meta property="og:url" content="https://www.inboxymail.com">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link 
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Overlock:700&display=swap" 
+      rel="stylesheet"
+    >
+  </head>
+  <body>
+    <section>
+      <h2 id="privacy-policy">Privacy Policy</h2>
+      <p>
+        inboxy is a lightweight visual layer over Gmail, and it uses Javascript and CSS to draw bundles.
+      </p>
+      <p>
+        <b>
+          With the default settings, inboxy does not handle any personal or sensitive data.
+        </b>
+      </p>
+      <p>
+        However, if you choose to customize your extension settings, <b>inboxy uses the Chrome Storage Sync API to sync settings</b> to browsers that you're logged into. 
+      </p>
+      <p>
+        In particular, the settings allow you to specify a list of labels to bundle (whitelist) or not to bundle (blacklist), instead of defaulting to bundling all labels. The list of labels may contain personal or sensitive data&mdash;for example, you might have a label where the text is your name. To maximize protection of your data, you should either:
+        <ol>
+          <li>Rename the labels so that they don't contain sensitive information, or</li>
+          <li>Opt not to include those labels in the list.</li>
+        </ol>
+      </p>
+      <p>
+        inboxy's usage of data adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.
+      </p>
+    </section>
+
+    <section class="final-section">
+      <a class="chrome-cta" href="https://chrome.google.com/webstore/detail/inboxy-bundles-for-gmail/clahkkinbdcdnogkkgmacmiknnamahha" target="_blank" class="get-inboxy">
+        <button>Get inboxy for Chrome</button>
+      </a>
+      <a class="firefox-cta" href="https://addons.mozilla.org/addon/inboxy-inbox-bundles-for-gmail/" target="_blank" class="get-inboxy">
+        <button>Get inboxy for Firefox</button>
+      </a>
+      <p>
+        <a href="https://www.inboxymail.com">
+          <button class="ghost">Learn more</button>
+        </a>
+      </p>
+    </section>
+  </body>
+</html>
