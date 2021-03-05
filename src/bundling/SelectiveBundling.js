@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import DomUtils from '../util/DomUtils';
-
 /**
  * Identifies the labels that have bundling enabled, according to the user's options.
  * By default, all labels are bundled.
@@ -29,15 +27,17 @@ class SelectiveBundling {
         });
     }
 
-    findRelevantLabels(message) {
-        const messageLabels = DomUtils.getLabelStrings(message);
-
+    filter(messageLabels) {
         if (this.exclude) {
-            return messageLabels.filter(l => !this.labels.has(l.toLowerCase()));
+            return messageLabels.filter(l => !this.labels.has(l.title.toLowerCase()));
         }
         else {
-            return messageLabels.filter(l => this.labels.has(l.toLowerCase()));
+            return messageLabels.filter(l => this.labels.has(l.title.toLowerCase()));
         }
+    }
+
+    filterStrings(messageLabels) {
+        return this.filter(messageLabels).map(l => l.title);
     }
 }
 

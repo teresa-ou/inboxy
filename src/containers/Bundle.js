@@ -18,8 +18,9 @@
  * A bundle of messages that belong to a particular label.
  */
 class Bundle {
-    constructor(label) {
+    constructor(label, style) {
         this._label = label;
+        this._style = style;
         this._bundleRow = null;
         this._order = null;
         this._messages = [];
@@ -44,6 +45,13 @@ class Bundle {
         return this._label;
     }
     
+    /**
+     * The style associated with this bundle.
+     */
+    getStyle() {
+        return this._style;
+    }
+
     /**
      * The dom element for the table row representing the bundle.
      */

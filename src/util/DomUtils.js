@@ -32,8 +32,38 @@ const DomUtils = {
         return checkboxNode.getAttribute('aria-checked') === 'true';
     },
 
-    getLabelStrings: function(message) {
-        return [...message.querySelectorAll(Selectors.LABELS)].map(l => l.title);
+    getLabels: function(message) {
+        return [...message.querySelectorAll(Selectors.LABELS)];
+    },
+
+    /** Slice entries out of an object. */
+    slice: function(src, ...keys) {
+        const dst = {};
+        for (const k of keys) {
+            dst[k] = src[k];
+        }
+        return dst;
+    },
+
+    getCSS: function(element, ...cssAttributes) {
+        const cssObj = {};
+        const csm = element.computedStyleMap();
+        for (let sty of cssAttributes) {
+            cssObj[sty] = csm.get(sty).toString();
+        }
+        return cssObj;
+    },
+
+    styleFor: function(cssObj) {
+        const css = Object.entries(cssObj).map(([k, v]) => `${k}: ${v};`).join("\n\t");
+        const [hasSingleQuote, hasDoubleQuote] = ["'", '"'].map(q => css.indexOf(q) > -1);
+        if (hasSingleQuote && hasDoubleQuote) {
+            return "";  // Safely-punt on safely-quoting the css.
+        } else if (hasSingleQuote) {
+            return `style="${css}"`;
+        } else {
+            return `style='${css}'`;
+        }
     },
 
     htmlToElement: function(html) {

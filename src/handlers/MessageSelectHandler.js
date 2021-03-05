@@ -94,7 +94,7 @@ class MessageSelectHandler {
                 message.classList.contains(GmailClasses.SELECTED)) 
             {
                 this.inboxyStyler.markSelectedBundlesFor(
-                    this.selectiveBundling.findRelevantLabels(message));
+                    this.selectiveBundling.filterStrings(DomUtils.getLabels(message)));
                 this.inboxyStyler.disableBulkArchiveIfNecessary();
             }
         });    

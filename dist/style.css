@@ -279,7 +279,7 @@ html.inboxy .bundled-message.visible {
  */
 
 html.inboxy .bundle-area {
-    background-color: #e8eaed;
+    background: linear-gradient(.5turn, transparent, rgba(232, 234, 237, 0.33));
     cursor: pointer;
     display: none;
     padding-bottom: 48px;
@@ -289,7 +289,7 @@ html.inboxy .bundle-area {
 }
 
 html.inboxy.dark-theme .bundle-area {
-    background-color: rgba(241, 243, 244, 0.24);
+    background: linear-gradient(.5turn, transparent, rgba(241, 243, 244, 0.33));
 }
 
 /** 
