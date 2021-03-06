@@ -25,7 +25,7 @@ import {
  * Create bulk archive button for archiving the given messages, which should be in the same bundle.
  */
 function create(messages) {
-    return _create(() => _selectMessages(messages));
+    return _create(() => _selectUnstarredMessages(messages));
 }
 
 function _create(selectMessagesFunction) {
@@ -72,15 +72,21 @@ function _archiveMessages(selectMessagesFunction) {
 }
 
 /**
- * Select all given messages.
+ * Select only messages without any stars assigned to them.
  */
-function _selectMessages(messages) {
+function _selectUnstarredMessages(messages) {
     for (let i = messages.length - 1; i >= 0; i--) {
         const checkboxNode = messages[i].querySelector(Selectors.MESSAGE_CHECKBOX);
-        if (!DomUtils.isChecked(checkboxNode)) {
+        const starred = _isStarred(messages[i]);
+        const checked = DomUtils.isChecked(checkboxNode);
+        if (starred && checked || !starred && !checked) {
             checkboxNode.click();
         }
     }
+}
+
+function _isStarred(message) {
+    return !message.querySelector(Selectors.UNSTARRED);
 }
 
 function _isClickable(button) {
