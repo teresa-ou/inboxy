@@ -40,6 +40,7 @@ const GmailClasses = {
     SUBJECT_CELL: 'a4W',
     UNREAD: 'zE',
     UNREAD_SENDER: 'zF',
+    UNSTARRED: 'aXw',
 };
 
 const InboxyClasses = {
@@ -88,6 +89,7 @@ const Selectors = {
     SCROLLABLE_CONTAINER: '.Tm.aeJ',
     SIDEPANE_TEXT: '.TO .nU',
     STARRED: `.T-KT.${GmailClasses.STARRED}`,
+    UNSTARRED: `.T-KT.${GmailClasses.UNSTARRED}`,
     TAB: `${MAIN} [role="tab"]`,
     TABPANELS: `${MAIN} [role="tabpanel"]`,
     TABLE_BODY: `.F tbody`,
