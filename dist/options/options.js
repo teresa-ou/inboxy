@@ -21,11 +21,13 @@ function saveOptions() {
     const labelList = document.getElementById('label-list');
     const labels = labelList.value.split(/[\n]+/).map(s => s.trim()).filter(s => !!s);
     const groupMessagesByDate = document.getElementById('group-by-date-checkbox').checked;
+    const useLabelColors = document.getElementById('use-label-colors-checkbox').checked;
 
     chrome.storage.sync.set({
         exclude: !!exclude,
         labels: labels,
         groupMessagesByDate: !!groupMessagesByDate,
+        useLabelColors: !!useLabelColors,
     }, function() {
         labelList.value = labels.join('\n');
 
@@ -42,6 +44,7 @@ function restoreOptions() {
         exclude: true,
         labels: [],
         groupMessagesByDate: true,
+        useLabelColors: true,  // TODO: Should be default false?
     }, function(items) {
         const id = items.exclude ? 'exclude-radio' : 'include-radio';
         document.getElementById(id).checked = true;
@@ -53,6 +56,7 @@ function restoreOptions() {
         }
 
         document.getElementById('group-by-date-checkbox').checked = items.groupMessagesByDate;
+        document.getElementById('use-label-colors-checkbox').checked = items.useLabelColors;
 
     });
 }
