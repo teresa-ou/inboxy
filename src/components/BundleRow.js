@@ -26,10 +26,17 @@ import {
 
 const MAX_MESSAGE_COUNT = 25;
 
+// TODO: Is there a more appropriate place to do this lookup?
+// TODO: Using colors sholuld default to false?
+let useLabelColorsSetting = true;
+chrome.storage.sync.get(['useLabelColors'], ({ useLabelColors = true }) => {
+    useLabelColorsSetting = useLabelColors;
+});
+
 /**
  * Create a table row for a bundle, to be shown in the list of messages. 
  */
-function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
+function create(label, order, messages, hasUnread, toggleBundle, baseUrl, textColor, backgroundColor, borderColor) {
     const displayedMessageCount = messages.length >= MAX_MESSAGE_COUNT 
         ? `${MAX_MESSAGE_COUNT}+` 
         : messages.length;
@@ -53,6 +60,8 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const latestIsUnreadClass = messages[0].classList.contains(GmailClasses.UNREAD) ? 'unread' : '';
     const latestIsSnoozedClass = snoozedText ? GmailClasses.SNOOZED : '';
 
+    const labelColorStyle = useLabelColorsSetting ? `style="color: ${textColor}; background-color: ${backgroundColor}; border-color: ${borderColor};"` : '';
+    
     const html = `
         <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
@@ -61,7 +70,7 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
             <td class="spacer ${GmailClasses.CELL} ${spacerClass}"></td>
             <td class="${GmailClasses.CELL} yX">
                 <div class="bundle-and-count">
-                    <span>${label}</span>
+                    <span ${labelColorStyle}>${label}</span>
                     <span class="bundle-count">(${displayedMessageCount})</span>
                 </div>
             </td>

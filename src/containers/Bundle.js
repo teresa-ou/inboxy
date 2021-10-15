@@ -18,8 +18,12 @@
  * A bundle of messages that belong to a particular label.
  */
 class Bundle {
-    constructor(label) {
+    constructor(label, textColor, backgroundColor, borderColor) {
         this._label = label;
+        //TODO: We should sanitize these colors for the right format.  And possibly tweak them?
+        this._textColor = textColor;
+        this._backgroundColor = backgroundColor;
+        this._borderColor = borderColor;
         this._bundleRow = null;
         this._order = null;
         this._messages = [];
@@ -63,6 +67,19 @@ class Bundle {
      */
     getMessages() {
         return this._messages;
+    }
+
+    // TODO: Add doc strings
+    getTextColor() {
+        return this._textColor;
+    }
+
+    getBackgroundColor() {
+        return this._backgroundColor;
+    }
+    
+    getBorderColor() {
+        return this._borderColor;
     }
 }
 
