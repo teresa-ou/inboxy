@@ -20,7 +20,7 @@
 class Bundle {
     constructor(label, textColor, backgroundColor, borderColor) {
         this._label = label;
-        //TODO: We should sanitize these colors for the right format.  And possibly tweak them?
+        //TODO: We should sanitize these colors for the right format?
         this._textColor = textColor;
         this._backgroundColor = backgroundColor;
         this._borderColor = borderColor;
@@ -69,15 +69,23 @@ class Bundle {
         return this._messages;
     }
 
-    // TODO: Add doc strings
+    /**
+     * The text color of the bundle's corresponding label
+     */
     getTextColor() {
         return this._textColor;
     }
 
+    /**
+     * The background color of the bundle's corresponding label
+     */
     getBackgroundColor() {
         return this._backgroundColor;
     }
     
+    /**
+     * The border color of the bundle's corresponding label
+     */
     getBorderColor() {
         return this._borderColor;
     }

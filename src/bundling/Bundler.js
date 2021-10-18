@@ -294,7 +294,6 @@ class Bundler {
             this.bundleToggler.toggleBundle,
             baseUrl,
             // TODO: Write tests
-            // TODO: Make sure it works with colorless labels
             bundle.getTextColor(),
             bundle.getBackgroundColor(),
             bundle.getBorderColor()

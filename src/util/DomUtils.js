@@ -32,12 +32,11 @@ const DomUtils = {
         return checkboxNode.getAttribute('aria-checked') === 'true';
     },
     
-    // TODO: Breaking change.  Make sure to change all call sites
-    // TODO: Rename to getLabels
+    // TODO: Rename to getLabels?
     getLabelStrings: function(message) {
         return [...message.querySelectorAll(Selectors.LABELS)].map(l => ({
             title: l.title,
-            backgroundColor: l.style.backgroundColor,  //TODO: Is this the best way to get it?
+            backgroundColor: l.style.backgroundColor,
             borderColor: l.style.borderColor,
             textColor: l.querySelectorAll(Selectors.LABEL_TEXT)[0].style.color
         }));
