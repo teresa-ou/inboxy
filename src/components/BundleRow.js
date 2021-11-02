@@ -26,7 +26,6 @@ import {
 
 const MAX_MESSAGE_COUNT = 25;
 
-// TODO: Is there a more appropriate place to do this lookup?
 // TODO: Using colors sholuld default to false?
 let useLabelColorsSetting = true;
 chrome.storage.sync.get(['useLabelColors'], ({ useLabelColors = true }) => {
