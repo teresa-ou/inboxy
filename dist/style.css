@@ -109,7 +109,6 @@ html.inboxy .bundle-row .bundle-and-count span {
     padding: 2px 4px;
     border-radius: 3px;
 }
-/* TODO: Test that this doesn't break any long name truncation */
 
 /* Handle long label names */
 html.inboxy .bundle-row:not(.visible) .bundle-and-count {
