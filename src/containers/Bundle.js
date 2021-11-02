@@ -20,7 +20,6 @@
 class Bundle {
     constructor(label, textColor, backgroundColor, borderColor) {
         this._label = label;
-        //TODO: We should sanitize these colors for the right format?
         this._textColor = textColor;
         this._backgroundColor = backgroundColor;
         this._borderColor = borderColor;
