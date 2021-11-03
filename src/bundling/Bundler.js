@@ -293,7 +293,6 @@ class Bundler {
             hasUnreadMessages, 
             this.bundleToggler.toggleBundle,
             baseUrl,
-            // TODO: Write tests
             bundle.getTextColor(),
             bundle.getBackgroundColor(),
             bundle.getBorderColor()
