@@ -38,6 +38,19 @@ import {
     isStarredPage,
 } from './util/MessagePageUtils';
 
+const DEBUG = true;
+const logDebugMessage = message => {
+    if (DEBUG) {
+        console.log(`inboxy-debug: ${message}`);
+    }
+};
+
+const html = document.querySelector('html');
+if (html) {
+    logDebugMessage('Applying styles');
+    html.classList.add(InboxyClasses.INBOXY);
+}
+
 const RETRY_TIMEOUT_MS = 50;
 
 let isFreshPage = false;
@@ -88,9 +101,13 @@ const mainParentObserver = new MainParentObserver(mutations => {
 //
 // Attach event listeners
 //
-
 // Call the bundler when the page has loaded.
-window.addEventListener('DOMContentLoaded', handleContentLoaded);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handleContentLoaded);
+}
+else {
+    handleContentLoaded();
+}
 
 document.addEventListener('mousedown', starHandler.handleStarring);
 
@@ -118,7 +135,9 @@ document.addEventListener('mousedown', e => {
 //
 
 function handleContentLoaded() {
+    logDebugMessage('Handle content loaded event');
     const bundleCurrentPage = supportsBundling(window.location.href);
+    logDebugMessage(`Url: ${window.location.href}, page supports bundling: ${bundleCurrentPage}`);
     tryBundling(0, bundleCurrentPage);
 }
 
@@ -135,6 +154,8 @@ function tryBundling(i, bundleCurrentPage) {
             setTimeout(() => tryBundling(i + 1, bundleCurrentPage), RETRY_TIMEOUT_MS);
         }
         else {
+            logDebugMessage('Start observers');
+
             addPinnedToggle(); 
             startObservers();
 
@@ -154,7 +175,10 @@ function tryBundling(i, bundleCurrentPage) {
             setTimeout(() => tryBundling(i + 1, bundleCurrentPage), RETRY_TIMEOUT_MS);
         }
         else {
-            bundler.bundleMessages(false);
+            logDebugMessage('Bundle messages');
+
+            const debugInfo = bundler.bundleMessages(false);
+            logDebugMessage(JSON.stringify(debugInfo));
             addPinnedToggle();
             startObservers();
         }

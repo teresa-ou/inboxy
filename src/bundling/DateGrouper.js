@@ -34,8 +34,10 @@ import DomUtils from '../util/DomUtils';
 class DateGrouper {
     constructor() {
         this.refreshDateDividers = this.refreshDateDividers.bind(this);
-
         this.pinnedMessageListWatcher = new PinnedMessageListWatcher(this.refreshDateDividers);
+        chrome.storage.sync.get(['groupMessagesByDate'], ({ groupMessagesByDate = true }) => {
+            this.groupMessagesByDate = groupMessagesByDate;
+        });
     }
 
     /** 
@@ -72,12 +74,16 @@ class DateGrouper {
             ? DomUtils.extractDate(messageNodes[0])
             : '';
 
-        const messageRows = messageNodes.map(m => ({
+        let messageRows = messageNodes.map(m => ({
             element: m,
             type: Element.UNBUNDLED_MESSAGE,
         }));
-        const rows = DateDivider.withDateDividers(messageRows, sampleDate);
-        this._drawRows(rows, tableBody);
+
+        if (this.groupMessagesByDate) {
+            messageRows = DateDivider.withDateDividers(messageRows, sampleDate);
+        }
+        
+        this._drawRows(messageRows, tableBody);
     }
 
     /**

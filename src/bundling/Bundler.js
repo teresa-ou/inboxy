@@ -50,11 +50,16 @@ class Bundler {
         this.messageSelectHandler = new MessageSelectHandler(bundledMail, selectiveBundling);
         this.inboxyStyler = new InboxyStyler(bundledMail);
         this.quickSelectHandler = new QuickSelectHandler();
+        chrome.storage.sync.get(['groupMessagesByDate'], ({ groupMessagesByDate = true }) => {
+            this.groupMessagesByDate = groupMessagesByDate;
+        });
     }
 
     /**
      * Bundle together the messages on the current page of messages, if they aren't already bundled,
      * optionally reopening the most recently open bundle.
+     *
+     * Returns an object with info for debug printing.
      */
     bundleMessages(reopenRecentBundle) {
         const bundledMail = this.bundledMail;
@@ -64,14 +69,18 @@ class Bundler {
             : null;
 
         if (!messageList) {
-            return;
+            return {
+                foundMessageList: false,
+            };
         }
         
+        let debugInfo = { foundMessageList: true };
+
         this.messageListWatcher.disconnect();
 
         // Only redraw if message list isn't still bundled
         if (!messageList.children[0].classList.contains('is-bundled')) {
-            this._bundleMessages(messageList);
+            debugInfo = this._bundleMessages(messageList);
             messageList.children[0].classList.add('is-bundled');
         }
 
@@ -84,6 +93,8 @@ class Bundler {
         }
 
         this.messageListWatcher.observe();
+
+        return debugInfo;
     }
 
     /**
@@ -91,6 +102,8 @@ class Bundler {
      *
      * Table rows are reordered by using flexbox and the order property, since Gmail's js seems 
      * to require the DOM nodes to remain in their original order. 
+     *
+     * Returns an object with info for debug printing.
      */
     _bundleMessages(messageList) {
         const tableBody = messageList.querySelector(Selectors.TABLE_BODY);
@@ -116,6 +129,11 @@ class Bundler {
 
         this._applyStyles(messageNodes);
         this._attachHandlers(messageNodes, messageList);
+
+        return {
+            numMessages: messageNodes.length,
+            numBundles: Object.keys(bundlesByLabel).length,
+        };
     }
 
     /**
@@ -157,7 +175,12 @@ class Bundler {
      * a message row, date divider, or bundle row.
      */
     _calculateSortedTableRows(messageNodes, bundlesByLabel) {
+        
         const rows = this._calculateMessageAndBundleRows(messageNodes, bundlesByLabel);
+
+        if (!this.groupMessagesByDate) {
+            return rows;
+        }
 
         const sampleDate = messageNodes.length 
             ? DomUtils.extractDate(messageNodes[0])
@@ -306,7 +329,8 @@ class Bundler {
 
         // Close bundles when clicking outside of any open bundle
         messageList.addEventListener('click', e => {
-            if (!e.target.closest('tr')) {
+            // #63 - e.target may have been removed before event propagates to messageList
+            if (document.body.contains(e.target) && !e.target.closest('tr')) {
                 this.bundleToggler.closeAllBundles();
             }
         });

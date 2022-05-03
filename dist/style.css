@@ -24,14 +24,32 @@ html.inboxy .flex-table-body {
 }
 
 /**
- * Bundle row
+ * Messages
  */
 
 /* Make unread messages grey for light theme, when Simplify is not used */
-html.inboxy:not(.messages-dark-theme):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
-html.inboxy:not(.messages-dark-theme):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
+html.inboxy:not(.messages-dark-theme):not(.simplify):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
+html.inboxy:not(.messages-dark-theme):not(.simplify):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
     background-color: rgba(242, 245, 245, 0.8);
 }
+
+/**
+ * Simplify v2
+ * Use a lighter color for focused message (to contrast against open bundle color)
+ */
+html.inboxy.simplify:not(.messages-dark-theme) tr.zA.btb {
+    background-color: rgba(242, 245, 245, 0.8) !important;
+}
+/* In dark theme, the chosen color is visually compatible, so no changes needed */
+
+/* Override rounded corners in Simplify v2 */
+html.inboxy.simplify .zA {
+    border-radius: 0 !important;
+}
+
+/**
+ * Bundle row
+ */
 
 html.inboxy .bundle-row.zE .xY.yX,
 html.inboxy .bundle-row .bundle-date.unread {
@@ -57,7 +75,7 @@ html.inboxy .bundle-row.zA.yO.visible,
 html.inboxy .bundle-row.zA.zE.visible {
     box-shadow: none !important;
     font-weight: bold;
-    background-color: #e8eaed;
+    background-color: #e8eaed !important;
     padding-top: 32px !important;
     padding-bottom: 18px !important;
     margin-top: 24px;
@@ -65,8 +83,8 @@ html.inboxy .bundle-row.zA.zE.visible {
 
 html.inboxy.dark-theme .bundle-row.yO.visible,
 html.inboxy.dark-theme .bundle-row.zE.visible {
-    background-color: rgba(241, 243, 244, 0.24);
-    color: #ffffff;
+    background-color: rgba(241, 243, 244, 0.24) !important;
+    color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 
@@ -96,9 +114,15 @@ html.inboxy .bundle-row:not(.visible) .xY {
 }
 /* Allow more width before wrapping (#11), but not too much so that #36 happens */
 html.inboxy .bundle-row:not(.visible) .xY.yX {
-    padding-right: 12px;
+    padding-right: 20px;
     flex-basis: 180px;
     max-width: 180px;
+}
+html.inboxy .Zs .bundle-row:not(.visible) .xY.yX {
+    padding-right: 0;
+}
+html.inboxy .Zs .bundle-row:not(.visible) .xY.yX {
+    flex-basis: unset;
 }
 
 html.inboxy .bundle-row.visible .bundle-date-cell,
@@ -317,6 +341,25 @@ html.inboxy.dark-theme .date-row .archive-bundle:before {
     }
 }
 
+/* Add a visual divider when using Simplify v2 */
+html.inboxy:not(.messages-dark-theme):not(.dark-theme).simplify .date-row {
+    border-bottom: 1px solid rgba(242, 245, 245, 0.8);
+}
+html.inboxy.messages-dark-theme.dark-theme.simplify .date-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/**
+ * Hide Simplify v2's date rows.
+ * Need to use inboxy's date rows because of flex reordering.
+ */
+html.inboxy.simplify.dateGroup tr[date] {
+    margin-top: 0 !important;
+}
+html.inboxy.simplify.dateGroup tr[date]:before {
+    display: none !important;
+}
+
 /** 
  * Archive button 
  */
@@ -473,11 +516,16 @@ html.inboxy .pinned-toggle.show-pinned .slider-button {
     margin-right: 0;
 }
 
-html.inboxy:not(.simpl) #gb form {
+/* 
+ * Simplify v2, v1
+ * 
+ * Layout compatibility
+ */
+html.inboxy:not(.simplify):not(.simpl) #gb form {
     width: 100%;
 }
 @media(max-width: 1250px) {
-    html.inboxy:not(.simpl) #gb form {
+    html.inboxy:not(.simplify):not(.simpl) #gb form {
         width: calc(100% - 100px);
     }
 }
@@ -486,12 +534,11 @@ html.inboxy:not(.simpl) #gb form {
  * pinned-toggle <--> Simplify compatibility.
  * Only apply these styles on pages that show the toggle.
  */
-
 html.inboxy.show-pinned-toggle.simpl:not(.hideSearch) .pinned-toggle {
     margin-right: 14px;
 }
 
-/** 
+/**
  * Show pinned-toggle when search is shown but not focused.
  * Adjust width of the search form.
  */
