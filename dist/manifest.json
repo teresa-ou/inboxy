@@ -1,11 +1,10 @@
 {
     "name": "inboxy: Inbox Bundles for Gmail",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://www.inboxymail.com",
     "background": {
-      "scripts": ["background.js"],
-      "persistent": false
+      "service_worker": "background.js"
     },
     "content_scripts": [{
         "matches": ["*://mail.google.com/mail/*"],
@@ -16,14 +15,14 @@
     }],
     "options_ui": {
         "page": "options/options.html",
-        "chrome_style": false,
+        "browser_style": false,
         "open_in_tab": true
     },
     "permissions": [
         "storage",
         "declarativeContent"
     ],
-    "page_action": {
+    "action": {
         "default_icon": {
             "16": "icons/inboxy.png",
             "24": "icons/inboxy@1.5x.png",
@@ -39,7 +38,10 @@
         "128": "icons/inboxy@8x.png"
     },
     "web_accessible_resources": [
-        "assets/*.svg"
+        {
+            "resources": [ "assets/*.svg" ],
+            "matches": [ "https://mail.google.com/*" ]
+        }
     ],
-    "manifest_version": 2
+    "manifest_version": 3
 }
