@@ -25,7 +25,8 @@ const DomUtils = {
     },
 
     extractDate: function(message) {
-        return message.querySelector(Selectors.MESSAGE_DATE).title
+        var node = message.querySelector(Selectors.MESSAGE_DATE)
+        return node ? node.title : null
     },
 
     isChecked: function(checkboxNode) {
