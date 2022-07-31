@@ -51,7 +51,7 @@ class StarHandler {
 
         // Only applies to bundled messages
         const messageRow = DomUtils.findMessageRow(e.target);
-        const labels = this.selectiveBundling.findRelevantLabels(messageRow);
+        const labels = this.selectiveBundling.filterStrings(DomUtils.getLabels(messageRow));
         if (!labels.length) {
             return;
         }

@@ -65,6 +65,7 @@ const Selectors = {
     CURRENT_TABPANEL: CURRENT_TABPANEL,
     INBOX_LABEL: `${LABELS}[title="Inbox"]`,
     INBOXY: `.${InboxyClasses.INBOXY}`,
+    LABEL_LEAF: '.au .av',
     LABEL_CONTAINERS: '.ar.as',
     LABELS: LABELS,
     IMPORTANCE_MARKER: `.${GmailClasses.ROW} .${GmailClasses.IMPORTANCE_MARKER}`,

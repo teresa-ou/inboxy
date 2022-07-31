@@ -144,16 +144,22 @@ class Bundler {
         const bundlesByLabel = {};
 
         messageNodes.forEach(message => {
-            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message));
 
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
-                    if (!bundlesByLabel[l]) {
-                        const bundle = new Bundle(l);
-                        bundlesByLabel[l] = bundle;
+                    const t = l.title;
+                    const leaf = l.querySelector(Selectors.LABEL_LEAF);
+                    const labelStyle = Object.assign(
+                        DomUtils.getCSS(l, "background", "background-color", "font-family", "border"),
+                        DomUtils.getCSS(leaf, "border-radius", "color", "padding")
+                    );
+
+                    if (!bundlesByLabel[t]) {
+                        bundlesByLabel[t] = new Bundle(t, labelStyle);
                     }
 
-                    bundlesByLabel[l].addMessage(message);
+                    bundlesByLabel[t].addMessage(message);
                 });
             }
         })
@@ -189,7 +195,7 @@ class Bundler {
 
         for (let i = 0; i < messageNodes.length; i++) {
             const message = messageNodes[i];
-            const messageLabels = this.selectiveBundling.findRelevantLabels(message);
+            const messageLabels = this.selectiveBundling.filter(DomUtils.getLabels(message));
 
             if (messageLabels.length === 0 || this._isStarred(message)) {
                 rows.push({
@@ -200,6 +206,7 @@ class Bundler {
             }
 
             messageLabels.forEach(l => {
+                l = l.title;
                 if (!labels.has(l) && bundlesByLabel[l]) {
                     rows.push({
                         element: bundlesByLabel[l],
@@ -288,6 +295,7 @@ class Bundler {
 
         const bundleRow = BundleRow.create(
             bundle.getLabel(), 
+            bundle.getStyle(),
             order, 
             messages,
             hasUnreadMessages, 
