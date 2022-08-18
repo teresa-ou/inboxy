@@ -21,6 +21,7 @@ function saveOptions() {
     const labelList = document.getElementById('label-list');
     const labels = labelList.value.split(/[\n]+/).map(s => s.trim()).filter(s => !!s);
     const groupMessagesByDate = document.getElementById('group-by-date-checkbox').checked;
+    const useLabelColors = document.getElementById('use-label-colors-checkbox').checked;
 
     const actionButtons = document.querySelectorAll('.action:checked');
     const actions = [...actionButtons].map(button => button.value);
@@ -30,6 +31,7 @@ function saveOptions() {
         labels: labels,
         actions: actions,
         groupMessagesByDate: !!groupMessagesByDate,
+        useLabelColors: !!useLabelColors,
     }, function() {
         labelList.value = labels.join('\n');
 
@@ -47,6 +49,7 @@ function restoreOptions() {
         labels: [],
         actions: ['archive'],
         groupMessagesByDate: true,
+        useLabelColors: true,  // TODO: Should be default false?
     }, function(items) {
         const id = items.exclude ? 'exclude-radio' : 'include-radio';
         document.getElementById(id).checked = true;
@@ -60,6 +63,8 @@ function restoreOptions() {
         for (const action of items.actions) {
             document.getElementById(`${action}-checkbox`).checked = true;
         }
+        document.getElementById('group-by-date-checkbox').checked = items.groupMessagesByDate;
+        document.getElementById('use-label-colors-checkbox').checked = items.useLabelColors;
 
         document.getElementById('group-by-date-checkbox').checked = items.groupMessagesByDate;
     });

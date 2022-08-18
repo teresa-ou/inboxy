@@ -32,9 +32,14 @@ const DomUtils = {
     isChecked: function(checkboxNode) {
         return checkboxNode.getAttribute('aria-checked') === 'true';
     },
-
-    getLabelStrings: function(message) {
-        return [...message.querySelectorAll(Selectors.LABELS)].map(l => l.title);
+    
+    getLabels: function(message) {
+        return [...message.querySelectorAll(Selectors.LABELS)].map(l => ({
+            title: l.title,
+            backgroundColor: l.style.backgroundColor,
+            borderColor: l.style.borderColor,
+            textColor: l.querySelectorAll(Selectors.LABEL_TEXT)[0].style.color
+        }));
     },
 
     htmlToElement: function(html) {
