@@ -24,6 +24,7 @@ import BundledMail from './containers/BundledMail';
 import PinnedToggle from './components/PinnedToggle';
 
 import TabPanelsObserver from './handlers/TabPanelsObserver';
+import MessageListObserver from './handlers/MessageListObserver';
 import MainParentObserver from './handlers/MainParentObserver';
 import MessageListWatcher from './handlers/MessageListWatcher';
 import StarHandler from './handlers/StarHandler';
@@ -55,6 +56,9 @@ if (html) {
 }
 
 const RETRY_TIMEOUT_MS = 50;
+
+/* Gmail will relayout the page soon after the first load, so let's wait before the first relayout */
+const FIRST_BUNDLE_TIMEOUT = 2000
 
 let isFreshPage = false;
 const handleFreshPage = e => isFreshPage = true;
@@ -92,6 +96,7 @@ const rebundle = () => {
     interactedWithBundle = false;
 };
 const tabPanelsObserver = new TabPanelsObserver(mutations => rebundle());
+const messageListObserver = new MessageListObserver(mutations => rebundle());
 const mainParentObserver = new MainParentObserver(mutations => {
     if (supportsBundling(window.location.href)) {
         rebundle();
@@ -143,6 +148,7 @@ function handleContentLoaded() {
     logDebugMessage(`Url: ${window.location.href}, page supports bundling: ${bundleCurrentPage}`);
     tryBundling(0, bundleCurrentPage);
     hideBulkActionButtonsIfNecessary();
+    setTimeout(() => { tryBundling(0, bundleCurrentPage) }, FIRST_BUNDLE_TIMEOUT);
 }
 
 function tryBundling(i, bundleCurrentPage) {
@@ -172,7 +178,7 @@ function tryBundling(i, bundleCurrentPage) {
         // Bundle messages on the current page
         const possibleMessageLists = document.querySelectorAll(Selectors.POSSIBLE_MESSAGE_LISTS);;
         const tableBody = possibleMessageLists.length 
-            ? possibleMessageLists.item(1).querySelector(Selectors.TABLE_BODY)
+            ? possibleMessageLists.item(0).querySelector(Selectors.TABLE_BODY)
             : null;
         if (!tableBody) {
             // Try again later
@@ -194,6 +200,7 @@ function startObservers() {
     themeChangeHandler.observe();
     mainParentObserver.observe();
     tabPanelsObserver.observe();
+    messageListObserver.observe();
 }
 
 function addPinnedToggle() {
