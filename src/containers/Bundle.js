@@ -18,8 +18,11 @@
  * A bundle of messages that belong to a particular label.
  */
 class Bundle {
-    constructor(label) {
+    constructor(label, textColor, backgroundColor, borderColor) {
         this._label = label;
+        this._textColor = textColor;
+        this._backgroundColor = backgroundColor;
+        this._borderColor = borderColor;
         this._bundleRow = null;
         this._order = null;
         this._messages = [];
@@ -63,6 +66,27 @@ class Bundle {
      */
     getMessages() {
         return this._messages;
+    }
+
+    /**
+     * The text color of the bundle's corresponding label
+     */
+    getTextColor() {
+        return this._textColor;
+    }
+
+    /**
+     * The background color of the bundle's corresponding label
+     */
+    getBackgroundColor() {
+        return this._backgroundColor;
+    }
+    
+    /**
+     * The border color of the bundle's corresponding label
+     */
+    getBorderColor() {
+        return this._borderColor;
     }
 }
 
