@@ -66,29 +66,33 @@ class InboxyStyler {
     }
 
     /**
-     * For each bundle, disable bulk-archiving if any message outside of its bundle is selected.
+     * For each bundle, disable bulk-actions if any message outside of its bundle is selected.
      */
-    disableBulkArchiveIfNecessary() {
+    disableBulkActionsIfNecessary() {
         const selectedMessages = [].slice.call(
             document.querySelectorAll(Selectors.SELECTED));
         Object.values(this.bundledMail.getAllBundles()).forEach(bundle => 
-            this._updateBulkArchiveButton(bundle, selectedMessages));
+            this._updateBulkActionButtons(bundle, selectedMessages));
     }
 
     /**
-     * Enable/disable the bulk archive button for the given bundle.
+     * Enable/disable the bulk action buttons for the given bundle.
      */
-    _updateBulkArchiveButton(bundle, selectedMessages) {
+    _updateBulkActionButtons(bundle, selectedMessages) {
         const bundledMessageIds = new Set(bundle.getMessages().map(m => m.id));
         const allSelectedMessagesInBundle = !selectedMessages.some(
             m => !bundledMessageIds.has(m.id));
+        const bulkActionButtons = bundle.getBundleRow().getElementsByClassName('bulk-action');
 
-        const bulkArchiveButton = bundle.getBundleRow().querySelector('.archive-bundle');
         if (allSelectedMessagesInBundle) {
-            bulkArchiveButton.classList.remove('disabled');
+            for (const bulkActionButton of bulkActionButtons) {
+                bulkActionButton.classList.remove('disabled');
+            }
         }
         else {
-            bulkArchiveButton.classList.add('disabled');
+            for (const bulkActionButton of bulkActionButtons) {
+                bulkActionButton.classList.add('disabled');
+            }
         }
     }
 }

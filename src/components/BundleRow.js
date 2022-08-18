@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import BulkArchiveButton from './BulkArchiveButton';
+import BulkActionButton from './BulkActionButton';
 
 import MessagePageUtils from '../util/MessagePageUtils';
 import DomUtils from '../util/DomUtils';
@@ -56,7 +56,6 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     const html = `
         <tr class="${GmailClasses.ROW} ${InboxyClasses.BUNDLE_ROW} ${unreadClass}">
             <td class="${GmailClasses.CELL} PF"></td>
-            <td class="${GmailClasses.CELL} oZ-x3"></td>
             <td class="${GmailClasses.CELL} apU"></td>
             <td class="spacer ${GmailClasses.CELL} ${spacerClass}"></td>
             <td class="${GmailClasses.CELL} yX">
@@ -74,9 +73,14 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
         </tr>
     `;
 
-    const bulkArchiveButton = BulkArchiveButton.create(messages);
-    const bulkArchiveTd = DomUtils.htmlToElement(`<td class="${GmailClasses.CELL}"></td>`);
-    bulkArchiveTd.appendChild(bulkArchiveButton);
+    const bulkArchiveButton = BulkActionButton.createArchive(messages);
+    const bulkDeleteButton = BulkActionButton.createDelete(messages);
+    const bulkSelectButton = BulkActionButton.createSelect(messages);
+    const bulkActionsTd = DomUtils.htmlToElement(`<td class="${GmailClasses.CELL}"></td>`);
+    bulkActionsTd.appendChild(bulkArchiveButton);
+    bulkActionsTd.appendChild(bulkDeleteButton);
+    const bulkSelectTd = DomUtils.htmlToElement(`<td class="${GmailClasses.CELL} select" style="order: 0;"></td>`);
+    bulkSelectTd.appendChild(bulkSelectButton);
 
     const labelUrl = label
         .split(' ').join('-')
@@ -105,8 +109,9 @@ function create(label, order, messages, hasUnread, toggleBundle, baseUrl) {
     `;
 
     const el = DomUtils.htmlToElement(html);
-    el.appendChild(bulkArchiveTd);
+    el.insertBefore(bulkSelectTd, el.childNodes[2]);
     el.appendChild(DomUtils.htmlToElement(bundleDateHtml));
+    el.appendChild(bulkActionsTd);
     el.appendChild(DomUtils.htmlToElement(viewAllButtonHtml));
 
     el.addEventListener('click', e => {

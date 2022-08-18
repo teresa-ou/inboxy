@@ -29,6 +29,9 @@ import MessageListWatcher from './handlers/MessageListWatcher';
 import StarHandler from './handlers/StarHandler';
 import ThemeChangeHandler from './handlers/ThemeChangeHandler';
 
+import {
+    getActionsToDisplay,
+} from './util/ActionUtils';
 import { 
     InboxyClasses,
     Selectors,
@@ -139,6 +142,7 @@ function handleContentLoaded() {
     const bundleCurrentPage = supportsBundling(window.location.href);
     logDebugMessage(`Url: ${window.location.href}, page supports bundling: ${bundleCurrentPage}`);
     tryBundling(0, bundleCurrentPage);
+    hideBulkActionButtonsIfNecessary();
 }
 
 function tryBundling(i, bundleCurrentPage) {
@@ -195,4 +199,18 @@ function startObservers() {
 function addPinnedToggle() {
     const searchForm = document.querySelector(Selectors.SEARCH_FORM).parentNode;
     searchForm.appendChild((new PinnedToggle()).create());
+}
+
+function hideBulkActionButtonsIfNecessary() {
+    getActionsToDisplay().then(actions => {
+        if (!actions.archive) {
+            html.classList.add('hide-archive-action');
+        }
+        if (!actions.delete) {
+            html.classList.add('hide-delete-action');
+        }
+        if (!actions.select) {
+            html.classList.add('hide-select-action');
+        }
+    });
 }

@@ -24,42 +24,62 @@ import {
 /**
  * Create bulk archive button for archiving the given messages, which should be in the same bundle.
  */
-function create(messages) {
-    return _create(() => _selectMessages(messages));
+function createArchive(messages) {
+    return _create('archive', GmailClasses.ARCHIVE_BUTTON, Selectors.TOOLBAR_ARCHIVE_BUTTON, () => _selectMessages(messages));
 }
 
-function _create(selectMessagesFunction) {
+/**
+ * Create bulk delete button for deleting the given messages, which should be in the same bundle.
+ */
+function createDelete(messages) {
+    return _create('delete', GmailClasses.DELETE_BUTTON, Selectors.TOOLBAR_DELETE_BUTTON, () => _selectMessages(messages));
+}
+
+/**
+ * Create bulk select button for selecting the given messages, which should be in the same bundle.
+ */
+function createSelect(messages) {
+    return _create('select', InboxyClasses.SELECT_BUTTON, null, () => _selectMessages(messages));
+}
+
+
+function _create(action, spanClass, selector, selectMessagesFunction) {
     const html = `
-        <span class="archive-bundle ${GmailClasses.ARCHIVE_BUTTON}">
+        <span class="bulk-action ${action} ${spanClass}">
         </span>
     `;
 
-    const archiveSpan = DomUtils.htmlToElement(html);
-    archiveSpan.addEventListener('click', e =>  {
-        if (archiveSpan.classList.contains('disabled')) {
+    const actionSpan = DomUtils.htmlToElement(html);
+    actionSpan.addEventListener('click', e =>  {
+        if (actionSpan.classList.contains('disabled')) {
             e.stopPropagation();
             return;
         }
 
-        _archiveMessages(selectMessagesFunction);
+        _processMessages(selector, selectMessagesFunction);
         e.stopPropagation();
     });
 
-    return archiveSpan;
+    return actionSpan;
 }
 
-function _archiveMessages(selectMessagesFunction) {
-    const toolbarArchiveButton = document.querySelector(Selectors.TOOLBAR_ARCHIVE_BUTTON);
+function _processMessages(selector, selectMessagesFunction) {
+    if (selector === null) {
+        selectMessagesFunction();
+        return;
+    }
+
+    const toolbarActionButton = document.querySelector(selector);
 
     const buttonIsVisible = new Promise((resolve, reject) => {
         const observer = new MutationObserver((mutation, observer) => {
-            if (_isClickable(toolbarArchiveButton)) {
+            if (_isClickable(toolbarActionButton)) {
                 observer.disconnect();
                 resolve();
             }
         });
         observer.observe(
-            toolbarArchiveButton.parentNode, 
+            toolbarActionButton.parentNode, 
             { attributes: true, childList: false, subtree: true });
     });
 
@@ -68,7 +88,7 @@ function _archiveMessages(selectMessagesFunction) {
         resolve();
     });
 
-    Promise.all([buttonIsVisible, selectMessages]).then(() => _simulateClick(toolbarArchiveButton));
+    Promise.all([buttonIsVisible, selectMessages]).then(() => _simulateClick(toolbarActionButton));
 }
 
 /**
@@ -103,4 +123,4 @@ function _simulateClick(element) {
     dispatchMouseEvent(element, 'mouseup');
 }
 
-export default { create };
+export default { createArchive, createDelete, createSelect };

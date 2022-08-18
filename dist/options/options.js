@@ -22,9 +22,13 @@ function saveOptions() {
     const labels = labelList.value.split(/[\n]+/).map(s => s.trim()).filter(s => !!s);
     const groupMessagesByDate = document.getElementById('group-by-date-checkbox').checked;
 
+    const actionButtons = document.querySelectorAll('.action:checked');
+    const actions = [...actionButtons].map(button => button.value);
+
     chrome.storage.sync.set({
         exclude: !!exclude,
         labels: labels,
+        actions: actions,
         groupMessagesByDate: !!groupMessagesByDate,
     }, function() {
         labelList.value = labels.join('\n');
@@ -41,6 +45,7 @@ function restoreOptions() {
     chrome.storage.sync.get({
         exclude: true,
         labels: [],
+        actions: ['archive'],
         groupMessagesByDate: true,
     }, function(items) {
         const id = items.exclude ? 'exclude-radio' : 'include-radio';
@@ -52,8 +57,11 @@ function restoreOptions() {
           labelList.placeholder = PLACEHOLDER;
         }
 
-        document.getElementById('group-by-date-checkbox').checked = items.groupMessagesByDate;
+        for (const action of items.actions) {
+            document.getElementById(`${action}-checkbox`).checked = true;
+        }
 
+        document.getElementById('group-by-date-checkbox').checked = items.groupMessagesByDate;
     });
 }
 document.getElementById('save-button').addEventListener('click', saveOptions);
