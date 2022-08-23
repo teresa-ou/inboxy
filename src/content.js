@@ -93,7 +93,11 @@ const rebundle = () => {
     interactedWithBundle = false;
 };
 const tabPanelsObserver = new TabPanelsObserver(mutations => rebundle());
-const messageListObserver = new MessageListObserver(mutations => rebundle());
+const messageListObserver = new MessageListObserver(mutations => {
+    if (supportsBundling(window.location.href)) {
+        rebundle();
+    }
+});
 const mainParentObserver = new MainParentObserver(mutations => {
     if (supportsBundling(window.location.href)) {
         rebundle();
