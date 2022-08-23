@@ -99,8 +99,6 @@ class MessageSelectHandler {
             }
         });    
     }
-
-    
 }
 
 export default MessageSelectHandler;
