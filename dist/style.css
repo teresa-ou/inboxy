@@ -27,11 +27,24 @@ html.inboxy .flex-table-body {
  * Messages
  */
 
-/* Make unread messages white for light theme, when Simplify is not used */
-html.inboxy:not(.messages-dark-theme):not(.simplify):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
-html.inboxy:not(.messages-dark-theme):not(.simplify):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
-    background-color: rgba(255, 255, 255, 0.8);
+/* Make unread messages grey for light theme, when Simplify is not used */
+html.inboxy:not(.simplify):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
+html.inboxy:not(.simplify):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
+    background-color: rgba(0, 0, 0, 0.09);
 }
+
+/* Make unread messages light blue for default theme, when Simplify is not used */
+html.inboxy.messages-default-theme:not(.simplify):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
+html.inboxy.messages-default-theme:not(.simplify):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
+    background-color: #f2f6fc;
+}
+
+/* Make unread messages black for dark theme, when Simplify is not used */
+html.inboxy.messages-dark-theme:not(.simplify):not(.simpl) tr:not(.bundle-row).zE:not(.x7),
+html.inboxy.messages-dark-theme:not(.simplify):not(.simpl) .bundle-row.zE:not(.visible):not(.x7) {
+    background-color: rgba(0, 0, 0, 0.502);
+}
+
 
 /**
  * Simplify v2
@@ -75,15 +88,20 @@ html.inboxy .bundle-row.zA.yO.visible,
 html.inboxy .bundle-row.zA.zE.visible {
     box-shadow: none !important;
     font-weight: bold;
-    background-color: #e8eaed !important;
+    background-color: rgba(255, 255, 255, 0.35) !important;
     padding-top: 32px !important;
     padding-bottom: 18px !important;
     margin-top: 24px;
 }
 
-html.inboxy.dark-theme .bundle-row.yO.visible,
-html.inboxy.dark-theme .bundle-row.zE.visible {
-    background-color: rgba(241, 243, 244, 0.24) !important;
+html.inboxy.messages-default-theme .bundle-row.yO.visible,
+html.inboxy.messages-default-theme .bundle-row.zE.visible {
+    background-color: #ecf0f9 !important;
+}
+
+html.inboxy.messages-dark-theme .bundle-row.yO.visible,
+html.inboxy.messages-dark-theme .bundle-row.zE.visible {
+    background-color: rgba(0, 0, 0, 0.25) !important;
     color: #ffffff !important;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
@@ -224,7 +242,7 @@ html.inboxy .bundle-row:hover .archive-bundle {
     display: block;
 }
 
-html.inboxy.dark-theme .bundle-row.visible .archive-bundle,
+html.inboxy.messages-dark-theme .bundle-row.visible .archive-bundle,
 html.inboxy.messages-dark-theme .bundle-row:not(.visible) .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     opacity: 0.7;
@@ -279,7 +297,7 @@ html.inboxy .bundled-message.visible {
  */
 
 html.inboxy .bundle-area {
-    background-color: #e8eaed;
+    background-color: rgba(255, 255, 255, 0.35);
     cursor: pointer;
     display: none;
     padding-bottom: 48px;
@@ -288,8 +306,12 @@ html.inboxy .bundle-area {
     z-index: -2;
 }
 
-html.inboxy.dark-theme .bundle-area {
-    background-color: rgba(241, 243, 244, 0.24);
+html.inboxy.messages-default-theme .bundle-area {
+    background: #ecf0f9;
+}
+
+html.inboxy.messages-dark-theme .bundle-area {
+    background: rgba(0, 0, 0, 0.25);
 }
 
 /** 
@@ -311,7 +333,7 @@ html.inboxy .date-row {
     color: #202124;
 }
 
-html.inboxy.dark-theme .date-row {
+html.inboxy.messages-dark-theme .date-row {
     color: #ffffff;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
@@ -322,12 +344,12 @@ html.inboxy .date-row .archive-bundle {
     margin-right: 24px;
 }
 
-html.inboxy.dark-theme .date-row .archive-bundle {
+html.inboxy.messages-dark-theme .date-row .archive-bundle {
     background-image: url('chrome-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     opacity: 0.7;
 }
 
-html.inboxy.dark-theme .date-row .archive-bundle:before {
+html.inboxy.messages-dark-theme .date-row .archive-bundle:before {
     background-color: rgb(255, 255, 255, 0.2);
 }
 
@@ -336,7 +358,7 @@ html.inboxy.dark-theme .date-row .archive-bundle:before {
         background-image: url('moz-extension://__MSG_@@extension_id__/assets/check-all.svg');
     }
 
-    html.inboxy.dark-theme .date-row .archive-bundle {
+    html.inboxy.messages-dark-theme .date-row .archive-bundle {
         background-image: url('moz-extension://__MSG_@@extension_id__/assets/light-check-all.svg');
     }
 }

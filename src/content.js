@@ -54,35 +54,11 @@ if (html) {
 
 const RETRY_TIMEOUT_MS = 50;
 
-/* Gmail will relayout the page soon after the first load, so let's wait before the first relayout */
-const FIRST_BUNDLE_TIMEOUT = 2000
-
 let isFreshPage = false;
 const handleFreshPage = e => isFreshPage = true;
 
 let interactedWithBundle = false;
 const handleBundleInteraction = e => interactedWithBundle = true;
- 
-const messageListWatcher = new MessageListWatcher(mutations => {
-    if (supportsBundling(window.location.href)) {
-        const reopenRecentBundle = !isFreshPage;
-        bundler.bundleMessages(reopenRecentBundle);
-        starHandler.scrollIfNecessary();
-        
-        isFreshPage = false;
-    }
-});
-
-const bundledMail = new BundledMail();
-const bundleToggler = new BundleToggler(bundledMail);
-const selectiveBundling = new SelectiveBundling();
-const bundler = new Bundler(bundleToggler, bundledMail, messageListWatcher, selectiveBundling);
-const starHandler = new StarHandler(bundledMail, selectiveBundling);
-const dateGrouper = new DateGrouper();
-
-// 
-// Observers for handling navigation
-// 
 const rebundle = () => {
     if (!interactedWithBundle || isFreshPage) {
         bundleToggler.closeAllBundles();
@@ -92,12 +68,30 @@ const rebundle = () => {
     isFreshPage = false;
     interactedWithBundle = false;
 };
-const tabPanelsObserver = new TabPanelsObserver(mutations => rebundle());
-const messageListObserver = new MessageListObserver(mutations => {
+const handleGmailRerender = () => {
     if (supportsBundling(window.location.href)) {
-        rebundle();
+        const reopenRecentBundle = !isFreshPage;
+        bundler.bundleMessages(reopenRecentBundle);
+        starHandler.scrollIfNecessary();
+        
+        isFreshPage = false;
     }
-});
+};
+
+const messageListWatcher = new MessageListWatcher(handleGmailRerender);
+
+const bundledMail = new BundledMail();
+const bundleToggler = new BundleToggler(bundledMail);
+const selectiveBundling = new SelectiveBundling();
+const bundler = new Bundler(bundleToggler, bundledMail, messageListWatcher, selectiveBundling);
+const starHandler = new StarHandler(bundledMail, selectiveBundling);
+const dateGrouper = new DateGrouper();
+
+// 
+// Observers for handling navigation, rerenders by Gmail, etc.
+// 
+const tabPanelsObserver = new TabPanelsObserver(mutations => rebundle());
+const messageListObserver = new MessageListObserver(handleGmailRerender);
 const mainParentObserver = new MainParentObserver(mutations => {
     if (supportsBundling(window.location.href)) {
         rebundle();
@@ -147,11 +141,11 @@ function handleContentLoaded() {
     logDebugMessage('Handle content loaded event');
     const bundleCurrentPage = supportsBundling(window.location.href);
     logDebugMessage(`Url: ${window.location.href}, page supports bundling: ${bundleCurrentPage}`);
-    setTimeout(() => { tryBundling(0, bundleCurrentPage) }, FIRST_BUNDLE_TIMEOUT);
+    tryBundling(0, bundleCurrentPage);
 }
 
 function tryBundling(i, bundleCurrentPage) {
-    if (i > 60) {
+    if (i > 100) {
         throw new Error('inboxy was unable to bundle messages. To try again, refresh the page.')
     }
 

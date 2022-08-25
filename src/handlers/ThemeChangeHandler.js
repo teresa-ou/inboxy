@@ -62,17 +62,29 @@ class ThemeChangeHandler {
             node.classList.remove(InboxyClasses.DARK_THEME);
         }
 
-        const message = document.querySelector(Selectors.SAMPLE_MESSAGE);
-        if (!message) {
+        const pane = document.querySelector(Selectors.MESSAGE_PANE);
+        if (!pane) {
             return;
         }
-        if (!this._isLight(getComputedStyle(message).backgroundColor)) {
+        const paneColor = getComputedStyle(pane).backgroundColor;
+
+        if (!this._isLight(paneColor)) {
             node.classList.add(InboxyClasses.MESSAGES_DARK_THEME);
         }
         else {
             node.classList.remove(InboxyClasses.MESSAGES_DARK_THEME);
         }
+        if (this._isWhite(paneColor)) {
+            node.classList.add(InboxyClasses.MESSAGES_DEFAULT_THEME);
+        }
+        else {
+            node.classList.remove(InboxyClasses.MESSAGES_DEFAULT_THEME);
+        }
 
+        const message = document.querySelector(Selectors.SAMPLE_MESSAGE);
+        if (!message) {
+            return;
+        }
         if (message.clientHeight <= 28) {
             node.classList.add('compact');
         }
@@ -85,20 +97,30 @@ class ThemeChangeHandler {
      * Whether the color represented by the rgb string is closer to white than to black.
      */
     _isLight(rgbString) {
-        const rgb = this._rgbStringToRgb(rgbString);
-        const intensity = this._rgbToGrayscale(rgb);
+        const rgba = this._rgbStringToRgba(rgbString);
+        const intensity = this._rgbToGrayscale(rgba);
 
         return intensity > (255 / 2);
     }
 
+    /** 
+     * Whether the color represented by the rgb string is white.
+     */
+    _isWhite(rgbString) {
+        const rgba = this._rgbStringToRgba(rgbString);
+
+        return rgba.slice(0, 3).every(v => v === 255) && rgba[3] === 1;
+    }
+
     /**
      * Converts an rgb(a) string, ex. 'rgb(243, 128, 4)' or 'rgba(243, 128, 4, 0.8)', to an 
-     * array of rgb values. The alpha value is discarded.
+     * array of rgba values.
      */
-    _rgbStringToRgb(rgbString) {
+    _rgbStringToRgba(rgbString) {
         const openParenIndex = rgbString.indexOf('(');
-        const rgbValues = rgbString.substring(openParenIndex + 1, rgbString.length - 1);
-        return rgbValues.split(',').map(s => parseInt(s.trim())).slice(0, 3);
+        const rgbaValues = rgbString.substring(openParenIndex + 1, rgbString.length - 1).split(',');
+        const alpha = rgbaValues.length === 3 ? 1 : parseFloat(rgbaValues[3]);
+        return [...rgbaValues.slice(0, 3).map(s => parseInt(s.trim())), alpha];
     }
 
     /** 

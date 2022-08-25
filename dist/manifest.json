@@ -1,6 +1,6 @@
 {
     "name": "inboxy: Inbox Bundles for Gmail",
-    "version": "1.6.2",
+    "version": "1.6.3",
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://www.inboxymail.com",
     "background": {
