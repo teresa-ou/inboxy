@@ -1,3 +1,11 @@
+## ⚠️ Maintenance & support
+
+inboxy continues to be available for Chrome and Firefox, but the extension is no longer actively maintained.
+
+Critical updates that affect the core functionality of the extension (i.e. bundling) will still be made, as needed. Issues and pull requests will not be actively monitored.
+
+---
+
 <p align="center">
   <img width="650" src="https://github.com/teresa-ou/inboxy/blob/master/images/inboxy-illustration.png" alt="Illustration of inboxy">
 </p>
