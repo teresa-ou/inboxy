@@ -4,7 +4,8 @@
     "description": "Adds Google Inbox bundles to Gmail",
     "homepage_url": "https://www.inboxymail.com",
     "background": {
-      "service_worker": "background.js"
+      "scripts": ["background.js"],
+      "persistent": false
     },
     "content_scripts": [{
         "matches": ["*://mail.google.com/mail/*"],
@@ -15,14 +16,14 @@
     }],
     "options_ui": {
         "page": "options/options.html",
-        "browser_style": false,
+        "chrome_style": false,
         "open_in_tab": true
     },
     "permissions": [
         "storage",
         "declarativeContent"
     ],
-    "action": {
+    "page_action": {
         "default_icon": {
             "16": "icons/inboxy.png",
             "24": "icons/inboxy@1.5x.png",
@@ -38,10 +39,7 @@
         "128": "icons/inboxy@8x.png"
     },
     "web_accessible_resources": [
-        {
-            "resources": [ "assets/*.svg" ],
-            "matches": [ "https://mail.google.com/*" ]
-        }
+        "assets/*.svg"
     ],
-    "manifest_version": 3
+    "manifest_version": 2
 }
