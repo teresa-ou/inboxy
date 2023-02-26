@@ -189,6 +189,21 @@ function _isDateDividerSupported(sampleDateString) {
 }
 
 function _parseDate(dateString) {
+    // Assumes the date string is formatted like 'Sat, Feb 25, 2023, 7:26 AM'    
+    const i = dateString.indexOf(', ');
+    if (i >= 0) {
+        const dateStringWithoutDayOfWeek = dateString.slice(i + 2).replace(/\s/g, ' ');
+        const date = _convertDateStringToDate(dateStringWithoutDayOfWeek);
+        if (date) {
+            return date;
+        }
+    }
+
+    // Assumes the date string is formatted in a way that Date.parse() understands
+    return _convertDateStringToDate(dateString);
+}
+
+function _convertDateStringToDate(dateString) {
     const date = Date.parse(dateString);
     if (isNaN(date)) {
         return null;
