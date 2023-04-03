@@ -67,6 +67,7 @@ const Selectors = {
     INBOX_LABEL: `${LABELS}[title="Inbox"]`,
     INBOXY: `.${InboxyClasses.INBOXY}`,
     LABEL_CONTAINERS: '.ar.as',
+    LABEL_TEXT: '.av',
     LABELS: LABELS,
     IMPORTANCE_MARKER: `.${GmailClasses.ROW} .${GmailClasses.IMPORTANCE_MARKER}`,
     INBOX_TAB: '.TO[data-tooltip="Inbox"]',

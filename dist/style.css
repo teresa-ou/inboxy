@@ -122,6 +122,12 @@ html.inboxy .bundle-row.visible .bundle-and-count {
     text-overflow: ellipsis;
 }
 
+/* Make bundle labels look like Gmail labels */
+html.inboxy .bundle-row .bundle-and-count span {
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
 /* Handle long label names */
 html.inboxy .bundle-row:not(.visible) .bundle-and-count {
     white-space: normal;

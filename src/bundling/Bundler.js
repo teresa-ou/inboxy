@@ -148,12 +148,12 @@ class Bundler {
 
             if (!this._isStarred(message)) {
                 messageLabels.forEach(l => {
-                    if (!bundlesByLabel[l]) {
-                        const bundle = new Bundle(l);
-                        bundlesByLabel[l] = bundle;
+                    if (!bundlesByLabel[l.title]) {
+                        const bundle = new Bundle(l.title, l.textColor, l.backgroundColor, l.borderColor);
+                        bundlesByLabel[l.title] = bundle;
                     }
 
-                    bundlesByLabel[l].addMessage(message);
+                    bundlesByLabel[l.title].addMessage(message);
                 });
             }
         })
@@ -200,12 +200,12 @@ class Bundler {
             }
 
             messageLabels.forEach(l => {
-                if (!labels.has(l) && bundlesByLabel[l]) {
+                if (!labels.has(l.title) && bundlesByLabel[l.title]) {
                     rows.push({
-                        element: bundlesByLabel[l],
+                        element: bundlesByLabel[l.title],
                         type: Element.BUNDLE,
                     });
-                    labels.add(l);
+                    labels.add(l.title);
                 }
             });
         }
@@ -292,7 +292,11 @@ class Bundler {
             messages,
             hasUnreadMessages, 
             this.bundleToggler.toggleBundle,
-            baseUrl);
+            baseUrl,
+            bundle.getTextColor(),
+            bundle.getBackgroundColor(),
+            bundle.getBorderColor()
+        );
         tableBody.appendChild(bundleRow);
 
         messages.forEach(m => m.classList.add(InboxyClasses.BUNDLED_MESSAGE));
